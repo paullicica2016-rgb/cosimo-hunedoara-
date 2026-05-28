@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #FDF6EC;
+  color: #1a1a1a;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FDF6EC;
+}
+::-webkit-scrollbar-thumb {
+  background: #D32F2F;
+  border-radius: 4px;
+}
+
+/* Smooth image transitions */
+img {
+  transition: transform 0.4s ease, box-shadow 0.3s ease;
+}
+
+/* Pattern overlay utility */
+.pattern-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D32F2F' fill-opacity='0.04'%3E%3Cpath d='M20 20c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10S20 25.5 20 20zm-20 0c0-5.5 4.5-10 10-10S20 14.5 20 20 15.5 30 10 30 0 25.5 0 20zm20 20c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10-10-4.5-10-10zM0 40c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10S0 45.5 0 40z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Location card hover */
+.location-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.location-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(211, 47, 47, 0.15);
+}
+
+/* Feature card hover */
+.feature-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(211, 47, 47, 0.1);
+}
+
+/* Gallery image hover */
+.gallery-item {
+  overflow: hidden;
+  cursor: pointer;
+}
+.gallery-item img {
+  transition: transform 0.4s ease;
+}
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+/* Navbar backdrop */
+.navbar-blur {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}

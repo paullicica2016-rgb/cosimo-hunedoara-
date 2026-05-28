@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\Paul\\\\Downloads\\\\cosimo\" -ErrorAction SilentlyContinue; if \\(-not \\(Test-Path \"C:\\\\Users\\\\Paul\\\\Downloads\\\\cosimo\"\\)\\) { Write-Host \"Directory does not exist\" })",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\Paul\\\\Downloads\\\\cosimo\" -Recurse -Name | Where-Object { $_ -notmatch \"node_modules\" -and $_ -notmatch \"\\\\.next\" } | Sort-Object)",
+      "PowerShell(netstat -ano)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "mcp__Claude_in_Chrome__navigate",
+      "mcp__Claude_in_Chrome__computer",
+      "mcp__Claude_in_Chrome__resize_window",
+      "Bash(grep -iE \"\\\\.\\(jpg|jpeg|png|webp\\)$\")",
+      "Bash(cp \"C:/Users/Paul/Downloads/WhatsApp Image 2026-05-27 at 15.02.55.jpeg\" \"C:/Users/Paul/Downloads/cosimo/public/images/pizzerie/pizzerie-hero.jpeg\")",
+      "Bash(gh auth *)",
+      "Bash(git --version)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git rm *)"
+    ]
+  }
+}

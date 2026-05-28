@@ -1,0 +1,37 @@
+# dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# production
+build/
+
+# misc
+.DS_Store
+*.pem
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# debug
+npm-debug.log*
+
+# vercel
+.vercel
+
+# IDE
+.vscode/
+.idea/
+
+# Source photos (not part of the site)
+*.jpeg
+*.png
+!public/**/*.jpeg
+!public/**/*.png
+
+# Claude
+.claude/
