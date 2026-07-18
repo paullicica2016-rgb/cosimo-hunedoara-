@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import fs from 'fs'
 import path from 'path'
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 
@@ -11,55 +11,113 @@ interface Props { images: string[] }
 
 const IMAGE_EXTS = ['.jpg', '.jpeg', '.png', '.webp', '.avif']
 
-/* ─── Types ─────────────────────────────────────────────── */
 interface MenuItem {
-  id: number
-  category: string
+  slug: string
   name: string
+  priceMedium?: string
+  priceFamily?: string
+  price?: string
+  sizeMediumLabel?: string
+  sizeFamilyLabel?: string
   ingredients: string
-  price: number
-  popular?: boolean
-  photo?: string
+  image: string
+  imageScale?: number
 }
 
-/* ─── Menu data (extracted via vision from menu board) ───── */
 const MENU: MenuItem[] = [
-  // Burgeri
-  { id: 1,  category: 'Burgeri',      name: 'Burger cu Șnițel din Piept de Pui', ingredients: 'Șnițel de pui crispy, salată verde, roșii, muștar, maioneză', price: 28, popular: true,  photo: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=260&fit=crop&auto=format' },
-  { id: 2,  category: 'Burgeri',      name: 'Pittburger',                         ingredients: 'Carne de vită, cascaval topit, salată, roșii, ceapă caramelizată, sos special', price: 34, popular: true, photo: 'https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&h=260&fit=crop&auto=format' },
-  { id: 3,  category: 'Burgeri',      name: 'Hamburger cu Șnițel Pui',            ingredients: 'Șnițel pui pane, castraveți murați, salată, sos muștar-maioneză', price: 30 },
-  { id: 4,  category: 'Burgeri',      name: 'Burger Vegetarian',                  ingredients: 'Legume gratinate, cascaval, salată verde, roșii, sos de casă', price: 22 },
-  // Shaorma
-  { id: 5,  category: 'Shaorma',      name: 'Mașorma Mare',                       ingredients: 'Carne kebab la grătar, legume proaspete, sos usturoi, chifla crocantă', price: 35, popular: true, photo: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=400&h=260&fit=crop&auto=format' },
-  { id: 6,  category: 'Shaorma',      name: 'Mașorma Mică',                       ingredients: 'Carne kebab, legume proaspete, sos usturoi', price: 25 },
-  { id: 7,  category: 'Shaorma',      name: 'Salată Carne Kebab Cosimo',           ingredients: 'Carne kebab la grătar, salată verde, legume proaspete, sos usturoi', price: 28 },
-  { id: 8,  category: 'Shaorma',      name: 'Salată Vegetariană Cosimo',           ingredients: 'Legume proaspete de sezon, brânză feta, sos de casă', price: 20 },
-  // Kebab
-  { id: 9,  category: 'Kebab',        name: 'Kebab',                               ingredients: 'Carne kebab la grătar, legume, sos usturoi, lipie crocantă', price: 30, popular: true, photo: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&h=260&fit=crop&auto=format' },
-  { id: 10, category: 'Kebab',        name: 'Kebab Cascaval',                      ingredients: 'Carne kebab, cascaval topit, legume, sos special', price: 33 },
-  { id: 11, category: 'Kebab',        name: 'Mașorma la Caserola',                 ingredients: 'Carne kebab, legume, sos usturoi — servit la caserola caldă', price: 32 },
-  // Hot Dog
-  { id: 12, category: 'Hot Dog',      name: 'Hot Dog Cascaval',                    ingredients: 'Cârnat grătar, cascaval topit, muștar, ketchup, chifla crocantă', price: 13, popular: true, photo: 'https://images.unsplash.com/photo-1612392166886-ee8475b03af2?w=400&h=260&fit=crop&auto=format' },
-  { id: 13, category: 'Hot Dog',      name: 'Hot Dog',                             ingredients: 'Cârnat grătar, muștar, ketchup, chifla crocantă', price: 11 },
-  // Meniuri Cola
-  { id: 14, category: 'Meniuri Cola', name: 'Meniu Burger + Cola',                 ingredients: 'Burger la alegere + Coca-Cola 0.5L', price: 38, popular: true, photo: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&h=260&fit=crop&auto=format' },
-  { id: 15, category: 'Meniuri Cola', name: 'Meniu Shaorma + Cola',                ingredients: 'Mașorma mică + Coca-Cola 0.5L', price: 33 },
-  { id: 16, category: 'Meniuri Cola', name: 'Meniu Hot Dog + Cola',                ingredients: 'Hot Dog Cascaval + Coca-Cola 0.5L', price: 21 },
-  // Sosuri
-  { id: 17, category: 'Sosuri',       name: 'Sos Usturoi',                         ingredients: 'Cremă de usturoi', price: 3 },
-  { id: 18, category: 'Sosuri',       name: 'Maioneză cu Ceapă',                   ingredients: 'Maioneză artizanală cu ceapă verde', price: 3 },
-  { id: 19, category: 'Sosuri',       name: 'Maioneză Picantă',                    ingredients: 'Maioneză cu ardei iute & boia', price: 3 },
-  { id: 20, category: 'Sosuri',       name: 'Ketchup',                             ingredients: 'Sos roșii clasic', price: 2 },
-  // Băuturi
-  { id: 21, category: 'Băuturi',      name: 'Coca-Cola 0.5L',                      ingredients: 'Răcoritoare', price: 7 },
-  { id: 22, category: 'Băuturi',      name: 'Fanta 0.5L',                          ingredients: 'Răcoritoare portocale', price: 7 },
-  { id: 23, category: 'Băuturi',      name: 'Sprite 0.5L',                         ingredients: 'Răcoritoare lămâie', price: 7 },
-  { id: 24, category: 'Băuturi',      name: 'Apă Plată 0.5L',                      ingredients: 'Apă minerală naturală', price: 3 },
+  {
+    slug: 'shaorma',
+    name: 'Shaorma',
+    priceMedium: '22 lei',
+    priceFamily: '25 lei',
+    sizeMediumLabel: 'Mică · 250g',
+    sizeFamilyLabel: 'Mare · 300g',
+    ingredients: 'Lipie, carne pui, cartofi prăjiți, salată de varză, ceapă, roșii, castraveți murați, ketchup, sos usturoi, sos tzatziki, sos chilli, condimente.',
+    image: '/images/corvin/shaorma.png',
+  },
+  {
+    slug: 'shaorma-farfurie',
+    name: 'Shaorma la Farfurie',
+    price: '27 lei',
+    ingredients: 'Carne pui, cartofi prăjiți, sos de usturoi, salată de varză, ceapă, roșii, castraveți murați, ketchup, sos tzatziki, sos chilli, lipie. 300g',
+    image: '/images/corvin/shaorma-farfurie.jpeg',
+  },
+  {
+    slug: 'kebab',
+    name: 'Kebab',
+    price: '30 lei',
+    ingredients: 'Chiflă-kebab, carne de pui, cartofi prăjiți, sos de usturoi, salată de varză, ceapă, roșii, castraveți murați, ketchup, sos tzatziki, sos picant. 300g',
+    image: '/images/corvin/kebab.jpeg',
+  },
+  {
+    slug: 'pittburger',
+    name: 'Pittburger Dublu',
+    price: '18 lei',
+    ingredients: 'Burger dublu · chiflă, 2 chiftele vită + porc, cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente. 260g',
+    image: '/images/corvin/pittburger.jpeg',
+  },
+  {
+    slug: 'pittburger-simplu',
+    name: 'Pittburger Simplu',
+    price: '13 lei',
+    ingredients: 'Chiflă, chiftea vită + porc, cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente.',
+    image: '/images/corvin/pittburger-simplu.jpeg',
+  },
+  {
+    slug: 'burger-snitel-pui',
+    name: 'Burger cu Șnițel de Pui',
+    price: '19 lei',
+    ingredients: 'Chiflă, șnițel din piept de pui, cartofi prăjiți, sos de usturoi, maioneză cu varză, ketchup, castraveți murați. 280g',
+    image: '/images/corvin/burger-snitel-pui.jpeg',
+  },
+  {
+    slug: 'sandwich-sunca-cascaval',
+    name: 'Sandwich cu Șuncă și Cașcaval',
+    price: '16 lei',
+    ingredients: 'Chiflă, cașcaval, șuncă, cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente. 250g',
+    image: '/images/corvin/sandwich-sunca-cascaval.jpeg',
+  },
+  {
+    slug: 'sandwich-sunca',
+    name: 'Sandwich cu Șuncă',
+    price: '14 lei',
+    ingredients: 'Chiflă, șuncă, cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente. 220g',
+    image: '/images/corvin/sandwich-sunca.jpeg',
+  },
+  {
+    slug: 'hotdog-cascaval',
+    name: 'Hot Dog cu Cașcaval',
+    price: '15 lei',
+    ingredients: 'Baton, crenvurști, cașcaval, maioneză, ketchup, muștar. 220g',
+    image: '/images/corvin/hotdog-cascaval.jpeg',
+  },
+  {
+    slug: 'hotdog',
+    name: 'Hot Dog',
+    price: '13 lei',
+    ingredients: 'Baton, crenvurști, maioneză, ketchup, muștar. 180g',
+    image: '/images/corvin/hotdog.jpeg',
+  },
+  {
+    slug: 'salata-pui',
+    name: 'Salată de Pui Cosimo',
+    price: '21 lei',
+    ingredients: 'Carne de pui la grătar, salată iceberg, morcov, roșii, castraveți, ceapă roșie, dressing tzatziki sau dressing orange Cosimo.',
+    image: '/images/corvin/salata-pui.png',
+    imageScale: 1.6,
+  },
+  {
+    slug: 'cartofi',
+    name: 'Cartofi Prăjiți',
+    priceMedium: '7 lei',
+    priceFamily: '10 lei',
+    sizeMediumLabel: '100g',
+    sizeFamilyLabel: '150g',
+    ingredients: 'Cartofi prăjiți crocanți — porție ca supliment sau garnitură.',
+    image: '/images/corvin/cartofi.jpeg',
+  },
 ]
 
-const TABS = ['Toate', 'Burgeri', 'Shaorma', 'Kebab', 'Hot Dog', 'Meniuri Cola', 'Sosuri', 'Băuturi'] as const
-
-/* ─── Intersection Observer hook ─────────────────────────── */
 function useInView(threshold = 0.12) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
@@ -76,7 +134,6 @@ function useInView(threshold = 0.12) {
   return { ref, visible }
 }
 
-/* ─── Animated counter hook ──────────────────────────────── */
 function useCounter(target: number, duration = 1400, active = false) {
   const [val, setVal] = useState(0)
   useEffect(() => {
@@ -85,7 +142,6 @@ function useCounter(target: number, duration = 1400, active = false) {
     const tick = (ts: number) => {
       if (!start) start = ts
       const pct = Math.min((ts - start) / duration, 1)
-      // ease-out cubic
       const ease = 1 - Math.pow(1 - pct, 3)
       setVal(Math.round(ease * target))
       if (pct < 1) requestAnimationFrame(tick)
@@ -95,91 +151,20 @@ function useCounter(target: number, duration = 1400, active = false) {
   return val
 }
 
-/* ─── Menu Card ──────────────────────────────────────────── */
-function MenuCard({ item, index, visible }: { item: MenuItem; index: number; visible: boolean }) {
-  const delay = index * 80
-  return (
-    <div
-      className="group bg-[#FFF8F0] rounded-2xl overflow-hidden border border-[#e8d5b7] shadow-sm
-        transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-[#D32F2F]/10 hover:border-[#D32F2F]/20"
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(28px)',
-        transition: `opacity 0.5s ease ${delay}ms, transform 0.5s ease ${delay}ms, box-shadow 0.3s ease, transform 0.3s ease`,
-      }}
-    >
-      {/* Photo (top 6 popular only) */}
-      {item.photo && (
-        <div className="relative h-44 overflow-hidden bg-[#f0e6d8]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={item.photo}
-            alt={item.name}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-          {item.popular && (
-            <span className="absolute top-3 left-3 bg-[#D32F2F] text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-md">
-              ⭐ Popular
-            </span>
-          )}
-        </div>
-      )}
-
-      <div className={`p-5 ${!item.photo ? 'pt-5' : ''}`}>
-        {/* No-photo popular badge */}
-        {item.popular && !item.photo && (
-          <span className="inline-block bg-[#FFC107]/20 text-[#b8860b] text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider mb-3">
-            ⭐ Popular
-          </span>
-        )}
-
-        <div className="flex items-start justify-between gap-3">
-          <div className="flex-1 min-w-0">
-            <h3 className="font-playfair text-[#1a1a1a] font-bold text-lg leading-tight line-clamp-2">
-              {item.name}
-            </h3>
-            <p className="text-[#6b5c4e] text-xs mt-1.5 leading-relaxed line-clamp-2">
-              {item.ingredients}
-            </p>
-          </div>
-          <div className="flex-shrink-0 bg-[#D32F2F] text-white font-bold text-sm px-3 py-1.5 rounded-xl shadow-sm whitespace-nowrap">
-            {item.price} lei
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-/* ─── Page ───────────────────────────────────────────────── */
 const CorvinPage: NextPage<Props> = ({ images }) => {
-  const heroImage = images[0] ?? null
-  const [activeTab, setActiveTab] = useState<string>('Toate')
-  const [tabVisible, setTabVisible] = useState(true)
+  const heroImage = images.find(f => f.toLowerCase().includes('hero')) ?? images[0] ?? null
+  const heroSection  = useInView(0.05)
+  const statsSection = useInView(0.3)
+  const mapsSection  = useInView(0.1)
 
-  const filtered = activeTab === 'Toate' ? MENU : MENU.filter(m => m.category === activeTab)
-
-  const handleTab = useCallback((tab: string) => {
-    if (tab === activeTab) return
-    setTabVisible(false)
-    setTimeout(() => { setActiveTab(tab); setTabVisible(true) }, 180)
-  }, [activeTab])
-
-  const heroSection   = useInView(0.05)
-  const menuSection   = useInView(0.08)
-  const statsSection  = useInView(0.3)
-  const mapsSection   = useInView(0.1)
-
-  const reviewCount   = useCounter(126, 1200, statsSection.visible)
-  const rating        = useCounter(45,  1000, statsSection.visible)  // 4.5 → show as 4.5
+  const reviewCount = useCounter(126, 1200, statsSection.visible)
+  const rating      = useCounter(45,  1000, statsSection.visible)
 
   return (
     <>
       <Head>
         <title>Fast Food Cosimo — Bulevardul Corvin, Hunedoara</title>
-        <meta name="description" content="Fast Food Cosimo Bd. Corvin — Burgeri, Shaorma, Kebab, Hot Dog în Hunedoara. Mâncare proaspătă, prețuri accesibile." />
+        <meta name="description" content="Fast Food Cosimo Bd. Corvin — Shaorma, Burgeri, Kebab, Hot Dog în Hunedoara. Mâncare proaspătă, prețuri accesibile." />
       </Head>
 
       <Navbar variant="location" />
@@ -190,9 +175,7 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
         ══════════════════════════════════════════ */}
         <section className="relative h-screen min-h-[700px] flex flex-col">
 
-          {/* ── TOP: Full-width location photo ── */}
           <div className="relative flex-[1.15] min-h-0 overflow-hidden">
-            {/* Location exterior — the hero visual */}
             {heroImage ? (
               <Image
                 src={`/images/corvin/${heroImage}`}
@@ -204,26 +187,16 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
             ) : (
               <div className="absolute inset-0 bg-gradient-to-br from-[#b71c1c] to-[#4a0000]" />
             )}
-
-            {/* Subtle dark vignette on edges */}
             <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.35) 100%)' }} />
-
-            {/* Bottom fade into the dark card */}
             <div className="absolute inset-x-0 bottom-0 h-28" style={{ background: 'linear-gradient(to top, #0d0d0d, transparent)' }} />
           </div>
 
-          {/* ── BOTTOM: Dark text card, overlaps image ── */}
           <div className="relative flex-1 min-h-0 bg-[#0d0d0d] -mt-8 rounded-t-[2rem] z-10 flex flex-col justify-center overflow-hidden">
-
-            {/* Subtle texture pattern */}
             <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
               style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-opacity='1'%3E%3Cpath d='M20 20h20v20H20z'/%3E%3Cpath d='M0 0h20v20H0z'/%3E%3C/g%3E%3C/svg%3E\")", backgroundSize: '20px 20px' }}
             />
 
-            <div
-              ref={heroSection.ref}
-              className="relative z-10 px-6 sm:px-8 lg:px-12 py-8 max-w-7xl mx-auto w-full"
-            >
+            <div ref={heroSection.ref} className="relative z-10 px-6 sm:px-8 lg:px-12 py-8 max-w-7xl mx-auto w-full">
               <div
                 style={{
                   opacity: heroSection.visible ? 1 : 0,
@@ -231,23 +204,20 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
                   transition: 'opacity 0.8s ease, transform 0.8s ease',
                 }}
               >
-                {/* Location tag */}
                 <p className="text-[#D32F2F] uppercase tracking-[0.35em] text-xs font-bold mb-3">
                   // Bulevardul Corvin, Hunedoara
                 </p>
 
-                {/* Title */}
                 <h1 className="font-playfair font-bold text-white leading-[0.95] mb-3" style={{ fontSize: 'clamp(40px, 7vw, 72px)' }}>
                   Fast Food<br />
                   <span className="italic text-[#D32F2F]">NON STOP</span>
                 </h1>
 
                 <p className="text-white/50 text-sm md:text-base mb-6 tracking-wide">
-                  Burgeri · Shaorma · Kebab · Hot Dog.<br className="hidden sm:block" />
+                  Shaorma · Burgeri · Kebab · Hot Dog.<br className="hidden sm:block" />
                   Prețuri corecte, porții generoase.
                 </p>
 
-                {/* CTA buttons */}
                 <div className="flex flex-col sm:flex-row gap-3 mb-6">
                   <a
                     href="tel:0722235551"
@@ -266,7 +236,6 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
                   </a>
                 </div>
 
-                {/* Ratings */}
                 <div className="flex flex-wrap items-center gap-3">
                   <div className="flex items-center gap-1.5 text-sm">
                     <span className="text-[#FFC107]">★★★★★</span>
@@ -282,7 +251,6 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
               </div>
             </div>
 
-            {/* Scroll arrow at very bottom of card */}
             <a
               href="#meniu"
               className="relative z-10 flex flex-col items-center gap-0.5 text-white/30 hover:text-white/60 transition-colors pb-4"
@@ -303,7 +271,7 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
               {[
                 { value: `${(rating / 10).toFixed(1)}`, label: 'Rating Google', suffix: '⭐' },
                 { value: `${reviewCount}`, label: 'Recenzii', suffix: '+' },
-                { value: '24', label: 'Produse în meniu', suffix: '' },
+                { value: `${MENU.length}`, label: 'Produse în meniu', suffix: '' },
               ].map((stat) => (
                 <div key={stat.label} className="py-5 text-center">
                   <div className="font-playfair text-2xl md:text-3xl font-bold text-white">
@@ -317,77 +285,86 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
         </div>
 
         {/* ══════════════════════════════════════════
-            MENU SECTION
+            MENU — pizzeria-style dark grid
         ══════════════════════════════════════════ */}
-        <section id="meniu" className="bg-[#FDF6EC] py-20 md:py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Header */}
-            <div
-              ref={menuSection.ref}
-              style={{
-                opacity: menuSection.visible ? 1 : 0,
-                transform: menuSection.visible ? 'translateY(0)' : 'translateY(24px)',
-                transition: 'opacity 0.6s ease, transform 0.6s ease',
-              }}
-              className="text-center mb-10"
-            >
-              <p className="font-inter text-[#D32F2F] uppercase tracking-[0.3em] text-xs font-semibold mb-3">
-                Descoperă
-              </p>
-              <h2 className="font-playfair text-4xl md:text-5xl font-bold text-[#1a1a1a]">
-                Meniul <span className="italic text-[#D32F2F]">Nostru</span>
+        <section id="meniu" className="bg-[#0f0806] py-24 relative">
+          <div
+            className="absolute inset-0 opacity-[0.04] pointer-events-none"
+            style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23e8b76a' fill-opacity='1'%3E%3Ccircle cx='20' cy='20' r='1'/%3E%3C/g%3E%3C/svg%3E\")" }}
+          />
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <span className="h-px w-10 bg-[#e8b76a]" />
+                <span className="font-inter text-[#e8b76a] uppercase tracking-[0.4em] text-xs font-semibold">
+                  Il menù
+                </span>
+                <span className="h-px w-10 bg-[#e8b76a]" />
+              </div>
+              <h2 className="font-playfair text-5xl md:text-6xl font-bold text-white italic">
+                Meniul <span className="text-[#e8b76a]">nostru</span>
               </h2>
-              <p className="text-[#6b5c4e] mt-3 max-w-md mx-auto">
-                Ingrediente proaspete zilnic — gust autentic la prețuri corecte
-              </p>
             </div>
 
-            {/* Tab navigation */}
-            <div className="overflow-x-auto -mx-4 px-4 mb-8">
-              <div className="flex gap-2 w-max md:w-auto md:flex-wrap md:justify-center">
-                {TABS.map(tab => (
-                  <button
-                    key={tab}
-                    onClick={() => handleTab(tab)}
-                    className={`flex-shrink-0 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 ${
-                      activeTab === tab
-                        ? 'bg-[#D32F2F] text-white shadow-lg shadow-red-200'
-                        : 'bg-[#FFF8F0] text-[#6b5c4e] border border-[#e8d5b7] hover:border-[#D32F2F]/40 hover:text-[#D32F2F]'
-                    }`}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+              {MENU.map(item => (
+                <div key={item.slug} className="flex flex-col items-center text-center group">
+                  <div className="relative w-full aspect-square max-w-md transition-transform duration-500 group-hover:scale-105">
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      fill
+                      className="object-contain drop-shadow-2xl"
+                      style={item.imageScale ? { transform: `scale(${item.imageScale})` } : undefined}
+                      sizes="(max-width: 768px) 100vw, 500px"
+                    />
+                  </div>
+                  <h3 className="font-playfair italic text-4xl font-bold text-[#e8b76a] mt-8">
+                    {item.name}
+                  </h3>
+                  {item.price && (
+                    <div className="text-white font-bold text-2xl mt-3 tracking-wide">
+                      {item.price}
+                    </div>
+                  )}
+                  {(item.priceMedium || item.priceFamily) && (
+                    <div className="flex items-center gap-8 mt-4">
+                      {item.priceMedium && (
+                        <div className="flex flex-col items-center">
+                          <span className="text-[#e8b76a]/80 uppercase tracking-widest text-[10px] font-semibold">
+                            {item.sizeMediumLabel ?? 'Medie · 32 cm'}
+                          </span>
+                          <span className="text-white font-bold text-2xl mt-1 tracking-wide">
+                            {item.priceMedium}
+                          </span>
+                        </div>
+                      )}
+                      {item.priceMedium && item.priceFamily && (
+                        <div className="h-10 w-px bg-[#e8b76a]/30" />
+                      )}
+                      {item.priceFamily && (
+                        <div className="flex flex-col items-center">
+                          <span className="text-[#e8b76a]/80 uppercase tracking-widest text-[10px] font-semibold">
+                            {item.sizeFamilyLabel ?? 'Family · 50 cm'}
+                          </span>
+                          <span className="text-white font-bold text-2xl mt-1 tracking-wide">
+                            {item.priceFamily}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  <p className="text-white/70 text-sm mt-4 max-w-md leading-relaxed">
+                    {item.ingredients}
+                  </p>
+                  <a
+                    href="tel:0722235551"
+                    className="mt-8 inline-flex items-center gap-2 border-2 border-[#e8b76a] text-[#e8b76a] hover:bg-[#e8b76a] hover:text-[#0f0806] font-bold uppercase tracking-widest px-8 py-3 rounded-full transition-all text-xs"
                   >
-                    {tab}
-                    {tab !== 'Toate' && (
-                      <span className={`ml-1.5 text-xs ${activeTab === tab ? 'text-red-200' : 'text-[#c9b99a]'}`}>
-                        ({MENU.filter(m => m.category === tab).length})
-                      </span>
-                    )}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Cards grid */}
-            <div
-              style={{ opacity: tabVisible ? 1 : 0, transition: 'opacity 0.18s ease' }}
-            >
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                {filtered.map((item, idx) => (
-                  <MenuCard
-                    key={item.id}
-                    item={item}
-                    index={idx}
-                    visible={menuSection.visible && tabVisible}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Supplements note */}
-            <div className="mt-8 p-4 bg-[#FFF8F0] rounded-2xl border border-[#e8d5b7] text-center">
-              <p className="text-[#6b5c4e] text-sm">
-                <span className="font-semibold text-[#1a1a1a]">Suplimente disponibile:</span>{' '}
-                Carne de Kebab +5 lei/porție · Cartofi Prăjiți 100g — 7 lei
-              </p>
+                    Comandă telefonic
+                  </a>
+                </div>
+              ))}
             </div>
           </div>
         </section>
