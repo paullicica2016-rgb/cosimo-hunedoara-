@@ -139,6 +139,7 @@ const MENU: MenuItem[] = [
     priceFamily: '66 lei',
     ingredients: 'Sos de roșii, mozzarella, ou, cârnat, ardei, ceapă, ardei iute.',
     image: '/images/pizzerie/tasta-cu-ou.png',
+    imageScale: 1.25,
   },
   {
     slug: 'pizza-salami',
@@ -148,6 +149,7 @@ const MENU: MenuItem[] = [
     priceFamily: '60 lei',
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte, salam Spinata, Romana Dolce.',
     image: '/images/pizzerie/pizza-salami.png',
+    imageScale: 1.25,
   },
   {
     slug: 'pizza-quatro-formaggi',
@@ -167,6 +169,7 @@ const MENU: MenuItem[] = [
     priceFamily: '66 lei',
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte, măsline, șuncă, mușchi file, salam, ciuperci, ardei kapia.',
     image: '/images/pizzerie/pizza-cosimo.png',
+    imageScale: 1.25,
   },
   {
     slug: 'pizza-jenny',
@@ -186,6 +189,7 @@ const MENU: MenuItem[] = [
     priceFamily: '65 lei',
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte, prosciutto crudo Stagionato, rucola.',
     image: '/images/pizzerie/pizza-prosciutto-crudo.png',
+    imageScale: 1.25,
   },
   {
     slug: 'pizza-tonno',
@@ -242,6 +246,7 @@ const MENU: MenuItem[] = [
     priceMedium: '33 lei',
     ingredients: 'Aluat, Nutella, ananas, fructe de sezon, banană, fulgi de migdale sau biscuiți Oreo.',
     image: '/images/pizzerie/pizza-desert.png',
+    imageScale: 1.25,
   },
   {
     slug: 'chef-burger',
@@ -399,13 +404,24 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
                   Vezi meniul
                 </a>
                 <a
-                  href="tel:0724004216"
+                  href="https://food.bolt.eu/ro-ro/1846-hunedoara/p/151943-pizzeria-cosimo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#34D186] hover:bg-[#2ab973] text-white font-bold px-8 py-4 rounded-full transition-all shadow-xl text-sm uppercase tracking-wider inline-flex items-center gap-2"
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.4 15.5l-4.5-4.5 1.5-1.5 3 3 6-6 1.5 1.5-7.5 7.5z" />
+                  </svg>
+                  Bolt Food
+                </a>
+                <a
+                  href="tel:0792764690"
                   className="border-2 border-white/40 hover:border-white text-white font-bold px-8 py-4 rounded-full transition-all text-sm uppercase tracking-wider inline-flex items-center gap-2"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
-                  0724 004 216
+                  0792 764 690
                 </a>
               </div>
             </div>
@@ -554,7 +570,7 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
                     {item.ingredients}
                   </p>
                   <a
-                    href="tel:0724004216"
+                    href="tel:0792764690"
                     className="mt-8 inline-flex items-center gap-2 border-2 border-[#e8b76a] text-[#e8b76a] hover:bg-[#e8b76a] hover:text-[#0f0806] font-bold uppercase tracking-widest px-8 py-3 rounded-full transition-all text-xs"
                   >
                     Comandă telefonic
@@ -586,13 +602,24 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="tel:0724004216"
+                href="https://food.bolt.eu/ro-ro/1846-hunedoara/p/151943-pizzeria-cosimo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#34D186] hover:bg-[#2ab973] text-white font-bold px-10 py-4 rounded-full transition-all hover:shadow-2xl text-sm uppercase tracking-wider inline-flex items-center justify-center gap-2"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.4 15.5l-4.5-4.5 1.5-1.5 3 3 6-6 1.5 1.5-7.5 7.5z" />
+                </svg>
+                Comandă pe Bolt Food
+              </a>
+              <a
+                href="tel:0792764690"
                 className="bg-[#e8b76a] hover:bg-[#d4a054] text-[#1a0f0a] font-bold px-10 py-4 rounded-full transition-all hover:shadow-2xl text-sm uppercase tracking-wider inline-flex items-center justify-center gap-2"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
-                0724 004 216
+                0792 764 690
               </a>
               <a
                 href="https://maps.google.com/?q=Bd+Corvin+nr+1+Hunedoara+Romania"

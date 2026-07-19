@@ -11,9 +11,21 @@ interface Props { images: string[] }
 
 const IMAGE_EXTS = ['.jpg', '.jpeg', '.png', '.webp', '.avif']
 
+type Category = 'shaorma' | 'burgeri' | 'sandwich' | 'hotdog' | 'salate' | 'cartofi'
+
+const CATEGORY_LABEL: Record<Category, string> = {
+  shaorma: '🌯 Shaorma & Kebab',
+  burgeri: '🍔 Burgeri',
+  sandwich: '🥪 Sandwich',
+  hotdog: '🌭 Hot Dog',
+  salate: '🥗 Salate',
+  cartofi: '🍟 Cartofi',
+}
+
 interface MenuItem {
   slug: string
   name: string
+  category: Category
   priceMedium?: string
   priceFamily?: string
   price?: string
@@ -28,6 +40,7 @@ const MENU: MenuItem[] = [
   {
     slug: 'shaorma',
     name: 'Shaorma',
+    category: 'shaorma',
     priceMedium: '22 lei',
     priceFamily: '25 lei',
     sizeMediumLabel: 'Mică · 250g',
@@ -38,6 +51,7 @@ const MENU: MenuItem[] = [
   {
     slug: 'shaorma-farfurie',
     name: 'Shaorma la Casserolă',
+    category: 'shaorma',
     price: '27 lei',
     ingredients: 'Carne pui, cartofi prăjiți, sos de usturoi, salată de varză, ceapă, roșii, castraveți murați, ketchup, sos tzatziki, sos chilli, lipie. 300g',
     image: '/images/corvin/shaorma-farfurie.jpeg',
@@ -45,6 +59,7 @@ const MENU: MenuItem[] = [
   {
     slug: 'kebab',
     name: 'Kebab',
+    category: 'shaorma',
     price: '22 lei',
     ingredients: 'Chiflă-kebab, carne de pui, cartofi prăjiți, sos de usturoi, salată de varză, ceapă, roșii, castraveți murați, ketchup, sos tzatziki, sos picant. 300g',
     image: '/images/corvin/kebab.jpeg',
@@ -52,60 +67,73 @@ const MENU: MenuItem[] = [
   {
     slug: 'pittburger',
     name: 'Pittburger',
+    category: 'burgeri',
     priceMedium: '18 lei',
     priceFamily: '21 lei',
     sizeMediumLabel: 'Simplu · 260g',
     sizeFamilyLabel: 'Dublu · 330g',
     ingredients: 'Chiflă, chiftea vită + porc (2 chiftele la Dublu), cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente.',
     image: '/images/corvin/pittburger-simplu.jpeg',
+    imageScale: 0.8,
   },
   {
     slug: 'burger-snitel-pui',
     name: 'Burger cu Șnițel de Pui',
+    category: 'burgeri',
     priceMedium: '19 lei',
     priceFamily: '22 lei',
     sizeMediumLabel: 'Simplu · 280g',
     sizeFamilyLabel: 'Dublu · 360g',
     ingredients: 'Chiflă, șnițel din piept de pui (2 șnițele la Dublu), cartofi prăjiți, sos de usturoi, maioneză cu varză, ketchup, castraveți murați, condimente.',
     image: '/images/corvin/burger-snitel-pui.jpeg',
+    imageScale: 0.8,
   },
   {
     slug: 'sandwich-sunca-cascaval',
     name: 'Sandwich cu Șuncă și Cașcaval',
+    category: 'sandwich',
     price: '16 lei',
     ingredients: 'Chiflă, cașcaval, șuncă, cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente. 250g',
     image: '/images/corvin/sandwich-sunca-cascaval.jpeg',
+    imageScale: 0.8,
   },
   {
     slug: 'sandwich-sunca',
     name: 'Sandwich cu Șuncă',
+    category: 'sandwich',
     priceMedium: '14 lei',
     priceFamily: '16 lei',
     sizeMediumLabel: 'Simplu · 220g',
     sizeFamilyLabel: 'Dublu · 260g',
     ingredients: 'Chiflă, șuncă (2 felii la Dublu), cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente.',
     image: '/images/corvin/sandwich-sunca.jpeg',
+    imageScale: 0.8,
   },
   {
     slug: 'hotdog-cascaval',
     name: 'Hot Dog cu Cașcaval',
+    category: 'hotdog',
     price: '15 lei',
     ingredients: 'Baton, crenvurști, cașcaval, maioneză, ketchup, muștar. 220g',
     image: '/images/corvin/hotdog-cascaval.jpeg',
+    imageScale: 0.8,
   },
   {
     slug: 'hotdog',
     name: 'Hot Dog',
+    category: 'hotdog',
     priceMedium: '13 lei',
     priceFamily: '15 lei',
     sizeMediumLabel: 'Simplu · 180g',
     sizeFamilyLabel: 'Dublu · 230g',
     ingredients: 'Baton, crenvurști (2 crenvurști la Dublu), maioneză, ketchup, muștar.',
     image: '/images/corvin/hotdog.jpeg',
+    imageScale: 0.8,
   },
   {
     slug: 'cartofi-cheddar',
     name: 'Cartofi cu Cheddar și Ceapă Caramelizată',
+    category: 'cartofi',
     price: '12 lei',
     ingredients: 'Cartofi, brânză cheddar, ceapă caramelizată, condimente. 220g',
     image: '/images/corvin/cartofi.jpeg',
@@ -113,6 +141,7 @@ const MENU: MenuItem[] = [
   {
     slug: 'salata-kebab',
     name: 'Salată cu Carne Kebab Cosimo',
+    category: 'salate',
     price: '21 lei',
     ingredients: 'Carne kebab la grătar, salată iceberg, morcov, roșii, castraveți, ceapă roșie, dressing tzatziki sau dressing orange Cosimo. 280g',
     image: '/images/corvin/salata-pui.png',
@@ -121,22 +150,25 @@ const MENU: MenuItem[] = [
   {
     slug: 'salata-ton',
     name: 'Salată cu Ton Cosimo',
+    category: 'salate',
     price: '21 lei',
     ingredients: 'Ton, ceapă roșie, roșii, salată iceberg, morcov, castraveți, dressing orange Cosimo și dressing pătrunjel cu lămâie. 280g',
     image: '/images/corvin/salata-ton.png',
-    imageScale: 1.6,
+    imageScale: 1.2,
   },
   {
     slug: 'salata-vegetala',
     name: 'Salată Vegetală Cosimo',
+    category: 'salate',
     price: '18 lei',
     ingredients: 'Roșii, salată iceberg, morcov, varză, castraveți, ceapă roșie, ardei iute (opțional), dressing tzatziki sau dressing orange Cosimo, dressing de pătrunjel cu lămâie. 270g',
     image: '/images/corvin/salata-vegetala.png',
-    imageScale: 1.6,
+    imageScale: 1.2,
   },
   {
     slug: 'cartofi',
     name: 'Cartofi Prăjiți',
+    category: 'cartofi',
     priceMedium: '7 lei',
     priceFamily: '10 lei',
     sizeMediumLabel: '100g',
@@ -179,6 +211,8 @@ function useCounter(target: number, duration = 1400, active = false) {
   return val
 }
 
+type TabValue = 'toate' | Category
+
 const CorvinPage: NextPage<Props> = ({ images }) => {
   const heroImage = images.find(f => f.toLowerCase().includes('hero')) ?? images[0] ?? null
   const heroSection  = useInView(0.05)
@@ -187,6 +221,19 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
 
   const reviewCount = useCounter(126, 1200, statsSection.visible)
   const rating      = useCounter(45,  1000, statsSection.visible)
+
+  const [activeTab, setActiveTab] = useState<TabValue>('toate')
+  const filtered = activeTab === 'toate' ? MENU : MENU.filter(m => m.category === activeTab)
+  const countBy = (cat: Category) => MENU.filter(m => m.category === cat).length
+  const tabs = [
+    { value: 'toate' as TabValue, label: 'Toate', count: MENU.length },
+    { value: 'shaorma' as TabValue, label: CATEGORY_LABEL.shaorma, count: countBy('shaorma') },
+    { value: 'burgeri' as TabValue, label: CATEGORY_LABEL.burgeri, count: countBy('burgeri') },
+    { value: 'sandwich' as TabValue, label: CATEGORY_LABEL.sandwich, count: countBy('sandwich') },
+    { value: 'hotdog' as TabValue, label: CATEGORY_LABEL.hotdog, count: countBy('hotdog') },
+    { value: 'salate' as TabValue, label: CATEGORY_LABEL.salate, count: countBy('salate') },
+    { value: 'cartofi' as TabValue, label: CATEGORY_LABEL.cartofi, count: countBy('cartofi') },
+  ]
 
   return (
     <>
@@ -334,8 +381,31 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
               </h2>
             </div>
 
+            {/* Category tabs */}
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-14">
+              {tabs.map(tab => {
+                const isActive = activeTab === tab.value
+                return (
+                  <button
+                    key={tab.value}
+                    onClick={() => setActiveTab(tab.value)}
+                    className={`px-5 sm:px-6 py-2.5 rounded-full text-sm font-semibold uppercase tracking-wider transition-all duration-200 ${
+                      isActive
+                        ? 'bg-[#e8b76a] text-[#0f0806] shadow-lg shadow-[#e8b76a]/20'
+                        : 'bg-transparent text-white/70 border border-white/20 hover:border-[#e8b76a]/60 hover:text-[#e8b76a]'
+                    }`}
+                  >
+                    {tab.label}
+                    <span className={`ml-2 text-xs ${isActive ? 'text-[#0f0806]/60' : 'text-white/40'}`}>
+                      {tab.count}
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-              {MENU.map(item => (
+              {filtered.map(item => (
                 <div key={item.slug} className="flex flex-col items-center text-center group">
                   <div className="relative w-full aspect-square max-w-md overflow-hidden transition-transform duration-500 group-hover:scale-105">
                     <Image

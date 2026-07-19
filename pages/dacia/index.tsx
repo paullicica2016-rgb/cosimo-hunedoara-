@@ -125,7 +125,7 @@ const MENU: MenuItem[] = [
     price: '21 lei',
     ingredients: 'Ton, ceapă roșie, roșii, salată iceberg, morcov, castraveți, dressing orange Cosimo și dressing pătrunjel cu lămâie. 280g',
     image: '/images/corvin/salata-ton.png',
-    imageScale: 1.6,
+    imageScale: 1.2,
   },
   {
     slug: 'salata-vegetala',
@@ -133,7 +133,7 @@ const MENU: MenuItem[] = [
     price: '18 lei',
     ingredients: 'Roșii, salată iceberg, morcov, varză, castraveți, ceapă roșie, ardei iute (opțional), dressing tzatziki sau dressing orange Cosimo, dressing de pătrunjel cu lămâie. 270g',
     image: '/images/corvin/salata-vegetala.png',
-    imageScale: 1.6,
+    imageScale: 1.2,
   },
   {
     slug: 'cartofi',
