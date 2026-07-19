@@ -5,16 +5,149 @@ import fs from 'fs'
 import path from 'path'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
-import ImageGallery from '../../components/ImageGallery'
 
 interface Props {
-  images: string[]
+  heroImage: string | null
 }
 
 const IMAGE_EXTS = ['.jpg', '.jpeg', '.png', '.webp', '.avif']
 
-const DaciaPage: NextPage<Props> = ({ images }) => {
-  const heroImage = images[0] ?? null
+interface MenuItem {
+  slug: string
+  name: string
+  priceMedium?: string
+  priceFamily?: string
+  price?: string
+  sizeMediumLabel?: string
+  sizeFamilyLabel?: string
+  ingredients: string
+  image: string
+  imageScale?: number
+}
+
+const MENU: MenuItem[] = [
+  {
+    slug: 'shaorma',
+    name: 'Shaorma',
+    priceMedium: '22 lei',
+    priceFamily: '25 lei',
+    sizeMediumLabel: 'Mică · 250g',
+    sizeFamilyLabel: 'Mare · 300g',
+    ingredients: 'Lipie, carne pui, cartofi prăjiți, salată de varză, ceapă, roșii, castraveți murați, ketchup, sos usturoi, sos tzatziki, sos chilli, condimente.',
+    image: '/images/corvin/shaorma.png',
+  },
+  {
+    slug: 'shaorma-farfurie',
+    name: 'Shaorma la Casserolă',
+    price: '27 lei',
+    ingredients: 'Carne pui, cartofi prăjiți, sos de usturoi, salată de varză, ceapă, roșii, castraveți murați, ketchup, sos tzatziki, sos chilli, lipie. 300g',
+    image: '/images/corvin/shaorma-farfurie.jpeg',
+  },
+  {
+    slug: 'kebab',
+    name: 'Kebab',
+    price: '22 lei',
+    ingredients: 'Chiflă-kebab, carne de pui, cartofi prăjiți, sos de usturoi, salată de varză, ceapă, roșii, castraveți murați, ketchup, sos tzatziki, sos picant. 300g',
+    image: '/images/corvin/kebab.jpeg',
+  },
+  {
+    slug: 'pittburger',
+    name: 'Pittburger',
+    priceMedium: '18 lei',
+    priceFamily: '21 lei',
+    sizeMediumLabel: 'Simplu · 260g',
+    sizeFamilyLabel: 'Dublu · 330g',
+    ingredients: 'Chiflă, chiftea vită + porc (2 chiftele la Dublu), cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente.',
+    image: '/images/corvin/pittburger-simplu.jpeg',
+  },
+  {
+    slug: 'burger-snitel-pui',
+    name: 'Burger cu Șnițel de Pui',
+    priceMedium: '19 lei',
+    priceFamily: '22 lei',
+    sizeMediumLabel: 'Simplu · 280g',
+    sizeFamilyLabel: 'Dublu · 360g',
+    ingredients: 'Chiflă, șnițel din piept de pui (2 șnițele la Dublu), cartofi prăjiți, sos de usturoi, maioneză cu varză, ketchup, castraveți murați, condimente.',
+    image: '/images/corvin/burger-snitel-pui.jpeg',
+  },
+  {
+    slug: 'sandwich-sunca-cascaval',
+    name: 'Sandwich cu Șuncă și Cașcaval',
+    price: '16 lei',
+    ingredients: 'Chiflă, cașcaval, șuncă, cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente. 250g',
+    image: '/images/corvin/sandwich-sunca-cascaval.jpeg',
+  },
+  {
+    slug: 'sandwich-sunca',
+    name: 'Sandwich cu Șuncă',
+    priceMedium: '14 lei',
+    priceFamily: '16 lei',
+    sizeMediumLabel: 'Simplu · 220g',
+    sizeFamilyLabel: 'Dublu · 260g',
+    ingredients: 'Chiflă, șuncă (2 felii la Dublu), cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente.',
+    image: '/images/corvin/sandwich-sunca.jpeg',
+  },
+  {
+    slug: 'hotdog-cascaval',
+    name: 'Hot Dog cu Cașcaval',
+    price: '15 lei',
+    ingredients: 'Baton, crenvurști, cașcaval, maioneză, ketchup, muștar. 220g',
+    image: '/images/corvin/hotdog-cascaval.jpeg',
+  },
+  {
+    slug: 'hotdog',
+    name: 'Hot Dog',
+    priceMedium: '13 lei',
+    priceFamily: '15 lei',
+    sizeMediumLabel: 'Simplu · 180g',
+    sizeFamilyLabel: 'Dublu · 230g',
+    ingredients: 'Baton, crenvurști (2 crenvurști la Dublu), maioneză, ketchup, muștar.',
+    image: '/images/corvin/hotdog.jpeg',
+  },
+  {
+    slug: 'cartofi-cheddar',
+    name: 'Cartofi cu Cheddar și Ceapă Caramelizată',
+    price: '12 lei',
+    ingredients: 'Cartofi, brânză cheddar, ceapă caramelizată, condimente. 220g',
+    image: '/images/corvin/cartofi.jpeg',
+  },
+  {
+    slug: 'salata-kebab',
+    name: 'Salată cu Carne Kebab Cosimo',
+    price: '21 lei',
+    ingredients: 'Carne kebab la grătar, salată iceberg, morcov, roșii, castraveți, ceapă roșie, dressing tzatziki sau dressing orange Cosimo. 280g',
+    image: '/images/corvin/salata-pui.png',
+    imageScale: 1.6,
+  },
+  {
+    slug: 'salata-ton',
+    name: 'Salată cu Ton Cosimo',
+    price: '21 lei',
+    ingredients: 'Ton, ceapă roșie, roșii, salată iceberg, morcov, castraveți, dressing orange Cosimo și dressing pătrunjel cu lămâie. 280g',
+    image: '/images/corvin/salata-ton.png',
+    imageScale: 1.6,
+  },
+  {
+    slug: 'salata-vegetala',
+    name: 'Salată Vegetală Cosimo',
+    price: '18 lei',
+    ingredients: 'Roșii, salată iceberg, morcov, varză, castraveți, ceapă roșie, ardei iute (opțional), dressing tzatziki sau dressing orange Cosimo, dressing de pătrunjel cu lămâie. 270g',
+    image: '/images/corvin/salata-vegetala.png',
+    imageScale: 1.6,
+  },
+  {
+    slug: 'cartofi',
+    name: 'Cartofi Prăjiți',
+    priceMedium: '7 lei',
+    priceFamily: '10 lei',
+    sizeMediumLabel: '100g',
+    sizeFamilyLabel: '150g',
+    ingredients: 'Cartofi prăjiți crocanți — porție ca supliment sau garnitură.',
+    image: '/images/corvin/cartofi.jpeg',
+  },
+]
+
+const DaciaPage: NextPage<Props> = ({ heroImage }) => {
 
   return (
     <>
@@ -107,22 +240,86 @@ const DaciaPage: NextPage<Props> = ({ images }) => {
           </div>
         </div>
 
-        {/* ─── MENU GALLERY ─── */}
-        <section className="bg-[#FDF6EC] py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-10">
-              <p className="font-inter text-[#D32F2F] uppercase tracking-[0.3em] text-xs font-semibold mb-3">
-                Descoperă
-              </p>
-              <h2 className="font-playfair text-4xl md:text-5xl font-bold text-[#1a1a1a]">
-                Meniul Nostru
+        {/* ─── MENU — pizzeria-style dark grid ─── */}
+        <section id="meniu" className="bg-[#0f0806] py-24 relative">
+          <div
+            className="absolute inset-0 opacity-[0.04] pointer-events-none"
+            style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23e8b76a' fill-opacity='1'%3E%3Ccircle cx='20' cy='20' r='1'/%3E%3C/g%3E%3C/svg%3E\")" }}
+          />
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <span className="h-px w-10 bg-[#e8b76a]" />
+                <span className="font-inter text-[#e8b76a] uppercase tracking-[0.4em] text-xs font-semibold">
+                  Il menù
+                </span>
+                <span className="h-px w-10 bg-[#e8b76a]" />
+              </div>
+              <h2 className="font-playfair text-5xl md:text-6xl font-bold text-white italic">
+                Meniul <span className="text-[#e8b76a]">nostru</span>
               </h2>
-              <p className="text-[#6b5c4e] mt-3">
-                Click pe orice imagine pentru a o mări
-              </p>
             </div>
 
-            <ImageGallery images={images} folder="dacia" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+              {MENU.map(item => (
+                <div key={item.slug} className="flex flex-col items-center text-center group">
+                  <div className="relative w-full aspect-square max-w-md overflow-hidden transition-transform duration-500 group-hover:scale-105">
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      fill
+                      className="object-contain drop-shadow-2xl"
+                      style={item.imageScale ? { transform: `scale(${item.imageScale})` } : undefined}
+                      sizes="(max-width: 768px) 100vw, 500px"
+                    />
+                  </div>
+                  <h3 className="font-playfair italic text-4xl font-bold text-[#e8b76a] mt-8">
+                    {item.name}
+                  </h3>
+                  {item.price && (
+                    <div className="text-white font-bold text-2xl mt-3 tracking-wide">
+                      {item.price}
+                    </div>
+                  )}
+                  {(item.priceMedium || item.priceFamily) && (
+                    <div className="flex items-center gap-8 mt-4">
+                      {item.priceMedium && (
+                        <div className="flex flex-col items-center">
+                          <span className="text-[#e8b76a]/80 uppercase tracking-widest text-[10px] font-semibold">
+                            {item.sizeMediumLabel ?? 'Medie · 32 cm'}
+                          </span>
+                          <span className="text-white font-bold text-2xl mt-1 tracking-wide">
+                            {item.priceMedium}
+                          </span>
+                        </div>
+                      )}
+                      {item.priceMedium && item.priceFamily && (
+                        <div className="h-10 w-px bg-[#e8b76a]/30" />
+                      )}
+                      {item.priceFamily && (
+                        <div className="flex flex-col items-center">
+                          <span className="text-[#e8b76a]/80 uppercase tracking-widest text-[10px] font-semibold">
+                            {item.sizeFamilyLabel ?? 'Family · 50 cm'}
+                          </span>
+                          <span className="text-white font-bold text-2xl mt-1 tracking-wide">
+                            {item.priceFamily}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  <p className="text-white/70 text-sm mt-4 max-w-md leading-relaxed">
+                    {item.ingredients}
+                  </p>
+                  <a
+                    href="tel:0724004216"
+                    className="mt-8 inline-flex items-center gap-2 border-2 border-[#e8b76a] text-[#e8b76a] hover:bg-[#e8b76a] hover:text-[#0f0806] font-bold uppercase tracking-widest px-8 py-3 rounded-full transition-all text-xs"
+                  >
+                    Comandă telefonic
+                  </a>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -159,13 +356,14 @@ const DaciaPage: NextPage<Props> = ({ images }) => {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const dir = path.join(process.cwd(), 'public', 'images', 'dacia')
-  let images: string[] = []
+  let heroImage: string | null = null
   if (fs.existsSync(dir)) {
-    images = fs.readdirSync(dir)
+    const all = fs.readdirSync(dir)
       .filter(f => IMAGE_EXTS.includes(path.extname(f).toLowerCase()))
       .sort()
+    heroImage = all.find(f => f.toLowerCase().includes('hero')) ?? all[0] ?? null
   }
-  return { props: { images } }
+  return { props: { heroImage } }
 }
 
 export default DaciaPage

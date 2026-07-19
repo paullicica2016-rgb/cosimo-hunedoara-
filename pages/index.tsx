@@ -163,8 +163,8 @@ const Home: NextPage<Props> = ({ daciaHero, corvinHero, pizzerieHero }) => {
                 <div className="grid grid-cols-3 gap-4">
                   {[
                     { value: '3', label: 'Locații' },
-                    { value: '5000+', label: 'Clienți' },
-                    { value: '10+', label: 'Ani' },
+                    { value: '10.000+', label: 'Clienți' },
+                    { value: '28+', label: 'Ani' },
                   ].map(stat => (
                     <div key={stat.label} className="text-center p-4 rounded-2xl bg-[#FDF6EC] border border-[#e8d5b7]">
                       <div className="font-playfair text-3xl font-bold text-[#D32F2F]">{stat.value}</div>
@@ -310,11 +310,15 @@ const Home: NextPage<Props> = ({ daciaHero, corvinHero, pizzerieHero }) => {
               {/* CARD 3 — Pizzerie */}
               <div className="location-card bg-[#FFF8F0] rounded-3xl overflow-hidden shadow-md border border-[#e8d5b7]">
                 <div className="relative h-52 overflow-hidden">
-                  {pizzerieHero ? (
-                    <Image src={pizzerieHero} alt="Pizzeria Cosimo" fill className="object-cover" />
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-[#e65100] to-[#bf360c]" />
-                  )}
+                  <Image
+                    src="/images/pizzerie/pizzerie-card.jpeg"
+                    alt="Pizzeria Cosimo"
+                    fill
+                    className="object-cover"
+                    style={{ objectPosition: '50% 25%' }}
+                  />
+                  {/* pizzerieHero preserved but unused for card visual override */}
+                  {!pizzerieHero && null}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   <div className="absolute top-3 left-3">
                     <span className="bg-[#FFC107] text-[#1a1a1a] text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
@@ -335,8 +339,14 @@ const Home: NextPage<Props> = ({ daciaHero, corvinHero, pizzerieHero }) => {
                   <div className="flex items-center gap-2 mb-3">
                     <StarRating count={5} />
                     <span className="text-[#1a1a1a] font-semibold text-sm">4.5</span>
-                    <span className="text-[#FFC107] text-xs font-medium">📞 Comenzi telefonice</span>
                   </div>
+
+                  <a href="tel:0792764690" className="flex items-center gap-2 text-[#D32F2F] font-medium text-sm mb-4 hover:text-[#b71c1c] transition-colors">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    0792 764 690
+                  </a>
 
                   <div className="flex items-start gap-2 mb-4 p-3 bg-[#FFF3CD] rounded-xl border border-[#FFC107]/30">
                     <span className="text-[#FFC107]">ℹ️</span>
@@ -369,28 +379,52 @@ const Home: NextPage<Props> = ({ daciaHero, corvinHero, pizzerieHero }) => {
         </section>
 
         {/* ─── SECTION 4: DE CE COSIMO? ─── */}
-        <section className="bg-[#FFF8F0] py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-14">
-              <p className="font-inter text-[#D32F2F] uppercase tracking-[0.3em] text-xs font-semibold mb-3">
-                Valorile noastre
-              </p>
-              <h2 className="font-playfair text-4xl md:text-5xl font-bold text-[#1a1a1a]">
-                De Ce <span className="text-[#D32F2F] italic">Cosimo?</span>
+        <section className="relative bg-[#1a0f0a] py-28 overflow-hidden">
+          {/* Background texture */}
+          <div
+            className="absolute inset-0 opacity-[0.05] pointer-events-none"
+            style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23e8b76a' fill-opacity='1'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/svg%3E\")" }}
+          />
+          {/* Glow */}
+          <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-[#D32F2F]/10 blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-[#e8b76a]/10 blur-3xl pointer-events-none" />
+
+          <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-20">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <span className="h-px w-10 bg-[#e8b76a]" />
+                <span className="font-inter text-[#e8b76a] uppercase tracking-[0.4em] text-xs font-semibold">
+                  Valorile noastre
+                </span>
+                <span className="h-px w-10 bg-[#e8b76a]" />
+              </div>
+              <h2 className="font-playfair text-5xl md:text-6xl font-bold text-white leading-tight">
+                De ce <span className="italic text-[#e8b76a]">Cosimo?</span>
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-16">
               {[
-                { icon: '🌿', title: 'Ingrediente Proaspete', desc: 'Selectăm zilnic ingrediente locale de cea mai bună calitate pentru fiecare preparat.' },
-                { icon: '⚡', title: 'Livrare Rapidă', desc: 'Comanda ta ajunge caldă și perfectă în cel mai scurt timp posibil prin Glovo.' },
-                { icon: '💰', title: 'Prețuri Accesibile', desc: 'Mâncare de calitate la prețuri corecte, pentru că toată lumea merită o masă bună.' },
-                { icon: '❤️', title: 'Făcut cu Pasiune', desc: 'Fiecare preparat este gătit cu dragoste și atenție, exact ca acasă, dar mai gustos.' },
+                { num: '01', title: 'Ingrediente Proaspete', desc: 'Selectăm zilnic ingrediente locale de cea mai bună calitate pentru fiecare preparat.' },
+                { num: '02', title: 'Livrare Rapidă', desc: 'Comanda ta ajunge caldă și perfectă în cel mai scurt timp posibil prin Glovo.' },
+                { num: '03', title: 'Prețuri Accesibile', desc: 'Mâncare de calitate la prețuri corecte, pentru că toată lumea merită o masă bună.' },
+                { num: '04', title: 'Făcut cu Pasiune', desc: 'Fiecare preparat este gătit cu dragoste și atenție, exact ca acasă, dar mai gustos.' },
               ].map(item => (
-                <div key={item.title} className="feature-card bg-[#FDF6EC] rounded-3xl p-8 text-center border border-[#e8d5b7]">
-                  <div className="text-5xl mb-5">{item.icon}</div>
-                  <h3 className="font-playfair text-xl font-bold text-[#1a1a1a] mb-3">{item.title}</h3>
-                  <p className="text-[#6b5c4e] text-sm leading-relaxed">{item.desc}</p>
+                <div key={item.title} className="group relative">
+                  <div className="flex items-start gap-6">
+                    <span className="font-playfair italic text-6xl md:text-7xl font-bold text-[#e8b76a]/25 leading-none flex-shrink-0 transition-all duration-300 group-hover:text-[#e8b76a]/50">
+                      {item.num}
+                    </span>
+                    <div className="flex-1 pt-2">
+                      <h3 className="font-playfair text-2xl md:text-3xl font-bold text-white mb-3 leading-tight">
+                        {item.title}
+                      </h3>
+                      <div className="h-px w-12 bg-[#e8b76a] mb-4" />
+                      <p className="text-white/70 text-base leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>

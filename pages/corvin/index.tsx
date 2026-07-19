@@ -37,7 +37,7 @@ const MENU: MenuItem[] = [
   },
   {
     slug: 'shaorma-farfurie',
-    name: 'Shaorma la Farfurie',
+    name: 'Shaorma la Casserolă',
     price: '27 lei',
     ingredients: 'Carne pui, cartofi prăjiți, sos de usturoi, salată de varză, ceapă, roșii, castraveți murați, ketchup, sos tzatziki, sos chilli, lipie. 300g',
     image: '/images/corvin/shaorma-farfurie.jpeg',
@@ -45,29 +45,28 @@ const MENU: MenuItem[] = [
   {
     slug: 'kebab',
     name: 'Kebab',
-    price: '30 lei',
+    price: '22 lei',
     ingredients: 'Chiflă-kebab, carne de pui, cartofi prăjiți, sos de usturoi, salată de varză, ceapă, roșii, castraveți murați, ketchup, sos tzatziki, sos picant. 300g',
     image: '/images/corvin/kebab.jpeg',
   },
   {
     slug: 'pittburger',
-    name: 'Pittburger Dublu',
-    price: '18 lei',
-    ingredients: 'Burger dublu · chiflă, 2 chiftele vită + porc, cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente. 260g',
-    image: '/images/corvin/pittburger.jpeg',
-  },
-  {
-    slug: 'pittburger-simplu',
-    name: 'Pittburger Simplu',
-    price: '13 lei',
-    ingredients: 'Chiflă, chiftea vită + porc, cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente.',
+    name: 'Pittburger',
+    priceMedium: '18 lei',
+    priceFamily: '21 lei',
+    sizeMediumLabel: 'Simplu · 260g',
+    sizeFamilyLabel: 'Dublu · 330g',
+    ingredients: 'Chiflă, chiftea vită + porc (2 chiftele la Dublu), cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente.',
     image: '/images/corvin/pittburger-simplu.jpeg',
   },
   {
     slug: 'burger-snitel-pui',
     name: 'Burger cu Șnițel de Pui',
-    price: '19 lei',
-    ingredients: 'Chiflă, șnițel din piept de pui, cartofi prăjiți, sos de usturoi, maioneză cu varză, ketchup, castraveți murați. 280g',
+    priceMedium: '19 lei',
+    priceFamily: '22 lei',
+    sizeMediumLabel: 'Simplu · 280g',
+    sizeFamilyLabel: 'Dublu · 360g',
+    ingredients: 'Chiflă, șnițel din piept de pui (2 șnițele la Dublu), cartofi prăjiți, sos de usturoi, maioneză cu varză, ketchup, castraveți murați, condimente.',
     image: '/images/corvin/burger-snitel-pui.jpeg',
   },
   {
@@ -80,8 +79,11 @@ const MENU: MenuItem[] = [
   {
     slug: 'sandwich-sunca',
     name: 'Sandwich cu Șuncă',
-    price: '14 lei',
-    ingredients: 'Chiflă, șuncă, cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente. 220g',
+    priceMedium: '14 lei',
+    priceFamily: '16 lei',
+    sizeMediumLabel: 'Simplu · 220g',
+    sizeFamilyLabel: 'Dublu · 260g',
+    ingredients: 'Chiflă, șuncă (2 felii la Dublu), cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente.',
     image: '/images/corvin/sandwich-sunca.jpeg',
   },
   {
@@ -94,16 +96,42 @@ const MENU: MenuItem[] = [
   {
     slug: 'hotdog',
     name: 'Hot Dog',
-    price: '13 lei',
-    ingredients: 'Baton, crenvurști, maioneză, ketchup, muștar. 180g',
+    priceMedium: '13 lei',
+    priceFamily: '15 lei',
+    sizeMediumLabel: 'Simplu · 180g',
+    sizeFamilyLabel: 'Dublu · 230g',
+    ingredients: 'Baton, crenvurști (2 crenvurști la Dublu), maioneză, ketchup, muștar.',
     image: '/images/corvin/hotdog.jpeg',
   },
   {
-    slug: 'salata-pui',
-    name: 'Salată de Pui Cosimo',
+    slug: 'cartofi-cheddar',
+    name: 'Cartofi cu Cheddar și Ceapă Caramelizată',
+    price: '12 lei',
+    ingredients: 'Cartofi, brânză cheddar, ceapă caramelizată, condimente. 220g',
+    image: '/images/corvin/cartofi.jpeg',
+  },
+  {
+    slug: 'salata-kebab',
+    name: 'Salată cu Carne Kebab Cosimo',
     price: '21 lei',
-    ingredients: 'Carne de pui la grătar, salată iceberg, morcov, roșii, castraveți, ceapă roșie, dressing tzatziki sau dressing orange Cosimo.',
+    ingredients: 'Carne kebab la grătar, salată iceberg, morcov, roșii, castraveți, ceapă roșie, dressing tzatziki sau dressing orange Cosimo. 280g',
     image: '/images/corvin/salata-pui.png',
+    imageScale: 1.6,
+  },
+  {
+    slug: 'salata-ton',
+    name: 'Salată cu Ton Cosimo',
+    price: '21 lei',
+    ingredients: 'Ton, ceapă roșie, roșii, salată iceberg, morcov, castraveți, dressing orange Cosimo și dressing pătrunjel cu lămâie. 280g',
+    image: '/images/corvin/salata-ton.png',
+    imageScale: 1.6,
+  },
+  {
+    slug: 'salata-vegetala',
+    name: 'Salată Vegetală Cosimo',
+    price: '18 lei',
+    ingredients: 'Roșii, salată iceberg, morcov, varză, castraveți, ceapă roșie, ardei iute (opțional), dressing tzatziki sau dressing orange Cosimo, dressing de pătrunjel cu lămâie. 270g',
+    image: '/images/corvin/salata-vegetala.png',
     imageScale: 1.6,
   },
   {
@@ -309,7 +337,7 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
               {MENU.map(item => (
                 <div key={item.slug} className="flex flex-col items-center text-center group">
-                  <div className="relative w-full aspect-square max-w-md transition-transform duration-500 group-hover:scale-105">
+                  <div className="relative w-full aspect-square max-w-md overflow-hidden transition-transform duration-500 group-hover:scale-105">
                     <Image
                       src={item.image}
                       alt={item.name}
