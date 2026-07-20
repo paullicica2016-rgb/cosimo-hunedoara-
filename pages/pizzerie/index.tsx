@@ -139,7 +139,7 @@ const MENU: MenuItem[] = [
     priceFamily: '66 lei',
     ingredients: 'Sos de roșii, mozzarella, ou, cârnat, ardei, ceapă, ardei iute.',
     image: '/images/pizzerie/tasta-cu-ou.png',
-    imageScale: 1.25,
+    imageScale: 1.2,
   },
   {
     slug: 'pizza-salami',
@@ -149,7 +149,7 @@ const MENU: MenuItem[] = [
     priceFamily: '60 lei',
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte, salam Spinata, Romana Dolce.',
     image: '/images/pizzerie/pizza-salami.png',
-    imageScale: 1.25,
+    imageScale: 1.2,
   },
   {
     slug: 'pizza-quatro-formaggi',
@@ -159,7 +159,6 @@ const MENU: MenuItem[] = [
     priceFamily: '66 lei',
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte, brânză Asiago, emmentaler, gorgonzola, Grana Padano.',
     image: '/images/pizzerie/quatro-formaggi.png',
-    imageScale: 1.25,
   },
   {
     slug: 'pizza-cosimo',
@@ -169,7 +168,6 @@ const MENU: MenuItem[] = [
     priceFamily: '66 lei',
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte, măsline, șuncă, mușchi file, salam, ciuperci, ardei kapia.',
     image: '/images/pizzerie/pizza-cosimo.png',
-    imageScale: 1.25,
   },
   {
     slug: 'pizza-jenny',
@@ -179,7 +177,7 @@ const MENU: MenuItem[] = [
     priceFamily: '62 lei',
     ingredients: 'Aluat, crenvurști, cartofi pai, emmentaler.',
     image: '/images/pizzerie/pizza-jenny.png',
-    imageScale: 1.25,
+    imageScale: 1.35,
   },
   {
     slug: 'pizza-prosciutto-crudo',
@@ -189,7 +187,7 @@ const MENU: MenuItem[] = [
     priceFamily: '65 lei',
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte, prosciutto crudo Stagionato, rucola.',
     image: '/images/pizzerie/pizza-prosciutto-crudo.png',
-    imageScale: 1.25,
+    imageScale: 1.2,
   },
   {
     slug: 'pizza-tonno',
@@ -199,6 +197,7 @@ const MENU: MenuItem[] = [
     priceFamily: '62 lei',
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte, ton, ceapă, lămâie.',
     image: '/images/pizzerie/pizza-tonno.png',
+    imageScale: 0.82,
   },
   {
     slug: 'pizza-semplice',
@@ -208,7 +207,7 @@ const MENU: MenuItem[] = [
     priceFamily: '56 lei',
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte, șuncă, ciuperci.',
     image: '/images/pizzerie/pizza-semplice.png',
-    imageScale: 1.25,
+    imageScale: 0.9,
   },
   {
     slug: 'pizza-kebab',
@@ -218,7 +217,6 @@ const MENU: MenuItem[] = [
     priceFamily: '65 lei',
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte, carne kebab, ceapă roșie, ardei, sos de usturoi.',
     image: '/images/pizzerie/pizza-kebab.png',
-    imageScale: 1.25,
   },
   {
     slug: 'pizza-peperoncino',
@@ -228,7 +226,7 @@ const MENU: MenuItem[] = [
     priceFamily: '60 lei',
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte, salam picant, ceapă, ardei iute.',
     image: '/images/pizzerie/pizza-peperoncino.png',
-    imageScale: 1.25,
+    imageScale: 1.2,
   },
   {
     slug: 'pizza-vegetala',
@@ -237,7 +235,6 @@ const MENU: MenuItem[] = [
     priceMedium: '29 lei',
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte (sau vegetală/de post), mix de legume, ardei copt, zucchini, măsline, anghinare (opțional).',
     image: '/images/pizzerie/pizza-vegetala.png',
-    imageScale: 1.25,
   },
   {
     slug: 'pizza-desert',
@@ -246,7 +243,7 @@ const MENU: MenuItem[] = [
     priceMedium: '33 lei',
     ingredients: 'Aluat, Nutella, ananas, fructe de sezon, banană, fulgi de migdale sau biscuiți Oreo.',
     image: '/images/pizzerie/pizza-desert.png',
-    imageScale: 1.25,
+    imageScale: 1.05,
   },
   {
     slug: 'chef-burger',
@@ -258,7 +255,7 @@ const MENU: MenuItem[] = [
     sizeFamilyLabel: 'Regular',
     ingredients: 'Chiflă cu susan, chiftea de vită, cașcaval cheddar, bacon, salată, roșii, castraveți murați, ceapă crispy, sos special — cu cartofi wedges și sos cheddar.',
     image: '/images/pizzerie/chef-burger.png',
-    imageScale: 1.2,
+    imageScale: 1.3,
   },
   {
     slug: 'paste-cosimo',
@@ -267,7 +264,7 @@ const MENU: MenuItem[] = [
     price: '35 lei',
     ingredients: 'Paste al dente, sos de roșii, parmezan, măsline negre, busuioc proaspăt.',
     image: '/images/pizzerie/paste-cosimo.png',
-    imageScale: 0.85,
+    imageScale: 1.1,
   },
   {
     slug: 'paste-carbonara',
@@ -276,7 +273,7 @@ const MENU: MenuItem[] = [
     price: '35 lei',
     ingredients: 'Paste, ou, guanciale (sau bacon), Pecorino Romano, piper negru proaspăt măcinat.',
     image: '/images/pizzerie/tagliatelle-carbonara.png',
-    imageScale: 0.85,
+    imageScale: 1.2,
   },
   {
     slug: 'paste-quatro-formaggi',
@@ -301,7 +298,7 @@ const MENU: MenuItem[] = [
     price: '32 lei',
     ingredients: 'Paste, zucchini, ardei copt, morcov, roșii cherry, mazăre, usturoi, ulei de măsline, parmezan, busuioc proaspăt.',
     image: '/images/pizzerie/paste-primavera.png',
-    imageScale: 0.75,
+    imageScale: 0.65,
   },
   {
     slug: 'lava-cake',
@@ -378,25 +375,28 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
 
           <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-2xl">
-              <div className="flex items-center gap-3 mb-6">
-                <span className="h-px w-10 bg-[#e8b76a]" />
-                <span className="font-inter text-[#e8b76a] uppercase tracking-[0.4em] text-xs font-semibold">
-                  Cuptor pe lemne · dal 1998
-                </span>
-              </div>
               <h1 className="font-playfair text-6xl md:text-8xl font-bold text-white leading-[0.95] italic">
                 Pizzeria
                 <br />
                 <span className="text-[#e8b76a]">Cosimo</span>
               </h1>
               <p className="font-playfair italic text-white/85 text-xl md:text-2xl mt-6 max-w-lg">
-                „O bucată de Napoli, coaptă pe lemne în inima Hunedoarei."
+                Pizza artizanală, paste italiene și deserturi — făcute proaspăt, comandate telefonic.
               </p>
-              <div className="flex items-center gap-3 mt-8 text-white/70 text-sm">
-                <svg className="w-4 h-4 text-[#e8b76a]" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                </svg>
-                Bd. Corvin nr. 1, bl. 1, ap. 2 · Hunedoara
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-8 text-white/70 text-sm">
+                <span className="flex items-center gap-2">
+                  <svg className="w-4 h-4 text-[#e8b76a]" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                  </svg>
+                  Bd. Corvin nr. 1, bl. 1, ap. 2 · Hunedoara
+                </span>
+                <span className="hidden sm:inline text-white/20">·</span>
+                <span className="flex items-center gap-2">
+                  <svg className="w-4 h-4 text-[#e8b76a]" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                  </svg>
+                  Program: 10:00 — 23:00
+                </span>
               </div>
 
               <div className="flex flex-wrap gap-3 mt-10">
