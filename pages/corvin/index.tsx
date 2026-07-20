@@ -31,6 +31,7 @@ interface MenuItem {
   price?: string
   sizeMediumLabel?: string
   sizeFamilyLabel?: string
+  comboPrice?: string
   ingredients: string
   image: string
   imageScale?: number
@@ -246,95 +247,109 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
 
       <main>
         {/* ══════════════════════════════════════════
-            HERO — Wolf-style: photo top, dark card bottom
+            HERO — Editorial magazine style
         ══════════════════════════════════════════ */}
-        <section className="relative h-screen min-h-[700px] flex flex-col">
-
-          <div className="relative flex-[1.15] min-h-0 overflow-hidden">
-            {heroImage ? (
+        <section className="relative min-h-[92vh] flex items-center overflow-hidden bg-[#0d0806] pt-16">
+          {/* Diagonal split background */}
+          <div className="absolute inset-0">
+            {heroImage && (
               <Image
                 src={`/images/corvin/${heroImage}`}
-                alt="Fast Food Cosimo exterior"
+                alt="Fast Food Cosimo interior"
                 fill
-                className="object-cover object-center"
+                className="object-cover object-center opacity-40"
                 priority
               />
-            ) : (
-              <div className="absolute inset-0 bg-gradient-to-br from-[#b71c1c] to-[#4a0000]" />
             )}
-            <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.35) 100%)' }} />
-            <div className="absolute inset-x-0 bottom-0 h-28" style={{ background: 'linear-gradient(to top, #0d0d0d, transparent)' }} />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0d0806] via-[#0d0806]/85 to-[#0d0806]/40" />
           </div>
 
-          <div className="relative flex-1 min-h-0 bg-[#0d0d0d] -mt-8 rounded-t-[2rem] z-10 flex flex-col justify-center overflow-hidden">
-            <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
-              style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-opacity='1'%3E%3Cpath d='M20 20h20v20H20z'/%3E%3Cpath d='M0 0h20v20H0z'/%3E%3C/g%3E%3C/svg%3E\")", backgroundSize: '20px 20px' }}
-            />
+          {/* Glow accents */}
+          <div className="absolute -top-32 right-0 w-[520px] h-[520px] rounded-full bg-[#D32F2F]/25 blur-[130px] pointer-events-none" />
+          <div className="absolute -bottom-40 -left-32 w-[480px] h-[480px] rounded-full bg-[#FFC107]/10 blur-[120px] pointer-events-none" />
 
-            <div ref={heroSection.ref} className="relative z-10 px-6 sm:px-8 lg:px-12 py-8 max-w-7xl mx-auto w-full">
-              <div
-                style={{
-                  opacity: heroSection.visible ? 1 : 0,
-                  transform: heroSection.visible ? 'translateY(0)' : 'translateY(30px)',
-                  transition: 'opacity 0.8s ease, transform 0.8s ease',
-                }}
-              >
-                <p className="text-[#D32F2F] uppercase tracking-[0.35em] text-xs font-bold mb-3">
-                  // Bulevardul Corvin, Hunedoara
-                </p>
+          <div ref={heroSection.ref} className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
+            <div
+              style={{
+                opacity: heroSection.visible ? 1 : 0,
+                transform: heroSection.visible ? 'translateY(0)' : 'translateY(30px)',
+                transition: 'opacity 0.8s ease, transform 0.8s ease',
+              }}
+              className="max-w-2xl"
+            >
+              {/* Vertical accent */}
+              <div className="flex items-center gap-3 mb-6">
+                <span className="h-px w-12 bg-[#D32F2F]" />
+                <span className="text-[#FFC107] uppercase tracking-[0.4em] text-[11px] font-semibold">
+                  Bulevardul Corvin · Hunedoara
+                </span>
+              </div>
 
-                <h1 className="font-playfair font-bold text-white leading-[0.95] mb-3" style={{ fontSize: 'clamp(40px, 7vw, 72px)' }}>
-                  Fast Food<br />
-                  <span className="italic text-[#D32F2F]">NON STOP</span>
-                </h1>
+              {/* Title */}
+              <h1 className="font-playfair font-bold text-white leading-[0.88] mb-6" style={{ fontSize: 'clamp(52px, 9vw, 112px)' }}>
+                Fast <span className="italic text-[#D32F2F]">Food</span>
+                <br />
+                <span className="text-white/95">Cosimo</span>
+              </h1>
 
-                <p className="text-white/50 text-sm md:text-base mb-6 tracking-wide">
-                  Shaorma · Burgeri · Kebab · Hot Dog.<br className="hidden sm:block" />
-                  Prețuri corecte, porții generoase.
-                </p>
+              {/* Divider */}
+              <div className="flex items-center gap-4 mb-7 max-w-md">
+                <span className="h-px flex-1 bg-white/20" />
+                <span className="font-playfair italic text-white/60 text-sm">gust · viteză · calitate</span>
+                <span className="h-px flex-1 bg-white/20" />
+              </div>
 
-                <div className="flex flex-col sm:flex-row gap-3 mb-6">
-                  <a
-                    href="tel:0722235551"
-                    className="flex items-center justify-center gap-2.5 bg-[#D32F2F] hover:bg-[#b71c1c] text-white font-bold px-7 py-3.5 rounded-full transition-all duration-200 hover:shadow-2xl hover:shadow-red-900/50 text-sm"
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                    SUNĂ ACUM — 0722 235 551
-                  </a>
-                  <a
-                    href="#meniu"
-                    className="flex items-center justify-center gap-2.5 text-white font-bold px-7 py-3.5 rounded-full border-2 border-white/30 hover:border-white/60 hover:bg-white/5 transition-all duration-200 text-sm"
-                  >
-                    MENIUL NOSTRU
-                  </a>
+              <p className="text-white/70 text-base md:text-lg mb-9 leading-relaxed max-w-lg">
+                Burgeri, sandwich-uri, hot dog și cartofi făcuți pe loc — prețuri corecte, porții generoase.
+              </p>
+
+              {/* Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 mb-9">
+                <a
+                  href="tel:0722235551"
+                  className="inline-flex items-center justify-center gap-2.5 bg-[#D32F2F] hover:bg-[#b71c1c] text-white font-bold px-8 py-4 rounded-full transition-all shadow-2xl shadow-red-900/40 text-sm uppercase tracking-wider"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  0722 235 551
+                </a>
+                <a
+                  href="#meniu"
+                  className="inline-flex items-center justify-center gap-2.5 text-white font-bold px-8 py-4 rounded-full border-2 border-white/25 hover:border-white/60 hover:bg-white/5 transition-all text-sm uppercase tracking-wider"
+                >
+                  Vezi meniul
+                </a>
+              </div>
+
+              {/* Rating + hours */}
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[#FFC107]">★★★★★</span>
+                  <span className="text-white font-semibold">4.5</span>
+                  <span className="text-white/40 text-xs">· 126 recenzii Google</span>
                 </div>
-
-                <div className="flex flex-wrap items-center gap-3">
-                  <div className="flex items-center gap-1.5 text-sm">
-                    <span className="text-[#FFC107]">★★★★★</span>
-                    <span className="text-white font-semibold">4.5</span>
-                    <span className="text-white/40 text-xs">· 126 recenzii</span>
-                  </div>
-                  <span className="text-white/20">|</span>
-                  <div className="flex items-center gap-1.5 text-sm">
-                    <span className="text-[#4caf50]">●</span>
-                    <span className="text-white/60">Deschis acum</span>
-                  </div>
+                <span className="text-white/20 hidden sm:inline">|</span>
+                <div className="flex items-center gap-1.5 text-white/60">
+                  <svg className="w-4 h-4 text-[#FFC107]" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                  </svg>
+                  Program de zi · sună pentru orar
                 </div>
               </div>
             </div>
-
-            <a
-              href="#meniu"
-              className="relative z-10 flex flex-col items-center gap-0.5 text-white/30 hover:text-white/60 transition-colors pb-4"
-            >
-              <svg className="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
-              </svg>
-            </a>
           </div>
+
+          {/* Scroll hint */}
+          <a
+            href="#meniu"
+            className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-white/30 hover:text-white/60 transition-colors"
+          >
+            <span className="text-[10px] uppercase tracking-widest">Scroll</span>
+            <svg className="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
         </section>
 
         {/* ══════════════════════════════════════════
@@ -455,6 +470,17 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
                   <p className="text-white/70 text-sm mt-4 max-w-md leading-relaxed">
                     {item.ingredients}
                   </p>
+                  {item.comboPrice && (
+                    <div className="mt-4 inline-flex items-center gap-2 bg-[#e8b76a]/10 border border-[#e8b76a]/30 rounded-full px-4 py-2">
+                      <span className="text-[#e8b76a] text-sm">🥤</span>
+                      <span className="text-white/80 text-xs uppercase tracking-wider font-semibold">
+                        Meniu + Coca-Cola 330 ml
+                      </span>
+                      <span className="text-[#e8b76a] font-bold text-sm">
+                        {item.comboPrice}
+                      </span>
+                    </div>
+                  )}
                   <a
                     href="tel:0722235551"
                     className="mt-8 inline-flex items-center gap-2 border-2 border-[#e8b76a] text-[#e8b76a] hover:bg-[#e8b76a] hover:text-[#0f0806] font-bold uppercase tracking-widest px-8 py-3 rounded-full transition-all text-xs"

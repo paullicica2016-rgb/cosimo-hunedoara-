@@ -20,6 +20,7 @@ interface MenuItem {
   price?: string
   sizeMediumLabel?: string
   sizeFamilyLabel?: string
+  comboPrice?: string
   ingredients: string
   image: string
   imageScale?: number
@@ -27,82 +28,72 @@ interface MenuItem {
 
 const MENU: MenuItem[] = [
   {
-    slug: 'shaorma',
-    name: 'Shaorma',
-    priceMedium: '22 lei',
-    priceFamily: '25 lei',
-    sizeMediumLabel: 'Mică · 250g',
-    sizeFamilyLabel: 'Mare · 300g',
-    ingredients: 'Lipie, carne pui, cartofi prăjiți, salată de varză, ceapă, roșii, castraveți murați, ketchup, sos usturoi, sos tzatziki, sos chilli, condimente.',
-    image: '/images/corvin/shaorma.png',
-  },
-  {
-    slug: 'shaorma-farfurie',
-    name: 'Shaorma la Casserolă',
-    price: '27 lei',
-    ingredients: 'Carne pui, cartofi prăjiți, sos de usturoi, salată de varză, ceapă, roșii, castraveți murați, ketchup, sos tzatziki, sos chilli, lipie. 300g',
-    image: '/images/corvin/shaorma-farfurie.jpeg',
-  },
-  {
-    slug: 'kebab',
-    name: 'Kebab',
-    price: '22 lei',
-    ingredients: 'Chiflă-kebab, carne de pui, cartofi prăjiți, sos de usturoi, salată de varză, ceapă, roșii, castraveți murați, ketchup, sos tzatziki, sos picant. 300g',
-    image: '/images/corvin/kebab.jpeg',
+    slug: 'burger-snitel-pui',
+    name: 'Burger cu Șnițel de Pui',
+    price: '19 lei',
+    comboPrice: '26 lei',
+    ingredients: 'Chiflă, șnițel din piept de pui, cartofi prăjiți, sos de usturoi, maioneză cu varză, ketchup, castraveți murați, condimente. 280g',
+    image: '/images/corvin/burger-snitel-pui.jpeg',
+    imageScale: 0.8,
   },
   {
     slug: 'pittburger',
     name: 'Pittburger',
-    priceMedium: '18 lei',
-    priceFamily: '21 lei',
-    sizeMediumLabel: 'Simplu · 260g',
-    sizeFamilyLabel: 'Dublu · 330g',
-    ingredients: 'Chiflă, chiftea vită + porc (2 chiftele la Dublu), cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente.',
+    price: '18 lei',
+    comboPrice: '24 lei',
+    ingredients: 'Chiflă, chiftea vită + porc, cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente. 260g',
     image: '/images/corvin/pittburger-simplu.jpeg',
-  },
-  {
-    slug: 'burger-snitel-pui',
-    name: 'Burger cu Șnițel de Pui',
-    priceMedium: '19 lei',
-    priceFamily: '22 lei',
-    sizeMediumLabel: 'Simplu · 280g',
-    sizeFamilyLabel: 'Dublu · 360g',
-    ingredients: 'Chiflă, șnițel din piept de pui (2 șnițele la Dublu), cartofi prăjiți, sos de usturoi, maioneză cu varză, ketchup, castraveți murați, condimente.',
-    image: '/images/corvin/burger-snitel-pui.jpeg',
+    imageScale: 0.8,
   },
   {
     slug: 'sandwich-sunca-cascaval',
     name: 'Sandwich cu Șuncă și Cașcaval',
     price: '16 lei',
+    comboPrice: '22 lei',
     ingredients: 'Chiflă, cașcaval, șuncă, cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente. 250g',
     image: '/images/corvin/sandwich-sunca-cascaval.jpeg',
+    imageScale: 0.8,
   },
   {
     slug: 'sandwich-sunca',
     name: 'Sandwich cu Șuncă',
-    priceMedium: '14 lei',
-    priceFamily: '16 lei',
-    sizeMediumLabel: 'Simplu · 220g',
-    sizeFamilyLabel: 'Dublu · 260g',
-    ingredients: 'Chiflă, șuncă (2 felii la Dublu), cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente.',
+    price: '14 lei',
+    ingredients: 'Chiflă, șuncă, cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente. 220g',
     image: '/images/corvin/sandwich-sunca.jpeg',
+    imageScale: 0.8,
+  },
+  {
+    slug: 'miniburger',
+    name: 'Miniburger',
+    price: '16 lei',
+    ingredients: 'Mini chiflă, șnițel de pui, cartofi prăjiți, maioneză, castraveți murați, ketchup, condimente. 180g',
+    image: '/images/corvin/burger-snitel-pui.jpeg',
+    imageScale: 0.8,
   },
   {
     slug: 'hotdog-cascaval',
     name: 'Hot Dog cu Cașcaval',
     price: '15 lei',
-    ingredients: 'Baton, crenvurști, cașcaval, maioneză, ketchup, muștar. 220g',
+    comboPrice: '21 lei',
+    ingredients: 'Baton, crenvurști, cașcaval, castraveți murați, maioneză, ketchup, muștar, condimente. 220g',
     image: '/images/corvin/hotdog-cascaval.jpeg',
+    imageScale: 0.8,
   },
   {
     slug: 'hotdog',
     name: 'Hot Dog',
-    priceMedium: '13 lei',
-    priceFamily: '15 lei',
-    sizeMediumLabel: 'Simplu · 180g',
-    sizeFamilyLabel: 'Dublu · 230g',
-    ingredients: 'Baton, crenvurști (2 crenvurști la Dublu), maioneză, ketchup, muștar.',
+    price: '13 lei',
+    ingredients: 'Baton, crenvurști, maioneză, ketchup, muștar. 180g',
     image: '/images/corvin/hotdog.jpeg',
+    imageScale: 0.8,
+  },
+  {
+    slug: 'burger-vegetal',
+    name: 'Burger Vegetal',
+    price: '14 lei',
+    ingredients: 'Chiflă, cartofi prăjiți, salată de varză, castraveți murați, maioneză, ketchup, condimente. 260g',
+    image: '/images/corvin/burger-snitel-pui.jpeg',
+    imageScale: 0.8,
   },
   {
     slug: 'cartofi-cheddar',
@@ -110,30 +101,6 @@ const MENU: MenuItem[] = [
     price: '12 lei',
     ingredients: 'Cartofi, brânză cheddar, ceapă caramelizată, condimente. 220g',
     image: '/images/corvin/cartofi.jpeg',
-  },
-  {
-    slug: 'salata-kebab',
-    name: 'Salată cu Carne Kebab Cosimo',
-    price: '21 lei',
-    ingredients: 'Carne kebab la grătar, salată iceberg, morcov, roșii, castraveți, ceapă roșie, dressing tzatziki sau dressing orange Cosimo. 280g',
-    image: '/images/corvin/salata-pui.png',
-    imageScale: 1.6,
-  },
-  {
-    slug: 'salata-ton',
-    name: 'Salată cu Ton Cosimo',
-    price: '21 lei',
-    ingredients: 'Ton, ceapă roșie, roșii, salată iceberg, morcov, castraveți, dressing orange Cosimo și dressing pătrunjel cu lămâie. 280g',
-    image: '/images/corvin/salata-ton.png',
-    imageScale: 1.2,
-  },
-  {
-    slug: 'salata-vegetala',
-    name: 'Salată Vegetală Cosimo',
-    price: '18 lei',
-    ingredients: 'Roșii, salată iceberg, morcov, varză, castraveți, ceapă roșie, ardei iute (opțional), dressing tzatziki sau dressing orange Cosimo, dressing de pătrunjel cu lămâie. 270g',
-    image: '/images/corvin/salata-vegetala.png',
-    imageScale: 1.2,
   },
   {
     slug: 'cartofi',
@@ -160,55 +127,86 @@ const DaciaPage: NextPage<Props> = ({ heroImage }) => {
 
       <main>
         {/* ─── HERO ─── */}
-        <section className="relative h-[65vh] min-h-[420px] flex items-end overflow-hidden pt-16">
-          {heroImage ? (
-            <Image
-              src={`/images/dacia/${heroImage}`}
-              alt="Cosimo Bd. Dacia"
-              fill
-              className="object-cover"
-              priority
-            />
-          ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-[#D32F2F] to-[#7f0000]" />
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
+        <section className="relative bg-[#0d0806] overflow-hidden min-h-[92vh] flex items-center pt-16">
+          {/* Ambient glows */}
+          <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#D32F2F]/25 blur-[120px] pointer-events-none" />
+          <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-[#FFC107]/15 blur-[120px] pointer-events-none" />
 
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14">
-            <div className="flex flex-wrap items-end justify-between gap-6">
+          {/* Subtle texture */}
+          <div
+            className="absolute inset-0 opacity-[0.04] pointer-events-none"
+            style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-opacity='1'%3E%3Ccircle cx='20' cy='20' r='1'/%3E%3C/g%3E%3C/svg%3E\")" }}
+          />
+
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
+
+              {/* LEFT — text */}
               <div>
-                <span className="inline-block bg-[#4caf50] text-white text-xs font-bold px-4 py-1.5 rounded-full mb-4 shadow-lg">
-                  ● Nonstop 24/7
-                </span>
-                <h1 className="font-playfair text-5xl md:text-7xl font-bold text-white drop-shadow-md">
-                  Cosimo
-                </h1>
-                <p className="text-white/80 text-lg mt-2 flex items-center gap-2">
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                  </svg>
-                  Bulevardul Dacia, Hunedoara
+                <div className="inline-flex items-center gap-2 bg-[#4caf50]/15 border border-[#4caf50]/40 text-[#7dcc7f] text-xs font-bold px-4 py-2 rounded-full mb-6 backdrop-blur">
+                  <span className="w-2 h-2 rounded-full bg-[#4caf50] animate-pulse" />
+                  Nonstop 24/7
+                </div>
+
+                <p className="font-inter text-[#FFC107] uppercase tracking-[0.35em] text-xs font-semibold mb-3">
+                  // Bulevardul Dacia
                 </p>
+
+                <h1 className="font-playfair font-bold text-white leading-[0.9] mb-4" style={{ fontSize: 'clamp(56px, 9vw, 108px)' }}>
+                  Cosimo<br />
+                  <span className="italic text-[#D32F2F]">Fast Food</span>
+                </h1>
+
+                <p className="text-white/70 text-base md:text-lg max-w-md mb-8 leading-relaxed">
+                  Burgeri, hot dog și sandwich-uri gata în câteva minute — orice oră, orice zi.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-3 mb-8">
+                  <a
+                    href="tel:0724004216"
+                    className="inline-flex items-center justify-center gap-2 bg-[#D32F2F] hover:bg-[#b71c1c] text-white font-bold px-8 py-4 rounded-full transition-all shadow-xl shadow-red-900/40 text-sm uppercase tracking-wider"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    0724 004 216
+                  </a>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-6 text-sm">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[#FFC107]">★★★★★</span>
+                    <span className="text-white font-semibold">4.4</span>
+                    <span className="text-white/40 text-xs">· 913 recenzii</span>
+                  </div>
+                  <span className="text-white/20">|</span>
+                  <div className="flex items-center gap-1.5 text-white/60">
+                    <svg className="w-4 h-4 text-[#D32F2F]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                    </svg>
+                    Bd. Dacia, Hunedoara
+                  </div>
+                </div>
               </div>
 
-              <div className="flex flex-col gap-3">
-                <a
-                  href="tel:0724004216"
-                  className="flex items-center gap-2 bg-[#D32F2F] hover:bg-[#b71c1c] text-white font-semibold px-6 py-3 rounded-full transition-colors shadow-lg text-sm"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                  0724 004 216
-                </a>
-                <a
-                  href="https://glovoapp.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur text-white font-semibold px-6 py-3 rounded-full transition-colors text-sm border border-white/30"
-                >
-                  🛵 Comandă pe Glovo
-                </a>
+              {/* RIGHT — burger */}
+              <div className="relative">
+                <div className="relative aspect-square max-w-md mx-auto">
+                  {/* Halo */}
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#D32F2F]/40 to-[#FFC107]/20 blur-3xl" />
+                  <Image
+                    src="/images/corvin/pittburger.jpeg"
+                    alt="Burger Cosimo"
+                    fill
+                    className="object-contain drop-shadow-[0_25px_45px_rgba(0,0,0,0.6)]"
+                    priority
+                  />
+                </div>
+
+                {/* Floating badge */}
+                <div className="absolute -bottom-4 left-4 md:left-8 bg-[#FFC107] text-[#1a1a1a] font-bold text-sm px-5 py-2.5 rounded-full shadow-2xl rotate-[-4deg]">
+                  🍔 Gata în 5 minute
+                </div>
               </div>
             </div>
           </div>
@@ -311,6 +309,17 @@ const DaciaPage: NextPage<Props> = ({ heroImage }) => {
                   <p className="text-white/70 text-sm mt-4 max-w-md leading-relaxed">
                     {item.ingredients}
                   </p>
+                  {item.comboPrice && (
+                    <div className="mt-4 inline-flex items-center gap-2 bg-[#e8b76a]/10 border border-[#e8b76a]/30 rounded-full px-4 py-2">
+                      <span className="text-[#e8b76a] text-sm">🥤</span>
+                      <span className="text-white/80 text-xs uppercase tracking-wider font-semibold">
+                        Meniu + Coca-Cola 330 ml
+                      </span>
+                      <span className="text-[#e8b76a] font-bold text-sm">
+                        {item.comboPrice}
+                      </span>
+                    </div>
+                  )}
                   <a
                     href="tel:0724004216"
                     className="mt-8 inline-flex items-center gap-2 border-2 border-[#e8b76a] text-[#e8b76a] hover:bg-[#e8b76a] hover:text-[#0f0806] font-bold uppercase tracking-widest px-8 py-3 rounded-full transition-all text-xs"

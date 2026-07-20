@@ -268,11 +268,11 @@ const MENU: MenuItem[] = [
     image: '/images/pizzerie/paste-cosimo.png',
   },
   {
-    slug: 'tagliatelle-carbonara',
-    name: 'Tagliatelle Carbonara',
+    slug: 'paste-carbonara',
+    name: 'Paste Carbonara',
     category: 'paste',
     price: '35 lei',
-    ingredients: 'Tagliatelle, ou, guanciale (sau bacon), Pecorino Romano, piper negru proaspăt măcinat.',
+    ingredients: 'Paste, ou, guanciale (sau bacon), Pecorino Romano, piper negru proaspăt măcinat.',
     image: '/images/pizzerie/tagliatelle-carbonara.png',
   },
   {
@@ -315,7 +315,7 @@ const MENU: MenuItem[] = [
     price: '22 lei',
     ingredients: 'Gogoașă prăjită cu brânză dulce, smântână și dulceață de fructe de pădure.',
     image: '/images/pizzerie/papanasi.png',
-    imageScale: 1.5,
+    imageScale: 1.1,
   },
   {
     slug: 'clatite',
