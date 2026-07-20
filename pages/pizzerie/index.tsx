@@ -207,7 +207,7 @@ const MENU: MenuItem[] = [
     priceFamily: '56 lei',
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte, șuncă, ciuperci.',
     image: '/images/pizzerie/pizza-semplice.png',
-    imageScale: 0.9,
+    imageScale: 1.05,
   },
   {
     slug: 'pizza-kebab',
