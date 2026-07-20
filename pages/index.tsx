@@ -196,11 +196,13 @@ const Home: NextPage<Props> = ({ daciaHero, corvinHero, pizzerieHero }) => {
               {/* CARD 1 — Dacia */}
               <div className="location-card bg-[#FFF8F0] rounded-3xl overflow-hidden shadow-md border border-[#e8d5b7]">
                 <div className="relative h-52 overflow-hidden">
-                  {daciaHero ? (
-                    <Image src={daciaHero} alt="Cosimo Bd. Dacia" fill className="object-cover" />
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-[#D32F2F] to-[#b71c1c]" />
-                  )}
+                  <Image
+                    src="/images/dacia/dacia-card.png"
+                    alt="Cosimo Bd. Dacia"
+                    fill
+                    className="object-cover"
+                  />
+                  {!daciaHero && null}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   <div className="absolute top-3 left-3">
                     <span className="bg-[#4caf50] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">

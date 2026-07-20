@@ -258,6 +258,7 @@ const MENU: MenuItem[] = [
     sizeFamilyLabel: 'Regular',
     ingredients: 'Chiflă cu susan, chiftea de vită, cașcaval cheddar, bacon, salată, roșii, castraveți murați, ceapă crispy, sos special — cu cartofi wedges și sos cheddar.',
     image: '/images/pizzerie/chef-burger.png',
+    imageScale: 1.2,
   },
   {
     slug: 'paste-cosimo',
@@ -266,6 +267,7 @@ const MENU: MenuItem[] = [
     price: '35 lei',
     ingredients: 'Paste al dente, sos de roșii, parmezan, măsline negre, busuioc proaspăt.',
     image: '/images/pizzerie/paste-cosimo.png',
+    imageScale: 0.85,
   },
   {
     slug: 'paste-carbonara',
@@ -274,6 +276,7 @@ const MENU: MenuItem[] = [
     price: '35 lei',
     ingredients: 'Paste, ou, guanciale (sau bacon), Pecorino Romano, piper negru proaspăt măcinat.',
     image: '/images/pizzerie/tagliatelle-carbonara.png',
+    imageScale: 0.85,
   },
   {
     slug: 'paste-quatro-formaggi',
@@ -298,7 +301,7 @@ const MENU: MenuItem[] = [
     price: '32 lei',
     ingredients: 'Paste, zucchini, ardei copt, morcov, roșii cherry, mazăre, usturoi, ulei de măsline, parmezan, busuioc proaspăt.',
     image: '/images/pizzerie/paste-primavera.png',
-    imageScale: 0.85,
+    imageScale: 0.75,
   },
   {
     slug: 'lava-cake',
