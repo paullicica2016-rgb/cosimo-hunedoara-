@@ -111,7 +111,7 @@ const MENU: MenuItem[] = [
     ingredients: 'Chiflă, cartofi prăjiți, salată de varză, castraveți murați, maioneză, ketchup, condimente. 260g',
     ingredientsEn: 'Bun, fries, cabbage salad, pickles, mayo, ketchup, spices. 260g',
     image: '/images/corvin/burger-vegetal.png',
-    imageScale: 0.8,
+    imageScale: 1.1,
   },
   {
     slug: 'cartofi-cheddar',
@@ -120,7 +120,7 @@ const MENU: MenuItem[] = [
     price: '12 lei',
     ingredients: 'Cartofi, brânză cheddar, ceapă caramelizată, condimente. 220g',
     ingredientsEn: 'Fries, cheddar cheese, caramelized onion, spices. 220g',
-    image: '/images/corvin/cartofi.jpeg',
+    image: '/images/corvin/cartofi-cheddar.png',
   },
   {
     slug: 'cartofi',

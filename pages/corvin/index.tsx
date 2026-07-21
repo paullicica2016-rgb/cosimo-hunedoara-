@@ -169,7 +169,7 @@ const MENU: MenuItem[] = [
     price: '12 lei',
     ingredients: 'Cartofi, brânză cheddar, ceapă caramelizată, condimente. 220g',
     ingredientsEn: 'Fries, cheddar cheese, caramelized onion, spices. 220g',
-    image: '/images/corvin/cartofi.jpeg',
+    image: '/images/corvin/cartofi-cheddar.png',
   },
   {
     slug: 'salata-kebab',
