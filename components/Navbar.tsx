@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
+import { useLanguage } from '../lib/i18n'
 
 interface NavbarProps {
   variant?: 'home' | 'location'
@@ -9,6 +10,7 @@ interface NavbarProps {
 export default function Navbar({ variant = 'home' }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const { lang, setLang, t } = useLanguage()
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -28,13 +30,13 @@ export default function Navbar({ variant = 'home' }: NavbarProps) {
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group flex-shrink-0">
-            <div className="relative w-9 h-9 rounded-full overflow-hidden ring-2 ring-[#D32F2F]/30 group-hover:ring-[#D32F2F] transition-all duration-200">
+          <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
+            <div className="relative w-14 h-14 rounded-full overflow-hidden ring-2 ring-[#D32F2F]/30 group-hover:ring-[#D32F2F] transition-all duration-200">
               <Image src="/images/logo.png" alt="Cosimo Logo" fill className="object-cover" />
             </div>
-            <span className="font-playfair text-xl font-bold text-[#D32F2F] tracking-wide">
+            <span className="font-playfair text-2xl font-bold text-[#D32F2F] tracking-wide">
               COSIMO
             </span>
           </Link>
@@ -49,7 +51,7 @@ export default function Navbar({ variant = 'home' }: NavbarProps) {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
-                Acasă
+                {t('Acasă', 'Home')}
               </Link>
             ) : (
               <>
@@ -62,25 +64,60 @@ export default function Navbar({ variant = 'home' }: NavbarProps) {
                   <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-[#D32F2F] group-hover:w-full transition-all duration-200" />
                 </Link>
                 <Link href="/pizzerie" className="text-[#6b5c4e] hover:text-[#D32F2F] font-medium transition-colors text-sm relative group">
-                  Pizzerie
+                  {t('Pizzerie', 'Pizzeria')}
                   <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-[#D32F2F] group-hover:w-full transition-all duration-200" />
                 </Link>
               </>
             )}
+            {/* Desktop language toggle */}
+            <div className="flex items-center gap-0.5 bg-[#FFF3E0] rounded-full p-0.5 border border-[#e8d5b7]">
+              <button
+                onClick={() => setLang('ro')}
+                className={`text-xs font-bold px-2.5 py-1 rounded-full transition-colors ${lang === 'ro' ? 'bg-[#D32F2F] text-white' : 'text-[#6b5c4e] hover:text-[#D32F2F]'}`}
+                aria-label="Română"
+              >
+                🇷🇴 RO
+              </button>
+              <button
+                onClick={() => setLang('en')}
+                className={`text-xs font-bold px-2.5 py-1 rounded-full transition-colors ${lang === 'en' ? 'bg-[#D32F2F] text-white' : 'text-[#6b5c4e] hover:text-[#D32F2F]'}`}
+                aria-label="English"
+              >
+                🇬🇧 EN
+              </button>
+            </div>
             <a
               href="https://glovoapp.com"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-[#D32F2F] hover:bg-[#b71c1c] text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-red-200 hover:-translate-y-px"
             >
-              Comandă pe Glovo
+              {t('Comandă pe Glovo', 'Order on Glovo')}
             </a>
           </div>
 
+          {/* Always-visible right cluster: language toggle (mobile) + hamburger */}
+          <div className="flex items-center gap-2 md:hidden">
+            <div className="flex items-center gap-0.5 bg-[#FFF3E0] rounded-full p-0.5 border border-[#e8d5b7]">
+              <button
+                onClick={() => setLang('ro')}
+                className={`text-[11px] font-bold px-2 py-1 rounded-full transition-colors ${lang === 'ro' ? 'bg-[#D32F2F] text-white' : 'text-[#6b5c4e]'}`}
+                aria-label="Română"
+              >
+                RO
+              </button>
+              <button
+                onClick={() => setLang('en')}
+                className={`text-[11px] font-bold px-2 py-1 rounded-full transition-colors ${lang === 'en' ? 'bg-[#D32F2F] text-white' : 'text-[#6b5c4e]'}`}
+                aria-label="English"
+              >
+                EN
+              </button>
+            </div>
           {/* Hamburger */}
           <button
             onClick={() => setMenuOpen(v => !v)}
-            className="md:hidden p-2 rounded-xl text-[#6b5c4e] hover:text-[#D32F2F] hover:bg-[#D32F2F]/10 transition-colors"
+            className="p-2 rounded-xl text-[#6b5c4e] hover:text-[#D32F2F] hover:bg-[#D32F2F]/10 transition-colors"
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
           >
@@ -91,6 +128,7 @@ export default function Navbar({ variant = 'home' }: NavbarProps) {
               }
             </svg>
           </button>
+          </div>
         </div>
       </div>
 
@@ -103,17 +141,32 @@ export default function Navbar({ variant = 'home' }: NavbarProps) {
         <div className="bg-white/95 backdrop-blur-md border-t border-[#e8d5b7]/50 px-4 py-4 space-y-1">
           {variant === 'location' ? (
             <Link href="/" className="flex items-center gap-2 text-[#6b5c4e] hover:text-[#D32F2F] font-medium py-3 px-3 rounded-xl hover:bg-[#D32F2F]/5 transition-colors" onClick={() => setMenuOpen(false)}>
-              ← Acasă
+              ← {t('Acasă', 'Home')}
             </Link>
           ) : (
             <>
-              {[{ href: '/dacia', label: 'Bd. Dacia' }, { href: '/corvin', label: 'Bd. Corvin' }, { href: '/pizzerie', label: 'Pizzerie' }].map(item => (
+              {[{ href: '/dacia', label: 'Bd. Dacia' }, { href: '/corvin', label: 'Bd. Corvin' }, { href: '/pizzerie', label: t('Pizzerie', 'Pizzeria') }].map(item => (
                 <Link key={item.href} href={item.href} className="block text-[#6b5c4e] hover:text-[#D32F2F] font-medium py-3 px-3 rounded-xl hover:bg-[#D32F2F]/5 transition-colors" onClick={() => setMenuOpen(false)}>
                   {item.label}
                 </Link>
               ))}
             </>
           )}
+          {/* Language toggle */}
+          <div className="flex items-center justify-center gap-0.5 bg-[#FFF3E0] rounded-full p-0.5 border border-[#e8d5b7] mt-2 w-max mx-auto">
+            <button
+              onClick={() => setLang('ro')}
+              className={`text-xs font-bold px-3 py-1.5 rounded-full transition-colors ${lang === 'ro' ? 'bg-[#D32F2F] text-white' : 'text-[#6b5c4e]'}`}
+            >
+              🇷🇴 RO
+            </button>
+            <button
+              onClick={() => setLang('en')}
+              className={`text-xs font-bold px-3 py-1.5 rounded-full transition-colors ${lang === 'en' ? 'bg-[#D32F2F] text-white' : 'text-[#6b5c4e]'}`}
+            >
+              🇬🇧 EN
+            </button>
+          </div>
           <div className="pt-2">
             <a
               href="https://glovoapp.com"
@@ -121,7 +174,7 @@ export default function Navbar({ variant = 'home' }: NavbarProps) {
               rel="noopener noreferrer"
               className="block bg-[#D32F2F] text-white text-center font-semibold px-5 py-3 rounded-full transition-colors hover:bg-[#b71c1c]"
             >
-              Comandă pe Glovo
+              {t('Comandă pe Glovo', 'Order on Glovo')}
             </a>
           </div>
         </div>

@@ -6,12 +6,14 @@ import path from 'path'
 import { useState } from 'react'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
+import { useLanguage } from '../../lib/i18n'
 
 type Category = 'pizza' | 'paste' | 'burgeri' | 'desert'
 
 interface MenuItem {
   slug: string
   name: string
+  nameEn?: string
   category: Category
   priceMedium?: string
   priceFamily?: string
@@ -19,32 +21,37 @@ interface MenuItem {
   sizeFamilyLabel?: string
   price?: string
   ingredients: string
+  ingredientsEn?: string
   image: string
   imageScale?: number
 }
 
-const CATEGORY_LABEL: Record<Category, string> = {
-  pizza: '🍕 Pizza',
-  paste: '🍝 Paste',
-  burgeri: '🍔 Burgeri',
-  desert: '🍰 Desert',
+const CATEGORY_LABEL: Record<Category, { ro: string; en: string }> = {
+  pizza: { ro: '🍕 Pizza', en: '🍕 Pizza' },
+  paste: { ro: '🍝 Paste', en: '🍝 Pasta' },
+  burgeri: { ro: '🍔 Burgeri', en: '🍔 Burgers' },
+  desert: { ro: '🍰 Desert', en: '🍰 Dessert' },
 }
 
 interface Drink {
   name: string
+  nameEn?: string
   note?: string
+  noteEn?: string
   volume?: string
   price: string
 }
 
 interface DrinkGroup {
   title: string
+  titleEn?: string
   items: Drink[]
 }
 
 const DRINKS: DrinkGroup[] = [
   {
     title: 'Vinuri & Șampanie',
+    titleEn: 'Wines & Champagne',
     items: [
       { name: 'Vin fiert (Merlot)', volume: '200 ml', price: '10 lei' },
       { name: 'Castel Huniade', note: 'sec, demisec — alb, roșu, roze', volume: '187 ml', price: '15 lei' },
@@ -60,6 +67,7 @@ const DRINKS: DrinkGroup[] = [
   },
   {
     title: 'Cocktail-uri',
+    titleEn: 'Cocktails',
     items: [
       { name: 'Dry Martini', note: '20 ml Cinzano, 50 ml Gin, gheață, 3 măsline', price: '25 lei' },
       { name: 'Aperol Spritz', note: '75 ml Prosecco, 50 ml Aperol, 30 ml apă minerală, felie de portocală', price: '25 lei' },
@@ -69,6 +77,7 @@ const DRINKS: DrinkGroup[] = [
   },
   {
     title: 'Bere',
+    titleEn: 'Beer',
     items: [
       { name: 'Birra Moretti', volume: '0.33 L', price: '9 lei' },
       { name: 'Birra Moretti Zero', volume: '0.33 L', price: '9 lei' },
@@ -83,6 +92,7 @@ const DRINKS: DrinkGroup[] = [
   },
   {
     title: 'Răcoritoare',
+    titleEn: 'Soft Drinks',
     items: [
       { name: 'Coca-Cola', note: 'Gust Original', volume: '0.25 L', price: '9 lei' },
       { name: 'Coca-Cola Zero', note: 'Zero zahăr, zero calorii', volume: '0.25 L', price: '9 lei' },
@@ -98,6 +108,7 @@ const DRINKS: DrinkGroup[] = [
   },
   {
     title: 'Cafea & Băuturi Calde',
+    titleEn: 'Coffee & Hot Drinks',
     items: [
       { name: 'Cafea', price: '7 lei' },
       { name: 'Cafe Latte', note: 'cafea, lapte', price: '10 lei' },
@@ -115,6 +126,7 @@ const DRINKS: DrinkGroup[] = [
   },
   {
     title: 'Lichioruri & Vinars',
+    titleEn: 'Liqueurs & Brandy',
     items: [
       { name: 'Cognac Jidvei (Vinars)', volume: '100 ml', price: '16 lei' },
       { name: 'Vecchia Romagna', volume: '100 ml', price: '18 lei' },
@@ -138,6 +150,7 @@ const MENU: MenuItem[] = [
     priceMedium: '35 lei',
     priceFamily: '66 lei',
     ingredients: 'Sos de roșii, mozzarella, ou, cârnat, ardei, ceapă, ardei iute.',
+    ingredientsEn: 'Tomato sauce, mozzarella, egg, sausage, bell pepper, onion, chilli pepper.',
     image: '/images/pizzerie/tasta-cu-ou.png',
     imageScale: 1.2,
   },
@@ -148,6 +161,7 @@ const MENU: MenuItem[] = [
     priceMedium: '32 lei',
     priceFamily: '60 lei',
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte, salam Spinata, Romana Dolce.',
+    ingredientsEn: 'Dough, tomato sauce, Fior di latte mozzarella, Spinata salami, Romana Dolce.',
     image: '/images/pizzerie/pizza-salami.png',
     imageScale: 1.2,
   },
@@ -158,6 +172,7 @@ const MENU: MenuItem[] = [
     priceMedium: '34 lei',
     priceFamily: '66 lei',
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte, brânză Asiago, emmentaler, gorgonzola, Grana Padano.',
+    ingredientsEn: 'Dough, tomato sauce, Fior di latte mozzarella, Asiago cheese, emmentaler, gorgonzola, Grana Padano.',
     image: '/images/pizzerie/quatro-formaggi.png',
   },
   {
@@ -167,6 +182,7 @@ const MENU: MenuItem[] = [
     priceMedium: '35 lei',
     priceFamily: '66 lei',
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte, măsline, șuncă, mușchi file, salam, ciuperci, ardei kapia.',
+    ingredientsEn: 'Dough, tomato sauce, Fior di latte mozzarella, olives, ham, pork tenderloin, salami, mushrooms, roasted red pepper.',
     image: '/images/pizzerie/pizza-cosimo.png',
   },
   {
@@ -176,6 +192,7 @@ const MENU: MenuItem[] = [
     priceMedium: '33 lei',
     priceFamily: '62 lei',
     ingredients: 'Aluat, crenvurști, cartofi pai, emmentaler.',
+    ingredientsEn: 'Dough, frankfurters, shoestring fries, emmentaler.',
     image: '/images/pizzerie/pizza-jenny.png',
     imageScale: 1.35,
   },
@@ -186,6 +203,7 @@ const MENU: MenuItem[] = [
     priceMedium: '34 lei',
     priceFamily: '65 lei',
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte, prosciutto crudo Stagionato, rucola.',
+    ingredientsEn: 'Dough, tomato sauce, Fior di latte mozzarella, aged prosciutto crudo Stagionato, rocket.',
     image: '/images/pizzerie/pizza-prosciutto-crudo.png',
     imageScale: 1.2,
   },
@@ -196,6 +214,7 @@ const MENU: MenuItem[] = [
     priceMedium: '33 lei',
     priceFamily: '62 lei',
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte, ton, ceapă, lămâie.',
+    ingredientsEn: 'Dough, tomato sauce, Fior di latte mozzarella, tuna, onion, lemon.',
     image: '/images/pizzerie/pizza-tonno.png',
     imageScale: 0.82,
   },
@@ -206,6 +225,7 @@ const MENU: MenuItem[] = [
     priceMedium: '31 lei',
     priceFamily: '56 lei',
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte, șuncă, ciuperci.',
+    ingredientsEn: 'Dough, tomato sauce, Fior di latte mozzarella, ham, mushrooms.',
     image: '/images/pizzerie/pizza-semplice.png',
     imageScale: 1.05,
   },
@@ -216,6 +236,7 @@ const MENU: MenuItem[] = [
     priceMedium: '34 lei',
     priceFamily: '65 lei',
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte, carne kebab, ceapă roșie, ardei, sos de usturoi.',
+    ingredientsEn: 'Dough, tomato sauce, Fior di latte mozzarella, kebab meat, red onion, bell pepper, garlic sauce.',
     image: '/images/pizzerie/pizza-kebab.png',
   },
   {
@@ -225,23 +246,28 @@ const MENU: MenuItem[] = [
     priceMedium: '32 lei',
     priceFamily: '60 lei',
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte, salam picant, ceapă, ardei iute.',
+    ingredientsEn: 'Dough, tomato sauce, Fior di latte mozzarella, spicy salami, onion, chilli pepper.',
     image: '/images/pizzerie/pizza-peperoncino.png',
     imageScale: 1.2,
   },
   {
     slug: 'pizza-vegetala',
     name: 'Pizza Vegetală',
+    nameEn: 'Vegetarian Pizza',
     category: 'pizza',
     priceMedium: '29 lei',
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte (sau vegetală/de post), mix de legume, ardei copt, zucchini, măsline, anghinare (opțional).',
+    ingredientsEn: 'Dough, tomato sauce, Fior di latte mozzarella (or vegan / fasting-friendly), mixed vegetables, roasted peppers, zucchini, olives, artichoke (optional).',
     image: '/images/pizzerie/pizza-vegetala.png',
   },
   {
     slug: 'pizza-desert',
     name: 'Pizza Desert',
+    nameEn: 'Dessert Pizza',
     category: 'pizza',
     priceMedium: '33 lei',
     ingredients: 'Aluat, Nutella, ananas, fructe de sezon, banană, fulgi de migdale sau biscuiți Oreo.',
+    ingredientsEn: 'Dough, Nutella, pineapple, seasonal fruit, banana, almond flakes or Oreo cookies.',
     image: '/images/pizzerie/pizza-desert.png',
     imageScale: 1.05,
   },
@@ -254,49 +280,60 @@ const MENU: MenuItem[] = [
     sizeMediumLabel: 'Mini',
     sizeFamilyLabel: 'Regular',
     ingredients: 'Chiflă cu susan, chiftea de vită, cașcaval cheddar, bacon, salată, roșii, castraveți murați, ceapă crispy, sos special — cu cartofi wedges și sos cheddar.',
+    ingredientsEn: 'Sesame bun, beef patty, cheddar cheese, bacon, lettuce, tomato, pickles, crispy onion, special sauce — served with potato wedges and cheddar sauce.',
     image: '/images/pizzerie/chef-burger.png',
     imageScale: 1.3,
   },
   {
     slug: 'paste-cosimo',
     name: 'Paste Cosimo',
+    nameEn: 'Cosimo Pasta',
     category: 'paste',
     price: '35 lei',
     ingredients: 'Paste al dente, sos de roșii, parmezan, măsline negre, busuioc proaspăt.',
+    ingredientsEn: 'Al dente pasta, tomato sauce, Parmesan, black olives, fresh basil.',
     image: '/images/pizzerie/paste-cosimo.png',
     imageScale: 1.1,
   },
   {
     slug: 'paste-carbonara',
     name: 'Paste Carbonara',
+    nameEn: 'Carbonara Pasta',
     category: 'paste',
     price: '35 lei',
     ingredients: 'Paste, ou, guanciale (sau bacon), Pecorino Romano, piper negru proaspăt măcinat.',
+    ingredientsEn: 'Pasta, egg, guanciale (or bacon), Pecorino Romano, freshly ground black pepper.',
     image: '/images/pizzerie/tagliatelle-carbonara.png',
     imageScale: 1.2,
   },
   {
     slug: 'paste-quatro-formaggi',
     name: 'Paste Quatro Formaggi',
+    nameEn: 'Quatro Formaggi Pasta',
     category: 'paste',
     price: '35 lei',
     ingredients: 'Paste, mozzarella, gorgonzola, Grana Padano, emmentaler, smântână, piper negru.',
+    ingredientsEn: 'Pasta, mozzarella, gorgonzola, Grana Padano, emmentaler, cream, black pepper.',
     image: '/images/pizzerie/paste-quatro-formaggi.png',
   },
   {
     slug: 'paste-bologneze',
     name: 'Paste Bologneze',
+    nameEn: 'Bolognese Pasta',
     category: 'paste',
     price: '35 lei',
     ingredients: 'Paste, ragù de vită și porc, sos de roșii, parmezan, busuioc proaspăt.',
+    ingredientsEn: 'Pasta, beef and pork ragù, tomato sauce, Parmesan, fresh basil.',
     image: '/images/pizzerie/paste-bolognese.png',
   },
   {
     slug: 'paste-primavera',
     name: 'Paste Primavera',
+    nameEn: 'Primavera Pasta',
     category: 'paste',
     price: '32 lei',
     ingredients: 'Paste, zucchini, ardei copt, morcov, roșii cherry, mazăre, usturoi, ulei de măsline, parmezan, busuioc proaspăt.',
+    ingredientsEn: 'Pasta, zucchini, roasted pepper, carrot, cherry tomatoes, peas, garlic, olive oil, Parmesan, fresh basil.',
     image: '/images/pizzerie/paste-primavera.png',
     imageScale: 0.65,
   },
@@ -306,23 +343,28 @@ const MENU: MenuItem[] = [
     category: 'desert',
     price: '22 lei',
     ingredients: 'Prăjitură de ciocolată cu inimă lichidă, servită cu înghețată de vanilie și fructe de pădure.',
+    ingredientsEn: 'Chocolate cake with a molten centre, served with vanilla ice cream and forest fruit.',
     image: '/images/pizzerie/lava-cake.png',
   },
   {
     slug: 'papanasi',
     name: 'Papanași',
+    nameEn: 'Papanași (Romanian cheese doughnuts)',
     category: 'desert',
     price: '22 lei',
     ingredients: 'Gogoașă prăjită cu brânză dulce, smântână și dulceață de fructe de pădure.',
+    ingredientsEn: 'Fried doughnut with sweet cheese, sour cream and forest fruit jam.',
     image: '/images/pizzerie/papanasi.png',
     imageScale: 1.1,
   },
   {
     slug: 'clatite',
     name: 'Clătite',
+    nameEn: 'Crêpes',
     category: 'desert',
     price: '18 lei',
     ingredients: 'Sortimente la alegere · cu Nutella · cu Nutella și banane · cu gem de afine · cu ciocolată și biscuiți Oreo. Servite cu frișcă și felii de portocală.',
+    ingredientsEn: 'Choice of fillings · Nutella · Nutella & banana · blueberry jam · chocolate & Oreo. Served with whipped cream and orange slices.',
     image: '/images/pizzerie/clatite.png',
   },
 ]
@@ -330,6 +372,7 @@ const MENU: MenuItem[] = [
 type TabValue = 'toate' | Category | 'bauturi'
 
 const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
+  const { t, lang } = useLanguage()
   const [activeTab, setActiveTab] = useState<TabValue>('toate')
 
   const filtered = activeTab === 'toate' || activeTab === 'bauturi'
@@ -338,19 +381,19 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
   const countBy = (cat: Category) => menu.filter(m => m.category === cat).length
   const drinksTotal = DRINKS.reduce((sum, g) => sum + g.items.length, 0)
   const tabs = [
-    { value: 'toate' as TabValue, label: 'Toate', count: menu.length },
-    { value: 'pizza' as TabValue, label: CATEGORY_LABEL.pizza, count: countBy('pizza') },
-    { value: 'paste' as TabValue, label: CATEGORY_LABEL.paste, count: countBy('paste') },
-    { value: 'burgeri' as TabValue, label: CATEGORY_LABEL.burgeri, count: countBy('burgeri') },
-    { value: 'desert' as TabValue, label: CATEGORY_LABEL.desert, count: countBy('desert') },
-    { value: 'bauturi' as TabValue, label: '🥂 Băuturi', count: drinksTotal },
+    { value: 'toate' as TabValue, label: t('Toate', 'All'), count: menu.length },
+    { value: 'pizza' as TabValue, label: CATEGORY_LABEL.pizza[lang], count: countBy('pizza') },
+    { value: 'paste' as TabValue, label: CATEGORY_LABEL.paste[lang], count: countBy('paste') },
+    { value: 'burgeri' as TabValue, label: CATEGORY_LABEL.burgeri[lang], count: countBy('burgeri') },
+    { value: 'desert' as TabValue, label: CATEGORY_LABEL.desert[lang], count: countBy('desert') },
+    { value: 'bauturi' as TabValue, label: t('🥂 Băuturi', '🥂 Drinks'), count: drinksTotal },
   ]
 
   return (
     <>
       <Head>
-        <title>Pizzeria Cosimo — Cuptor pe lemne · Bd. Corvin nr. 1, Hunedoara</title>
-        <meta name="description" content="Pizzeria Cosimo Hunedoara — Pizza napoletană coaptă în cuptor pe lemne. Rețete tradiționale, ingrediente italiene. Comenzi telefonice." />
+        <title>{t('Pizzeria Cosimo — Bd. Corvin nr. 1, Hunedoara', 'Cosimo Pizzeria — Bd. Corvin no. 1, Hunedoara')}</title>
+        <meta name="description" content={t('Pizzeria Cosimo Hunedoara — Pizza artizanală, paste italiene și deserturi. Comenzi telefonice.', 'Cosimo Pizzeria Hunedoara — Artisan pizza, Italian pasta and desserts. Phone orders.')} />
       </Head>
 
       <Navbar variant="location" />
@@ -376,12 +419,15 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
           <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-2xl">
               <h1 className="font-playfair text-6xl md:text-8xl font-bold text-white leading-[0.95] italic">
-                Pizzeria
+                {t('Pizzeria', 'Cosimo')}
                 <br />
-                <span className="text-[#e8b76a]">Cosimo</span>
+                <span className="text-[#e8b76a]">{t('Cosimo', 'Pizzeria')}</span>
               </h1>
               <p className="font-playfair italic text-white/85 text-xl md:text-2xl mt-6 max-w-lg">
-                Pizza artizanală, paste italiene și deserturi — făcute proaspăt, comandate telefonic.
+                {t(
+                  'Pizza artizanală, paste italiene și deserturi — făcute proaspăt, comandate telefonic.',
+                  'Artisan pizza, Italian pasta and desserts — made fresh, ordered by phone.'
+                )}
               </p>
               <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-8 text-white/70 text-sm">
                 <span className="flex items-center gap-2">
@@ -395,7 +441,7 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
                   <svg className="w-4 h-4 text-[#e8b76a]" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
                   </svg>
-                  Program: 10:00 — 23:00
+                  {t('Program: 10:00 — 23:00', 'Open: 10:00 — 23:00')}
                 </span>
               </div>
 
@@ -404,7 +450,7 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
                   href="#meniu"
                   className="bg-[#e8b76a] hover:bg-[#d4a054] text-[#1a0f0a] font-bold px-8 py-4 rounded-full transition-all shadow-xl text-sm uppercase tracking-wider"
                 >
-                  Vezi meniul
+                  {t('Vezi meniul', 'View menu')}
                 </a>
                 <a
                   href="https://food.bolt.eu/ro-ro/1846-hunedoara/p/151943-pizzeria-cosimo"
@@ -453,7 +499,7 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
                 <span className="h-px w-10 bg-[#e8b76a]" />
               </div>
               <h2 className="font-playfair text-5xl md:text-6xl font-bold text-white italic">
-                Specialitățile <span className="text-[#e8b76a]">casei</span>
+                {t('Specialitățile', 'House')} <span className="text-[#e8b76a]">{t('casei', 'Specialities')}</span>
               </h2>
             </div>
 
@@ -487,7 +533,7 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
                     <div className="flex items-center gap-4 mb-6">
                       <span className="h-px flex-1 bg-[#e8b76a]/30" />
                       <h3 className="font-playfair italic text-2xl md:text-3xl text-[#e8b76a] whitespace-nowrap">
-                        {group.title}
+                        {lang === 'en' && group.titleEn ? group.titleEn : group.title}
                       </h3>
                       <span className="h-px flex-1 bg-[#e8b76a]/30" />
                     </div>
@@ -496,11 +542,11 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
                         <li key={`${d.name}-${i}`} className="flex items-baseline gap-3 py-3">
                           <div className="flex-1 min-w-0">
                             <div className="font-playfair text-white text-lg leading-tight">
-                              {d.name}
+                              {lang === 'en' && d.nameEn ? d.nameEn : d.name}
                             </div>
                             {d.note && (
                               <div className="text-white/50 text-xs mt-1 leading-snug">
-                                {d.note}
+                                {lang === 'en' && d.noteEn ? d.noteEn : d.note}
                               </div>
                             )}
                           </div>
@@ -535,7 +581,7 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
                     />
                   </div>
                   <h3 className="font-playfair italic text-4xl font-bold text-[#e8b76a] mt-2">
-                    {item.name}
+                    {lang === 'en' && item.nameEn ? item.nameEn : item.name}
                   </h3>
                   {item.price && (
                     <div className="text-white font-bold text-2xl mt-3 tracking-wide">
@@ -570,13 +616,13 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
                     </div>
                   )}
                   <p className="text-white/70 text-sm mt-4 max-w-md leading-relaxed">
-                    {item.ingredients}
+                    {lang === 'en' && item.ingredientsEn ? item.ingredientsEn : item.ingredients}
                   </p>
                   <a
                     href="tel:0792764690"
                     className="mt-8 inline-flex items-center gap-2 border-2 border-[#e8b76a] text-[#e8b76a] hover:bg-[#e8b76a] hover:text-[#0f0806] font-bold uppercase tracking-widest px-8 py-3 rounded-full transition-all text-xs"
                   >
-                    Comandă telefonic
+                    {t('Comandă telefonic', 'Order by phone')}
                   </a>
                 </div>
               ))}
@@ -593,15 +639,18 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
           />
           <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
             <p className="font-inter text-[#e8b76a] uppercase tracking-[0.4em] text-xs font-semibold mb-4">
-              Buonissimo
+              {t('Buonissimo', 'Buonissimo')}
             </p>
             <h2 className="font-playfair text-4xl md:text-5xl font-bold text-white italic leading-tight">
-              Ți-e foame?
+              {t('Ți-e foame?', 'Hungry?')}
               <br />
-              <span className="text-[#e8b76a]">Cuptorul e cald.</span>
+              <span className="text-[#e8b76a]">{t('Cuptorul e cald.', 'The oven is hot.')}</span>
             </h2>
             <p className="text-white/80 mt-6 mb-10 text-lg">
-              Sună-ne, alege pizza — o găsești pregătită și proaspătă în câteva minute.
+              {t(
+                'Sună-ne, alege pizza — o găsești pregătită și proaspătă în câteva minute.',
+                "Call us, pick your pizza — it'll be ready and fresh in a few minutes."
+              )}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -613,7 +662,7 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.4 15.5l-4.5-4.5 1.5-1.5 3 3 6-6 1.5 1.5-7.5 7.5z" />
                 </svg>
-                Comandă pe Bolt Food
+                {t('Comandă pe Bolt Food', 'Order on Bolt Food')}
               </a>
               <a
                 href="tel:0792764690"
@@ -633,7 +682,7 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                 </svg>
-                Direcții pe Maps
+                {t('Direcții pe Maps', 'Directions on Maps')}
               </a>
             </div>
           </div>
@@ -644,10 +693,10 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10">
               <p className="font-inter text-[#a63e2a] uppercase tracking-[0.3em] text-xs font-semibold mb-3">
-                Cum ne găsești
+                {t('Cum ne găsești', 'Find us')}
               </p>
               <h2 className="font-playfair text-3xl md:text-4xl font-bold text-[#3a1a0a] italic">
-                Te așteptăm la Cosimo
+                {t('Te așteptăm la Cosimo', 'See you at Cosimo')}
               </h2>
               <p className="text-[#5c4433] mt-3 flex items-center justify-center gap-1.5">
                 <svg className="w-4 h-4 text-[#a63e2a]" fill="currentColor" viewBox="0 0 20 20">
