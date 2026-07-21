@@ -37,7 +37,7 @@ export default function Footer() {
           <div>
             <h3 className="font-playfair text-white text-lg font-semibold mb-4 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#D32F2F] inline-block"></span>
-              Cosimo — Bd. Dacia
+              Cosimo Non-Stop Fast Food
             </h3>
             <ul className="space-y-2 text-sm">
               <li className="flex items-start gap-2">
@@ -45,7 +45,7 @@ export default function Footer() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                Bulevardul Dacia, Hunedoara
+                Bd. Dacia 23 bis, Hunedoara
               </li>
               <li className="flex items-center gap-2">
                 <svg className="w-4 h-4 text-[#D32F2F] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,7 +66,7 @@ export default function Footer() {
           <div>
             <h3 className="font-playfair text-white text-lg font-semibold mb-4 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#D32F2F] inline-block"></span>
-              Fast Food — Bd. Corvin
+              Cosimo Fast Food Pietonala
             </h3>
             <ul className="space-y-2 text-sm">
               <li className="flex items-start gap-2">
@@ -74,7 +74,7 @@ export default function Footer() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                Bulevardul Corvin, Hunedoara
+                Bd. Corvin nr. 1, ap. 3, Hunedoara
               </li>
               <li className="flex items-center gap-2">
                 <svg className="w-4 h-4 text-[#D32F2F] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -114,7 +114,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-[#5a4535]">© 2025 Cosimo Hunedoara. {t('Toate drepturile rezervate.', 'All rights reserved.')}</p>
             <div className="flex gap-4 text-sm">
-              <Link href="/dacia" className="text-[#5a4535] hover:text-[#c9b99a] transition-colors">Bd. Dacia</Link>
+              <Link href="/dacia" className="text-[#5a4535] hover:text-[#c9b99a] transition-colors">Non Stop</Link>
               <Link href="/corvin" className="text-[#5a4535] hover:text-[#c9b99a] transition-colors">Bd. Corvin</Link>
               <Link href="/pizzerie" className="text-[#5a4535] hover:text-[#c9b99a] transition-colors">{t('Pizzerie', 'Pizzeria')}</Link>
             </div>

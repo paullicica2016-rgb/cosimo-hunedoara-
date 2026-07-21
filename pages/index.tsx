@@ -165,12 +165,12 @@ const Home: NextPage<Props> = ({ daciaHero, corvinHero, pizzerieHero }) => {
                 <div className="grid grid-cols-3 gap-4">
                   {[
                     { value: '3', label: t('Locații', 'Locations') },
-                    { value: '10.000+', label: t('Clienți', 'Customers') },
+                    { value: t('10.000+', '10,000+'), label: t('Clienți', 'Customers') },
                     { value: '28+', label: t('Ani', 'Years') },
                   ].map(stat => (
                     <div key={stat.label} className="text-center p-4 rounded-2xl bg-[#FDF6EC] border border-[#e8d5b7]">
-                      <div className="font-playfair text-3xl font-bold text-[#D32F2F]">{stat.value}</div>
-                      <div className="text-[#6b5c4e] text-sm font-medium mt-1">{stat.label}</div>
+                      <div className="font-playfair text-2xl sm:text-3xl font-bold text-[#D32F2F] whitespace-nowrap">{stat.value}</div>
+                      <div className="text-[#6b5c4e] text-xs sm:text-sm font-medium mt-1">{stat.label}</div>
                     </div>
                   ))}
                 </div>
@@ -200,12 +200,13 @@ const Home: NextPage<Props> = ({ daciaHero, corvinHero, pizzerieHero }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {/* CARD 1 — Dacia */}
               <div className="location-card bg-[#FFF8F0] rounded-3xl overflow-hidden shadow-md border border-[#e8d5b7]">
-                <div className="relative h-52 overflow-hidden">
+                <div className="relative h-72 overflow-hidden">
                   <Image
                     src="/images/dacia/dacia-card.png"
                     alt="Cosimo Bd. Dacia"
                     fill
                     className="object-cover"
+                    style={{ objectPosition: '50% 15%' }}
                   />
                   {!daciaHero && null}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
@@ -217,12 +218,12 @@ const Home: NextPage<Props> = ({ daciaHero, corvinHero, pizzerieHero }) => {
                 </div>
 
                 <div className="p-6">
-                  <h3 className="font-playfair text-2xl font-bold text-[#1a1a1a] mb-1">Cosimo</h3>
+                  <h3 className="font-playfair text-2xl font-bold text-[#1a1a1a] mb-1">Cosimo Non-Stop Fast Food</h3>
                   <p className="text-[#6b5c4e] text-sm flex items-center gap-1.5 mb-3">
                     <svg className="w-4 h-4 text-[#D32F2F]" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                     </svg>
-                    Bulevardul Dacia, Hunedoara
+                    Bd. Dacia 23 bis, Hunedoara
                   </p>
 
                   {/* Rating */}
@@ -265,7 +266,7 @@ const Home: NextPage<Props> = ({ daciaHero, corvinHero, pizzerieHero }) => {
               <div className="location-card bg-[#FFF8F0] rounded-3xl overflow-hidden shadow-md border border-[#e8d5b7]">
                 <div className="relative h-52 overflow-hidden">
                   {corvinHero ? (
-                    <Image src={corvinHero} alt="Fast Food Cosimo Bd. Corvin" fill className="object-cover" />
+                    <Image src={corvinHero} alt="Fast Food Cosimo Bd. Corvin" fill className="object-cover" style={{ objectPosition: '50% 20%' }} />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-[#b71c1c] to-[#7f0000]" />
                   )}
@@ -273,12 +274,12 @@ const Home: NextPage<Props> = ({ daciaHero, corvinHero, pizzerieHero }) => {
                 </div>
 
                 <div className="p-6">
-                  <h3 className="font-playfair text-2xl font-bold text-[#1a1a1a] mb-1">Fast Food Cosimo</h3>
+                  <h3 className="font-playfair text-2xl font-bold text-[#1a1a1a] mb-1">Cosimo Fast Food Pietonala</h3>
                   <p className="text-[#6b5c4e] text-sm flex items-center gap-1.5 mb-3">
                     <svg className="w-4 h-4 text-[#D32F2F]" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                     </svg>
-                    Bulevardul Corvin, Hunedoara
+                    Bd. Corvin nr. 1, ap. 3, Hunedoara
                   </p>
 
                   <div className="flex items-center gap-2 mb-3">
@@ -322,7 +323,7 @@ const Home: NextPage<Props> = ({ daciaHero, corvinHero, pizzerieHero }) => {
                     alt="Pizzeria Cosimo"
                     fill
                     className="object-cover"
-                    style={{ objectPosition: '50% 25%' }}
+                    style={{ objectPosition: '50% 22%' }}
                   />
                   {/* pizzerieHero preserved but unused for card visual override */}
                   {!pizzerieHero && null}
@@ -557,7 +558,7 @@ const Home: NextPage<Props> = ({ daciaHero, corvinHero, pizzerieHero }) => {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
-                {t('Sună', 'Call')} — Bd. Dacia
+                {t('Sună', 'Call')} — Non Stop
               </a>
             </div>
           </div>

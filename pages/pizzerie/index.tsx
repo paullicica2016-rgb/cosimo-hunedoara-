@@ -425,8 +425,8 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
               </h1>
               <p className="font-playfair italic text-white/85 text-xl md:text-2xl mt-6 max-w-lg">
                 {t(
-                  'Pizza artizanală, paste italiene și deserturi — făcute proaspăt, comandate telefonic.',
-                  'Artisan pizza, Italian pasta and desserts — made fresh, ordered by phone.'
+                  'Pizza artizanală, paste italiene și deserturi — comenzi telefonice, doar cu ridicare din locație.',
+                  'Artisan pizza, Italian pasta and desserts — phone orders only, pick-up from the location.'
                 )}
               </p>
               <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-8 text-white/70 text-sm">
@@ -618,12 +618,6 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
                   <p className="text-white/70 text-sm mt-4 max-w-md leading-relaxed">
                     {lang === 'en' && item.ingredientsEn ? item.ingredientsEn : item.ingredients}
                   </p>
-                  <a
-                    href="tel:0792764690"
-                    className="mt-8 inline-flex items-center gap-2 border-2 border-[#e8b76a] text-[#e8b76a] hover:bg-[#e8b76a] hover:text-[#0f0806] font-bold uppercase tracking-widest px-8 py-3 rounded-full transition-all text-xs"
-                  >
-                    {t('Comandă telefonic', 'Order by phone')}
-                  </a>
                 </div>
               ))}
             </div>

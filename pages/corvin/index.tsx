@@ -167,9 +167,10 @@ const MENU: MenuItem[] = [
     nameEn: 'Cheddar & Caramelized Onion Fries',
     category: 'cartofi',
     price: '12 lei',
-    ingredients: 'Cartofi, brânză cheddar, ceapă caramelizată, condimente. 220g',
-    ingredientsEn: 'Fries, cheddar cheese, caramelized onion, spices. 220g',
+    ingredients: 'Cartofi, sos cheddar, ceapă caramelizată, condimente. 220g',
+    ingredientsEn: 'Fries, cheddar sauce, caramelized onion, spices. 220g',
     image: '/images/corvin/cartofi-cheddar.png',
+    imageScale: 1.15,
   },
   {
     slug: 'salata-kebab',
@@ -280,7 +281,7 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
   return (
     <>
       <Head>
-        <title>{t('Fast Food Cosimo — Bulevardul Corvin, Hunedoara', 'Cosimo Fast Food — Corvin Boulevard, Hunedoara')}</title>
+        <title>{t('Cosimo Fast Food Pietonala — Bd. Corvin nr. 1, ap. 3, Hunedoara', 'Cosimo Fast Food Pietonala — Bd. Corvin no. 1, ap. 3, Hunedoara')}</title>
         <meta name="description" content={t('Fast Food Cosimo Bd. Corvin — Shaorma, Burgeri, Kebab, Hot Dog în Hunedoara. Mâncare proaspătă, prețuri accesibile.', 'Cosimo Fast Food Bd. Corvin — Shawarma, Burgers, Kebab, Hot Dog in Hunedoara. Fresh food, fair prices.')} />
       </Head>
 
@@ -322,7 +323,7 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
               <div className="flex items-center gap-3 mb-6">
                 <span className="h-px w-12 bg-[#D32F2F]" />
                 <span className="text-[#FFC107] uppercase tracking-[0.4em] text-[11px] font-semibold">
-                  {t('Bulevardul Corvin · Hunedoara', 'Corvin Boulevard · Hunedoara')}
+                  {t('Bd. Corvin nr. 1, ap. 3 · Hunedoara', 'Bd. Corvin no. 1, ap. 3 · Hunedoara')}
                 </span>
               </div>
 
@@ -525,12 +526,6 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
                       </span>
                     </div>
                   )}
-                  <a
-                    href="tel:0724004415"
-                    className="mt-8 inline-flex items-center gap-2 border-2 border-[#e8b76a] text-[#e8b76a] hover:bg-[#e8b76a] hover:text-[#0f0806] font-bold uppercase tracking-widest px-8 py-3 rounded-full transition-all text-xs"
-                  >
-                    {t('Comandă telefonic', 'Order by phone')}
-                  </a>
                 </div>
               ))}
             </div>
@@ -589,7 +584,7 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
                 <svg className="w-4 h-4 text-[#D32F2F]" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                 </svg>
-                Bulevardul Corvin, Hunedoara, România
+                Bd. Corvin nr. 1, ap. 3, Hunedoara, România
               </p>
             </div>
             <div

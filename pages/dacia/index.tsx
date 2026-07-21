@@ -80,7 +80,7 @@ const MENU: MenuItem[] = [
     price: '16 lei',
     ingredients: 'Mini chiflă, șnițel de pui, cartofi prăjiți, maioneză, castraveți murați, ketchup, condimente. 180g',
     ingredientsEn: 'Mini bun, chicken schnitzel, fries, mayo, pickles, ketchup, spices. 180g',
-    image: '/images/corvin/burger-snitel-pui.jpeg',
+    image: '/images/corvin/miniburger.png',
     imageScale: 0.8,
   },
   {
@@ -118,9 +118,10 @@ const MENU: MenuItem[] = [
     name: 'Cartofi cu Cheddar și Ceapă Caramelizată',
     nameEn: 'Cheddar & Caramelized Onion Fries',
     price: '12 lei',
-    ingredients: 'Cartofi, brânză cheddar, ceapă caramelizată, condimente. 220g',
-    ingredientsEn: 'Fries, cheddar cheese, caramelized onion, spices. 220g',
+    ingredients: 'Cartofi, sos cheddar, ceapă caramelizată, condimente. 220g',
+    ingredientsEn: 'Fries, cheddar sauce, caramelized onion, spices. 220g',
     image: '/images/corvin/cartofi-cheddar.png',
+    imageScale: 1.15,
   },
   {
     slug: 'cartofi',
@@ -142,8 +143,8 @@ const DaciaPage: NextPage<Props> = ({ heroImage }) => {
   return (
     <>
       <Head>
-        <title>{t('Cosimo — Bulevardul Dacia, Hunedoara', 'Cosimo — Dacia Boulevard, Hunedoara')}</title>
-        <meta name="description" content={t('Cosimo Bulevardul Dacia — Restaurant nonstop 24/7 în Hunedoara. Burgeri, mâncare proaspătă, livrare Glovo.', 'Cosimo Dacia Boulevard — 24/7 restaurant in Hunedoara. Burgers, fresh food, Glovo delivery.')} />
+        <title>{t('Cosimo Non-Stop Fast Food — Bd. Dacia 23 bis, Hunedoara', 'Cosimo Non-Stop Fast Food — Bd. Dacia 23 bis, Hunedoara')}</title>
+        <meta name="description" content={t('Cosimo Non-Stop Fast Food, Bd. Dacia 23 bis — Restaurant nonstop 24/7 în Hunedoara. Burgeri, mâncare proaspătă, livrare Glovo.', 'Cosimo Non-Stop Fast Food, Bd. Dacia 23 bis — 24/7 restaurant in Hunedoara. Burgers, fresh food, Glovo delivery.')} />
       </Head>
 
       <Navbar variant="location" />
@@ -169,7 +170,7 @@ const DaciaPage: NextPage<Props> = ({ heroImage }) => {
                 </div>
 
                 <p className="font-inter text-[#FFC107] uppercase tracking-[0.35em] text-xs font-semibold mb-3">
-                  {t('// Bulevardul Dacia', '// Dacia Boulevard')}
+                  {t('// Bd. Dacia 23 bis', '// Bd. Dacia 23 bis')}
                 </p>
 
                 <h1 className="font-playfair font-bold text-white leading-[0.9] mb-4" style={{ fontSize: 'clamp(56px, 9vw, 108px)' }}>
@@ -179,8 +180,8 @@ const DaciaPage: NextPage<Props> = ({ heroImage }) => {
 
                 <p className="text-white/70 text-base md:text-lg max-w-md mb-8 leading-relaxed">
                   {t(
-                    'Burgeri, hot dog și sandwich-uri gata în câteva minute — orice oră, orice zi.',
-                    'Burgers, hot dogs and sandwiches ready in minutes — any hour, any day.'
+                    'Burgeri, hot dog și sandwich-uri gata în mai puțin de 5 minute — cea mai rapidă servire, orice oră, orice zi.',
+                    'Burgers, hot dogs and sandwiches ready in under 5 minutes — the fastest service in town, any hour, any day.'
                   )}
                 </p>
 
@@ -207,7 +208,7 @@ const DaciaPage: NextPage<Props> = ({ heroImage }) => {
                     <svg className="w-4 h-4 text-[#D32F2F]" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                     </svg>
-                    Bd. Dacia, Hunedoara
+                    Bd. Dacia 23 bis, Hunedoara
                   </div>
                 </div>
               </div>
@@ -252,7 +253,7 @@ const DaciaPage: NextPage<Props> = ({ heroImage }) => {
                 <svg className="w-4 h-4 text-[#D32F2F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 </svg>
-                Bulevardul Dacia, Hunedoara
+                Bd. Dacia 23 bis, Hunedoara
               </div>
             </div>
           </div>
@@ -340,12 +341,6 @@ const DaciaPage: NextPage<Props> = ({ heroImage }) => {
                       </span>
                     </div>
                   )}
-                  <a
-                    href="tel:0724004216"
-                    className="mt-8 inline-flex items-center gap-2 border-2 border-[#e8b76a] text-[#e8b76a] hover:bg-[#e8b76a] hover:text-[#0f0806] font-bold uppercase tracking-widest px-8 py-3 rounded-full transition-all text-xs"
-                  >
-                    {t('Comandă telefonic', 'Order by phone')}
-                  </a>
                 </div>
               ))}
             </div>
@@ -361,7 +356,7 @@ const DaciaPage: NextPage<Props> = ({ heroImage }) => {
                 <svg className="w-4 h-4 text-[#D32F2F]" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                 </svg>
-                {t('Bulevardul Dacia, Hunedoara, România', 'Dacia Boulevard, Hunedoara, Romania')}
+                {t('Bd. Dacia 23 bis, Hunedoara, România', 'Bd. Dacia 23 bis, Hunedoara, Romania')}
               </p>
             </div>
             <div className="rounded-3xl overflow-hidden shadow-xl border border-[#e8d5b7]">

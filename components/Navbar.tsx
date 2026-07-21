@@ -56,15 +56,15 @@ export default function Navbar({ variant = 'home' }: NavbarProps) {
             ) : (
               <>
                 <Link href="/dacia" className="text-[#6b5c4e] hover:text-[#D32F2F] font-medium transition-colors text-sm relative group">
-                  Bd. Dacia
+                  Cosimo Non-Stop Fast Food
                   <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-[#D32F2F] group-hover:w-full transition-all duration-200" />
                 </Link>
                 <Link href="/corvin" className="text-[#6b5c4e] hover:text-[#D32F2F] font-medium transition-colors text-sm relative group">
-                  Bd. Corvin
+                  Cosimo Fast Food Pietonala
                   <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-[#D32F2F] group-hover:w-full transition-all duration-200" />
                 </Link>
                 <Link href="/pizzerie" className="text-[#6b5c4e] hover:text-[#D32F2F] font-medium transition-colors text-sm relative group">
-                  {t('Pizzerie', 'Pizzeria')}
+                  {t('Pizzeria Cosimo', 'Cosimo Pizzeria')}
                   <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-[#D32F2F] group-hover:w-full transition-all duration-200" />
                 </Link>
               </>
@@ -145,7 +145,7 @@ export default function Navbar({ variant = 'home' }: NavbarProps) {
             </Link>
           ) : (
             <>
-              {[{ href: '/dacia', label: 'Bd. Dacia' }, { href: '/corvin', label: 'Bd. Corvin' }, { href: '/pizzerie', label: t('Pizzerie', 'Pizzeria') }].map(item => (
+              {[{ href: '/dacia', label: 'Cosimo Non-Stop Fast Food' }, { href: '/corvin', label: 'Cosimo Fast Food Pietonala' }, { href: '/pizzerie', label: t('Pizzeria Cosimo', 'Cosimo Pizzeria') }].map(item => (
                 <Link key={item.href} href={item.href} className="block text-[#6b5c4e] hover:text-[#D32F2F] font-medium py-3 px-3 rounded-xl hover:bg-[#D32F2F]/5 transition-colors" onClick={() => setMenuOpen(false)}>
                   {item.label}
                 </Link>
