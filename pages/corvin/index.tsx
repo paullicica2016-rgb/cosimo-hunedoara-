@@ -60,7 +60,7 @@ const MENU: MenuItem[] = [
   },
   {
     slug: 'shaorma-farfurie',
-    name: 'Shaorma la Casserolă',
+    name: 'Shaorma la Caserolă',
     nameEn: 'Shawarma in Casserole',
     category: 'shaorma',
     price: '27 lei',
@@ -87,8 +87,8 @@ const MENU: MenuItem[] = [
     sizeMediumLabelEn: 'Single · 260g',
     sizeFamilyLabel: 'Dublu · 330g',
     sizeFamilyLabelEn: 'Double · 330g',
-    ingredients: 'Chiflă, chiftea vită + porc (2 chiftele la Dublu), cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente.',
-    ingredientsEn: 'Bun, beef + pork patty (2 patties on Double), fries, mayo with cabbage, ketchup, pickles, spices.',
+    ingredients: 'Chiflă, chiftea vită + porc — 1 chiftea la Simplu, 2 chiftele la Dublu, cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente.',
+    ingredientsEn: 'Bun, beef + pork patty — 1 patty on Single, 2 patties on Double, fries, mayo with cabbage, ketchup, pickles, spices.',
     image: '/images/corvin/pittburger-simplu.jpeg',
     imageScale: 0.8,
   },
@@ -103,8 +103,8 @@ const MENU: MenuItem[] = [
     sizeMediumLabelEn: 'Single · 280g',
     sizeFamilyLabel: 'Dublu · 360g',
     sizeFamilyLabelEn: 'Double · 360g',
-    ingredients: 'Chiflă, șnițel din piept de pui (2 șnițele la Dublu), cartofi prăjiți, sos de usturoi, maioneză cu varză, ketchup, castraveți murați, condimente.',
-    ingredientsEn: 'Bun, chicken breast schnitzel (2 on Double), fries, garlic sauce, mayo with cabbage, ketchup, pickles, spices.',
+    ingredients: 'Chiflă, șnițel din piept de pui — 1 șnițel la Simplu, 2 șnițele la Dublu, cartofi prăjiți, sos de usturoi, maioneză cu varză, ketchup, castraveți murați, condimente.',
+    ingredientsEn: 'Bun, chicken breast schnitzel — 1 schnitzel on Single, 2 on Double, fries, garlic sauce, mayo with cabbage, ketchup, pickles, spices.',
     image: '/images/corvin/burger-snitel-pui.jpeg',
     imageScale: 0.8,
   },
@@ -130,8 +130,8 @@ const MENU: MenuItem[] = [
     sizeMediumLabelEn: 'Single · 220g',
     sizeFamilyLabel: 'Dublu · 260g',
     sizeFamilyLabelEn: 'Double · 260g',
-    ingredients: 'Chiflă, șuncă (2 felii la Dublu), cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente.',
-    ingredientsEn: 'Bun, ham (2 slices on Double), fries, mayo with cabbage, ketchup, pickles, spices.',
+    ingredients: 'Chiflă, șuncă — 1 felie la Simplu, 2 felii la Dublu, cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente.',
+    ingredientsEn: 'Bun, ham — 1 slice on Single, 2 slices on Double, fries, mayo with cabbage, ketchup, pickles, spices.',
     image: '/images/corvin/sandwich-sunca.jpeg',
     imageScale: 0.8,
   },
@@ -140,9 +140,14 @@ const MENU: MenuItem[] = [
     name: 'Hot Dog cu Cașcaval',
     nameEn: 'Hot Dog with Cheese',
     category: 'hotdog',
-    price: '15 lei',
-    ingredients: 'Baton, crenvurști, cașcaval, maioneză, ketchup, muștar. 220g',
-    ingredientsEn: 'Baguette, frankfurters, kaskaval cheese, mayo, ketchup, mustard. 220g',
+    priceMedium: '15 lei',
+    priceFamily: '19 lei',
+    sizeMediumLabel: 'Simplu · 220g',
+    sizeMediumLabelEn: 'Single · 220g',
+    sizeFamilyLabel: 'Dublu · 270g',
+    sizeFamilyLabelEn: 'Double · 270g',
+    ingredients: 'Baton, crenvurști — 1 crenvurst la Simplu, 2 crenvurști la Dublu, cașcaval, maioneză, ketchup, muștar.',
+    ingredientsEn: 'Baguette, frankfurters — 1 frankfurter on Single, 2 on Double, kaskaval cheese, mayo, ketchup, mustard.',
     image: '/images/corvin/hotdog-cascaval.jpeg',
     imageScale: 0.8,
   },
@@ -156,8 +161,8 @@ const MENU: MenuItem[] = [
     sizeMediumLabelEn: 'Single · 180g',
     sizeFamilyLabel: 'Dublu · 230g',
     sizeFamilyLabelEn: 'Double · 230g',
-    ingredients: 'Baton, crenvurști (2 crenvurști la Dublu), maioneză, ketchup, muștar.',
-    ingredientsEn: 'Baguette, frankfurters (2 on Double), mayo, ketchup, mustard.',
+    ingredients: 'Baton, crenvurști — 1 crenvurst la Simplu, 2 crenvurști la Dublu, maioneză, ketchup, muștar.',
+    ingredientsEn: 'Baguette, frankfurters — 1 frankfurter on Single, 2 on Double, mayo, ketchup, mustard.',
     image: '/images/corvin/hotdog.jpeg',
     imageScale: 0.8,
   },
@@ -316,7 +321,7 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
                 </p>
 
                 <h1 className="font-playfair font-bold text-white leading-[0.9] mb-4" style={{ fontSize: 'clamp(56px, 9vw, 108px)' }}>
-                  <span className="inline-block italic text-[#D32F2F] -rotate-2">Fast Food</span>
+                  <span className="inline-block italic text-[#D32F2F]">Fast Food</span>
                   <br />
                   Cosimo
                 </h1>
@@ -533,10 +538,13 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
           />
           <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
             <h2 className="font-playfair text-3xl md:text-4xl font-bold text-white mb-3">
-              {t('Ți-e foame? Sunăm noi!', "Hungry? We're a call away!")} 📞
+              {t('Nu gătești azi? Nici nu trebuie, gătim noi!', "Not cooking today? No need — we've got it!")} 🍔
             </h2>
             <p className="text-[#c9b99a] mb-8">
-              {t('Comandă telefonic sau ridică direct de la Fast Food Cosimo Bd. Corvin', 'Order by phone or pick up directly at Cosimo Fast Food Bd. Corvin')}
+              {t(
+                'Comandă pe Glovo cu livrare, sau sună-ne telefonic — comenzile telefonice se ridică doar din locație.',
+                'Order on Glovo for delivery, or call us by phone — phone orders are pickup-only from our location.'
+              )}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="tel:0724004415"
