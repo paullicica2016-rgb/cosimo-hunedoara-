@@ -224,10 +224,6 @@ const DaciaPage: NextPage<Props> = ({ heroImage }) => {
                     priority
                   />
                 </div>
-
-                <div className="absolute -bottom-4 left-4 md:left-8 bg-[#FFC107] text-[#1a1a1a] font-bold text-sm px-5 py-2.5 rounded-full shadow-2xl rotate-[-4deg]">
-                  🍔 {t('Gata în 5 minute', 'Ready in 5 minutes')}
-                </div>
               </div>
             </div>
           </div>

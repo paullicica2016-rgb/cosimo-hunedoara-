@@ -317,13 +317,13 @@ const Home: NextPage<Props> = ({ daciaHero, corvinHero, pizzerieHero }) => {
 
               {/* CARD 3 — Pizzerie */}
               <div className="location-card bg-[#FFF8F0] rounded-3xl overflow-hidden shadow-md border border-[#e8d5b7]">
-                <div className="relative h-52 overflow-hidden">
+                <div className="relative h-72 overflow-hidden">
                   <Image
-                    src="/images/pizzerie/pizzerie-card.jpeg"
+                    src="/images/pizzerie/pizzerie-card.png"
                     alt="Pizzeria Cosimo"
                     fill
                     className="object-cover"
-                    style={{ objectPosition: '50% 22%' }}
+                    style={{ objectPosition: '50% 5%' }}
                   />
                   {/* pizzerieHero preserved but unused for card visual override */}
                   {!pizzerieHero && null}

@@ -289,97 +289,89 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
 
       <main>
         {/* ══════════════════════════════════════════
-            HERO — Editorial magazine style
+            HERO — split layout with burger showcase
         ══════════════════════════════════════════ */}
-        <section className="relative min-h-[92vh] flex items-center overflow-hidden bg-[#0d0806] pt-16">
-          {/* Diagonal split background */}
-          <div className="absolute inset-0">
-            {heroImage && (
-              <Image
-                src={`/images/corvin/${heroImage}`}
-                alt="Fast Food Cosimo interior"
-                fill
-                className="object-cover object-center opacity-40"
-                priority
-              />
-            )}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0d0806] via-[#0d0806]/85 to-[#0d0806]/40" />
-          </div>
+        <section className="relative bg-[#0d0806] overflow-hidden min-h-[92vh] flex items-center pt-16">
+          <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#D32F2F]/25 blur-[120px] pointer-events-none" />
+          <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-[#FFC107]/15 blur-[120px] pointer-events-none" />
 
-          {/* Glow accents */}
-          <div className="absolute -top-32 right-0 w-[520px] h-[520px] rounded-full bg-[#D32F2F]/25 blur-[130px] pointer-events-none" />
-          <div className="absolute -bottom-40 -left-32 w-[480px] h-[480px] rounded-full bg-[#FFC107]/10 blur-[120px] pointer-events-none" />
+          <div
+            className="absolute inset-0 opacity-[0.04] pointer-events-none"
+            style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-opacity='1'%3E%3Ccircle cx='20' cy='20' r='1'/%3E%3C/g%3E%3C/svg%3E\")" }}
+          />
 
-          <div ref={heroSection.ref} className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
+          <div ref={heroSection.ref} className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div
               style={{
                 opacity: heroSection.visible ? 1 : 0,
                 transform: heroSection.visible ? 'translateY(0)' : 'translateY(30px)',
                 transition: 'opacity 0.8s ease, transform 0.8s ease',
               }}
-              className="max-w-2xl"
+              className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center"
             >
-              {/* Vertical accent */}
-              <div className="flex items-center gap-3 mb-6">
-                <span className="h-px w-12 bg-[#D32F2F]" />
-                <span className="text-[#FFC107] uppercase tracking-[0.4em] text-[11px] font-semibold">
-                  {t('Bd. Corvin nr. 1, ap. 3 · Hunedoara', 'Bd. Corvin no. 1, ap. 3 · Hunedoara')}
-                </span>
-              </div>
 
-              {/* Title */}
-              <h1 className="font-playfair font-bold text-white leading-[0.88] mb-6" style={{ fontSize: 'clamp(52px, 9vw, 112px)' }}>
-                Fast <span className="italic text-[#D32F2F]">Food</span>
-                <br />
-                <span className="text-white/95">Cosimo</span>
-              </h1>
+              <div>
+                <p className="font-inter text-[#FFC107] uppercase tracking-[0.35em] text-xs font-semibold mb-3">
+                  {t('// Bd. Corvin nr. 1, ap. 3', '// Bd. Corvin no. 1, ap. 3')}
+                </p>
 
-              {/* Divider */}
-              <div className="flex items-center gap-4 mb-7 max-w-md">
-                <span className="h-px flex-1 bg-white/20" />
-                <span className="font-playfair italic text-white/60 text-sm">{t('gust · viteză · calitate', 'taste · speed · quality')}</span>
-                <span className="h-px flex-1 bg-white/20" />
-              </div>
+                <h1 className="font-playfair font-bold text-white leading-[0.9] mb-4" style={{ fontSize: 'clamp(56px, 9vw, 108px)' }}>
+                  <span className="inline-block italic text-[#D32F2F] -rotate-2">Fast Food</span>
+                  <br />
+                  Cosimo
+                </h1>
 
-              <p className="text-white/70 text-base md:text-lg mb-9 leading-relaxed max-w-lg">
-                {t(
-                  'Burgeri, sandwich-uri, hot dog și cartofi făcuți pe loc — prețuri corecte, porții generoase.',
-                  'Burgers, sandwiches, hot dogs and fresh-made fries — fair prices, generous portions.'
-                )}
-              </p>
+                <p className="text-white/70 text-base md:text-lg max-w-md mb-8 leading-relaxed">
+                  {t(
+                    'Burgeri, sandwich-uri, hot dog și cartofi făcuți pe loc — prețuri corecte, porții generoase.',
+                    'Burgers, sandwiches, hot dogs and fresh-made fries — fair prices, generous portions.'
+                  )}
+                </p>
 
-              {/* Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 mb-9">
-                <a
-                  href="tel:0724004415"
-                  className="inline-flex items-center justify-center gap-2.5 bg-[#D32F2F] hover:bg-[#b71c1c] text-white font-bold px-8 py-4 rounded-full transition-all shadow-2xl shadow-red-900/40 text-sm uppercase tracking-wider"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                  0724 004 415
-                </a>
-                <a
-                  href="#meniu"
-                  className="inline-flex items-center justify-center gap-2.5 text-white font-bold px-8 py-4 rounded-full border-2 border-white/25 hover:border-white/60 hover:bg-white/5 transition-all text-sm uppercase tracking-wider"
-                >
-                  {t('Vezi meniul', 'View menu')}
-                </a>
-              </div>
-
-              {/* Rating + hours */}
-              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
-                <div className="flex items-center gap-1.5">
-                  <span className="text-[#FFC107]">★★★★★</span>
-                  <span className="text-white font-semibold">4.5</span>
-                  <span className="text-white/40 text-xs">· 126 {t('recenzii Google', 'Google reviews')}</span>
+                <div className="flex flex-col sm:flex-row gap-3 mb-8">
+                  <a
+                    href="tel:0724004415"
+                    className="inline-flex items-center justify-center gap-2 bg-[#D32F2F] hover:bg-[#b71c1c] text-white font-bold px-8 py-4 rounded-full transition-all shadow-xl shadow-red-900/40 text-sm uppercase tracking-wider"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    0724 004 415
+                  </a>
+                  <a
+                    href="#meniu"
+                    className="inline-flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 backdrop-blur text-white font-bold px-8 py-4 rounded-full border border-white/25 hover:border-white/50 transition-all text-sm uppercase tracking-wider"
+                  >
+                    {t('Vezi meniul', 'View menu')}
+                  </a>
                 </div>
-                <span className="text-white/20 hidden sm:inline">|</span>
-                <div className="flex items-center gap-1.5 text-white/60">
-                  <svg className="w-4 h-4 text-[#FFC107]" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                  </svg>
-                  {t('Program: 10:00 — 22:00', 'Open: 10:00 — 22:00')}
+
+                <div className="flex flex-wrap items-center gap-6 text-sm">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[#FFC107]">★★★★★</span>
+                    <span className="text-white font-semibold">4.5</span>
+                    <span className="text-white/40 text-xs">· 126 {t('recenzii Google', 'Google reviews')}</span>
+                  </div>
+                  <span className="text-white/20">|</span>
+                  <div className="flex items-center gap-1.5 text-white/60">
+                    <svg className="w-4 h-4 text-[#FFC107]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                    </svg>
+                    {t('Program: 10:00 — 22:00', 'Open: 10:00 — 22:00')}
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="relative aspect-square max-w-md mx-auto">
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#D32F2F]/40 to-[#FFC107]/20 blur-3xl" />
+                  <Image
+                    src="/images/corvin/pittburger.jpeg"
+                    alt="Burger Cosimo"
+                    fill
+                    className="object-contain drop-shadow-[0_25px_45px_rgba(0,0,0,0.6)]"
+                    priority
+                  />
                 </div>
               </div>
             </div>
