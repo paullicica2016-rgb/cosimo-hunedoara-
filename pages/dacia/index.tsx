@@ -185,7 +185,7 @@ const DaciaPage: NextPage<Props> = ({ heroImage }) => {
                   )}
                 </p>
 
-                <div className="flex flex-col sm:flex-row gap-3 mb-8">
+                <div className="flex flex-col sm:flex-row flex-wrap gap-3 mb-8">
                   <a
                     href="tel:0724004216"
                     className="inline-flex items-center justify-center gap-2 bg-[#D32F2F] hover:bg-[#b71c1c] text-white font-bold px-8 py-4 rounded-full transition-all shadow-xl shadow-red-900/40 text-sm uppercase tracking-wider"
@@ -194,6 +194,25 @@ const DaciaPage: NextPage<Props> = ({ heroImage }) => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
                     0724 004 216
+                  </a>
+                  <a
+                    href="https://glovoapp.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 backdrop-blur text-white font-bold px-8 py-4 rounded-full border border-white/25 hover:border-white/50 transition-all text-sm uppercase tracking-wider"
+                  >
+                    🛵 {t('Comandă pe Glovo', 'Order on Glovo')}
+                  </a>
+                  <a
+                    href="https://food.bolt.eu"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 bg-[#34D186] hover:bg-[#2ab973] text-white font-bold px-8 py-4 rounded-full transition-all shadow-xl text-sm uppercase tracking-wider"
+                  >
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.4 15.5l-4.5-4.5 1.5-1.5 3 3 6-6 1.5 1.5-7.5 7.5z" />
+                    </svg>
+                    Bolt Food
                   </a>
                 </div>
 

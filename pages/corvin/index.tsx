@@ -555,10 +555,13 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
                 </svg>
                 0724 004 415
               </a>
-              <a href="https://glovoapp.com" target="_blank" rel="noopener noreferrer"
-                className="bg-white/10 hover:bg-white/20 backdrop-blur text-white font-bold px-8 py-4 rounded-full border border-white/20 transition-all text-sm inline-flex items-center justify-center gap-2"
+              <a href="https://food.bolt.eu" target="_blank" rel="noopener noreferrer"
+                className="bg-[#34D186] hover:bg-[#2ab973] text-white font-bold px-8 py-4 rounded-full transition-all shadow-xl text-sm inline-flex items-center justify-center gap-2"
               >
-                🛵 {t('Comandă pe Glovo', 'Order on Glovo')}
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.4 15.5l-4.5-4.5 1.5-1.5 3 3 6-6 1.5 1.5-7.5 7.5z" />
+                </svg>
+                Bolt Food
               </a>
             </div>
           </div>
