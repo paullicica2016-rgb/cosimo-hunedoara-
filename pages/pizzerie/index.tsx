@@ -491,13 +491,9 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
           />
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <span className="h-px w-10 bg-[#e8b76a]" />
-                <span className="font-inter text-[#e8b76a] uppercase tracking-[0.4em] text-xs font-semibold">
-                  Il menù
-                </span>
-                <span className="h-px w-10 bg-[#e8b76a]" />
-              </div>
+              <p className="font-inter text-[#e8b76a] uppercase tracking-[0.4em] text-xs font-semibold mb-4">
+                Il menù
+              </p>
               <h2 className="font-playfair text-5xl md:text-6xl font-bold text-white italic">
                 {t('Specialitățile', 'House')} <span className="text-[#e8b76a]">{t('casei', 'Specialities')}</span>
               </h2>
@@ -668,7 +664,7 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
                 0792 764 690
               </a>
               <a
-                href="https://maps.google.com/?q=Bd+Corvin+nr+1+Hunedoara+Romania"
+                href="https://maps.google.com/?q=Bd+Corvin+nr+1+bl+1+ap+2+Hunedoara+Romania"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="border-2 border-white/50 hover:border-white text-white font-bold px-10 py-4 rounded-full transition-all text-sm uppercase tracking-wider inline-flex items-center justify-center gap-2"
@@ -701,7 +697,7 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
             </div>
             <div className="rounded-3xl overflow-hidden shadow-2xl border border-[#d4b483]/50">
               <iframe
-                src="https://maps.google.com/maps?q=Bd+Corvin+nr+1+bl+1+Hunedoara+Romania&hl=ro&z=16&output=embed"
+                src="https://maps.google.com/maps?q=Bd+Corvin+nr+1+bl+1+ap+2,+Hunedoara,+Romania&hl=ro&z=17&output=embed"
                 width="100%"
                 height="450"
                 style={{ border: 0 }}

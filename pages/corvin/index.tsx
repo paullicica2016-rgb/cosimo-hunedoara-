@@ -426,13 +426,9 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
           />
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <span className="h-px w-10 bg-[#e8b76a]" />
-                <span className="font-inter text-[#e8b76a] uppercase tracking-[0.4em] text-xs font-semibold">
-                  Il menù
-                </span>
-                <span className="h-px w-10 bg-[#e8b76a]" />
-              </div>
+              <p className="font-inter text-[#e8b76a] uppercase tracking-[0.4em] text-xs font-semibold mb-4">
+                Il menù
+              </p>
               <h2 className="font-playfair text-5xl md:text-6xl font-bold text-white italic">
                 {t('Meniul', 'Our')} <span className="text-[#e8b76a]">{t('nostru', 'Menu')}</span>
               </h2>
@@ -599,7 +595,7 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
               }}
             >
               <iframe
-                src="https://maps.google.com/maps?q=Bulevardul+Corvin,+Hunedoara,+Romania&hl=ro&z=16&output=embed"
+                src="https://maps.google.com/maps?q=Bulevardul+Corvin+nr+1+ap+3,+Hunedoara,+Romania&hl=ro&z=17&output=embed"
                 width="100%"
                 height="450"
                 style={{ border: 0 }}

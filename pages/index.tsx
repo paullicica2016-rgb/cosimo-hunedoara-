@@ -92,13 +92,6 @@ const Home: NextPage<Props> = ({ daciaHero, corvinHero, pizzerieHero }) => {
           <div className="absolute bottom-1/3 left-1/4 w-48 h-48 rounded-full border border-[#FFC107]/20 pointer-events-none" />
 
           <div className="relative z-10 text-center px-4 animate-fade-in">
-            {/* Ornamental line */}
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <div className="h-px w-16 bg-[#D32F2F]/40" />
-              <div className="w-2 h-2 rounded-full bg-[#D32F2F]" />
-              <div className="h-px w-16 bg-[#D32F2F]/40" />
-            </div>
-
             <p className="font-inter text-[#6b5c4e] uppercase tracking-[0.4em] text-xs md:text-sm font-medium mb-3">
               {t('Hunedoara, România', 'Hunedoara, Romania')}
             </p>
@@ -244,7 +237,7 @@ const Home: NextPage<Props> = ({ daciaHero, corvinHero, pizzerieHero }) => {
                   {/* Mini map */}
                   <div className="rounded-xl overflow-hidden mb-5 border border-[#e8d5b7]">
                     <iframe
-                      src="https://maps.google.com/maps?q=Bulevardul+Dacia,+Hunedoara,+Romania&hl=ro&z=15&output=embed"
+                      src="https://maps.google.com/maps?q=Bulevardul+Dacia+23+bis,+Hunedoara,+Romania&hl=ro&z=17&output=embed"
                       width="100%"
                       height="120"
                       style={{ border: 0 }}
@@ -297,7 +290,7 @@ const Home: NextPage<Props> = ({ daciaHero, corvinHero, pizzerieHero }) => {
 
                   <div className="rounded-xl overflow-hidden mb-5 border border-[#e8d5b7]">
                     <iframe
-                      src="https://maps.google.com/maps?q=Bulevardul+Corvin,+Hunedoara,+Romania&hl=ro&z=15&output=embed"
+                      src="https://maps.google.com/maps?q=Bulevardul+Corvin+nr+1+ap+3,+Hunedoara,+Romania&hl=ro&z=17&output=embed"
                       width="100%"
                       height="120"
                       style={{ border: 0 }}
@@ -365,7 +358,7 @@ const Home: NextPage<Props> = ({ daciaHero, corvinHero, pizzerieHero }) => {
 
                   <div className="rounded-xl overflow-hidden mb-5 border border-[#e8d5b7]">
                     <iframe
-                      src="https://maps.google.com/maps?q=Bd+Corvin+nr+1,+Hunedoara,+Romania&hl=ro&z=15&output=embed"
+                      src="https://maps.google.com/maps?q=Bd+Corvin+nr+1+bl+1+ap+2,+Hunedoara,+Romania&hl=ro&z=17&output=embed"
                       width="100%"
                       height="120"
                       style={{ border: 0 }}
@@ -540,20 +533,12 @@ const Home: NextPage<Props> = ({ daciaHero, corvinHero, pizzerieHero }) => {
               {t('Foame?', 'Hungry?')}
             </h2>
             <p className="text-red-100 text-xl mb-10">
-              {t('Comandă acum prin Glovo sau sună-ne direct!', 'Order now via Glovo or call us directly!')}
+              {t('Sună-ne direct și comandă acum!', 'Call us now and order!')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://glovoapp.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white text-[#D32F2F] hover:bg-red-50 font-bold px-10 py-4 rounded-full transition-all duration-200 hover:shadow-2xl text-sm inline-flex items-center justify-center gap-2"
-              >
-                <span>🛵</span> {t('Comandă pe Glovo', 'Order on Glovo')}
-              </a>
-              <a
                 href="tel:0724004216"
-                className="border-2 border-white text-white hover:bg-white hover:text-[#D32F2F] font-bold px-10 py-4 rounded-full transition-all duration-200 text-sm inline-flex items-center justify-center gap-2"
+                className="bg-white text-[#D32F2F] hover:bg-red-50 font-bold px-10 py-4 rounded-full transition-all duration-200 hover:shadow-2xl text-sm inline-flex items-center justify-center gap-2"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
