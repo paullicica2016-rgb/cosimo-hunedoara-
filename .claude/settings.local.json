@@ -46,7 +46,10 @@
       "mcp__Claude_Browser__preview_start",
       "Bash(awk '{print $5}')",
       "Bash(cp \"C:/Users/Paul/AppData/Local/Temp/claude/C--Users-Paul-Downloads-cosimo/60d614fc-baab-48f0-8ee9-46c1cc9ccacd/scratchpad/compress.js\" \"./compress.tmp.js\")",
-      "Bash(cp \"C:/Users/Paul/AppData/Local/Temp/claude/C--Users-Paul-Downloads-cosimo/60d614fc-baab-48f0-8ee9-46c1cc9ccacd/scratchpad/compress.js\" ./compress.tmp.js 2>/dev/null && node compress.tmp.js 2>&1 | tail -10 ; rm -f compress.tmp.js)"
+      "Bash(cp \"C:/Users/Paul/AppData/Local/Temp/claude/C--Users-Paul-Downloads-cosimo/60d614fc-baab-48f0-8ee9-46c1cc9ccacd/scratchpad/compress.js\" ./compress.tmp.js 2>/dev/null && node compress.tmp.js 2>&1 | tail -10 ; rm -f compress.tmp.js)",
+      "WebSearch",
+      "WebFetch(domain:mapcarta.com)",
+      "WebFetch(domain:ro.near-place.com)"
     ]
   }
 }

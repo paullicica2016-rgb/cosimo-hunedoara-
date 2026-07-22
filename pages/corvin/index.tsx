@@ -186,7 +186,7 @@ const MENU: MenuItem[] = [
     ingredients: 'Carne kebab la grătar, salată iceberg, morcov, roșii, castraveți, ceapă roșie, dressing tzatziki sau dressing orange Cosimo. 280g',
     ingredientsEn: 'Grilled kebab meat, iceberg lettuce, carrot, tomato, cucumber, red onion, tzatziki or Cosimo orange dressing. 280g',
     image: '/images/corvin/salata-pui.png',
-    imageScale: 1.0,
+    imageScale: 1.3,
   },
   {
     slug: 'salata-ton',
@@ -197,7 +197,7 @@ const MENU: MenuItem[] = [
     ingredients: 'Ton, ceapă roșie, roșii, salată iceberg, morcov, castraveți, dressing orange Cosimo și dressing pătrunjel cu lămâie. 280g',
     ingredientsEn: 'Tuna, red onion, tomato, iceberg lettuce, carrot, cucumber, Cosimo orange dressing and parsley–lemon dressing. 280g',
     image: '/images/corvin/salata-ton.png',
-    imageScale: 1.2,
+    imageScale: 1.4,
   },
   {
     slug: 'salata-vegetala',
@@ -595,7 +595,7 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
               }}
             >
               <iframe
-                src="https://maps.google.com/maps?q=Bulevardul+Corvin+nr+1+ap+3,+Hunedoara,+Romania&hl=ro&z=17&output=embed"
+                src="https://maps.google.com/maps?q=45.7548575,22.9040721&hl=ro&z=17&output=embed"
                 width="100%"
                 height="450"
                 style={{ border: 0 }}
