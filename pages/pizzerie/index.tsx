@@ -417,7 +417,7 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/40" />
 
           <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-2xl">
+            <div className="max-w-2xl mt-20 md:mt-0">
               <h1 className="font-playfair text-6xl md:text-8xl font-bold text-white leading-[0.95] italic">
                 {t('Pizzeria', 'Cosimo')}
                 <br />
