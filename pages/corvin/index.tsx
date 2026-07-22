@@ -208,7 +208,7 @@ const MENU: MenuItem[] = [
     ingredients: 'Roșii, salată iceberg, morcov, varză, castraveți, ceapă roșie, ardei iute (opțional), dressing tzatziki sau dressing orange Cosimo, dressing de pătrunjel cu lămâie. 270g',
     ingredientsEn: 'Tomato, iceberg lettuce, carrot, cabbage, cucumber, red onion, chilli pepper (optional), tzatziki or Cosimo orange dressing, parsley–lemon dressing. 270g',
     image: '/images/corvin/salata-vegetala.png',
-    imageScale: 1.2,
+    imageScale: 1.0,
   },
   {
     slug: 'cartofi',
@@ -595,7 +595,7 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
               }}
             >
               <iframe
-                src="https://maps.google.com/maps?q=45.7548575,22.9040721&hl=ro&z=17&output=embed"
+                src="https://maps.google.com/maps?q=loc:45.7548575,22.9040721&hl=ro&z=17&output=embed"
                 width="100%"
                 height="450"
                 style={{ border: 0 }}

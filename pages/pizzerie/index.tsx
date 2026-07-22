@@ -664,7 +664,7 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
                 0792 764 690
               </a>
               <a
-                href="https://maps.google.com/?q=45.7548575,22.9040721"
+                href="https://maps.google.com/?q=loc:45.7548575,22.9040721"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="border-2 border-white/50 hover:border-white text-white font-bold px-10 py-4 rounded-full transition-all text-sm uppercase tracking-wider inline-flex items-center justify-center gap-2"
@@ -697,7 +697,7 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
             </div>
             <div className="rounded-3xl overflow-hidden shadow-2xl border border-[#d4b483]/50">
               <iframe
-                src="https://maps.google.com/maps?q=45.7548575,22.9040721&hl=ro&z=17&output=embed"
+                src="https://maps.google.com/maps?q=loc:45.7548575,22.9040721&hl=ro&z=17&output=embed"
                 width="100%"
                 height="450"
                 style={{ border: 0 }}

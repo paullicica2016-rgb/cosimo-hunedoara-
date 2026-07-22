@@ -372,7 +372,7 @@ const DaciaPage: NextPage<Props> = ({ heroImage }) => {
             </div>
             <div className="rounded-3xl overflow-hidden shadow-xl border border-[#e8d5b7]">
               <iframe
-                src="https://maps.google.com/maps?q=45.7578681,22.907037&hl=ro&z=17&output=embed"
+                src="https://maps.google.com/maps?q=loc:45.7578681,22.907037&hl=ro&z=17&output=embed"
                 width="100%"
                 height="450"
                 style={{ border: 0 }}

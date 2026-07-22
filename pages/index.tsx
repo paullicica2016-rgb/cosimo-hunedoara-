@@ -237,7 +237,7 @@ const Home: NextPage<Props> = ({ daciaHero, corvinHero, pizzerieHero }) => {
                   {/* Mini map */}
                   <div className="rounded-xl overflow-hidden mb-5 border border-[#e8d5b7]">
                     <iframe
-                      src="https://maps.google.com/maps?q=45.7578681,22.907037&hl=ro&z=17&output=embed"
+                      src="https://maps.google.com/maps?q=loc:45.7578681,22.907037&hl=ro&z=17&output=embed"
                       width="100%"
                       height="120"
                       style={{ border: 0 }}
@@ -290,7 +290,7 @@ const Home: NextPage<Props> = ({ daciaHero, corvinHero, pizzerieHero }) => {
 
                   <div className="rounded-xl overflow-hidden mb-5 border border-[#e8d5b7]">
                     <iframe
-                      src="https://maps.google.com/maps?q=45.7548575,22.9040721&hl=ro&z=17&output=embed"
+                      src="https://maps.google.com/maps?q=loc:45.7548575,22.9040721&hl=ro&z=17&output=embed"
                       width="100%"
                       height="120"
                       style={{ border: 0 }}
@@ -358,7 +358,7 @@ const Home: NextPage<Props> = ({ daciaHero, corvinHero, pizzerieHero }) => {
 
                   <div className="rounded-xl overflow-hidden mb-5 border border-[#e8d5b7]">
                     <iframe
-                      src="https://maps.google.com/maps?q=45.7548575,22.9040721&hl=ro&z=17&output=embed"
+                      src="https://maps.google.com/maps?q=loc:45.7548575,22.9040721&hl=ro&z=17&output=embed"
                       width="100%"
                       height="120"
                       style={{ border: 0 }}
