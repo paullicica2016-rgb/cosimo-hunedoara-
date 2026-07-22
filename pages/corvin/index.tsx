@@ -85,8 +85,8 @@ const MENU: MenuItem[] = [
     priceFamily: '21 lei',
     sizeMediumLabel: 'Simplu · 260g',
     sizeMediumLabelEn: 'Single · 260g',
-    sizeFamilyLabel: 'Dublu · 330g',
-    sizeFamilyLabelEn: 'Double · 330g',
+    sizeFamilyLabel: 'Dublu · 2 chiftele · 330g',
+    sizeFamilyLabelEn: 'Double · 2 patties · 330g',
     ingredients: 'Chiflă, chiftea vită + porc — 1 chiftea la Simplu, 2 chiftele la Dublu, cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente.',
     ingredientsEn: 'Bun, beef + pork patty — 1 patty on Single, 2 patties on Double, fries, mayo with cabbage, ketchup, pickles, spices.',
     image: '/images/corvin/pittburger-simplu.jpeg',
@@ -197,7 +197,7 @@ const MENU: MenuItem[] = [
     ingredients: 'Ton, ceapă roșie, roșii, salată iceberg, morcov, castraveți, dressing orange Cosimo și dressing pătrunjel cu lămâie. 280g',
     ingredientsEn: 'Tuna, red onion, tomato, iceberg lettuce, carrot, cucumber, Cosimo orange dressing and parsley–lemon dressing. 280g',
     image: '/images/corvin/salata-ton.png',
-    imageScale: 1.4,
+    imageScale: 1.3,
   },
   {
     slug: 'salata-vegetala',
@@ -208,7 +208,7 @@ const MENU: MenuItem[] = [
     ingredients: 'Roșii, salată iceberg, morcov, varză, castraveți, ceapă roșie, ardei iute (opțional), dressing tzatziki sau dressing orange Cosimo, dressing de pătrunjel cu lămâie. 270g',
     ingredientsEn: 'Tomato, iceberg lettuce, carrot, cabbage, cucumber, red onion, chilli pepper (optional), tzatziki or Cosimo orange dressing, parsley–lemon dressing. 270g',
     image: '/images/corvin/salata-vegetala.png',
-    imageScale: 1.0,
+    imageScale: 1.3,
   },
   {
     slug: 'cartofi',
