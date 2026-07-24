@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import fs from 'fs'
 import path from 'path'
+import { useState } from 'react'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 import { useLanguage } from '../../lib/i18n'
@@ -168,8 +169,16 @@ const MENU: MenuItem[] = [
   },
 ]
 
+type TabValue = 'toate' | 'bauturi'
+
 const DaciaPage: NextPage<Props> = ({ heroImage }) => {
   const { t, lang } = useLanguage()
+  const [activeTab, setActiveTab] = useState<TabValue>('toate')
+  const drinksTotal = DRINKS.reduce((sum, g) => sum + g.items.length, 0)
+  const tabs = [
+    { value: 'toate' as TabValue, label: t('Toate', 'All'), count: MENU.length },
+    { value: 'bauturi' as TabValue, label: t('🥤 Băuturi', '🥤 Drinks'), count: drinksTotal },
+  ]
 
   return (
     <>
@@ -321,6 +330,70 @@ const DaciaPage: NextPage<Props> = ({ heroImage }) => {
               </h2>
             </div>
 
+            {/* Category tabs */}
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-14">
+              {tabs.map(tab => {
+                const isActive = activeTab === tab.value
+                return (
+                  <button
+                    key={tab.value}
+                    onClick={() => setActiveTab(tab.value)}
+                    className={`px-5 sm:px-6 py-2.5 rounded-full text-sm font-semibold uppercase tracking-wider transition-all duration-200 ${
+                      isActive
+                        ? 'bg-[#e8b76a] text-[#0f0806] shadow-lg shadow-[#e8b76a]/20'
+                        : 'bg-transparent text-white/70 border border-white/20 hover:border-[#e8b76a]/60 hover:text-[#e8b76a]'
+                    }`}
+                  >
+                    {tab.label}
+                    <span className={`ml-2 text-xs ${isActive ? 'text-[#0f0806]/60' : 'text-white/40'}`}>
+                      {tab.count}
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
+
+            {activeTab === 'bauturi' ? (
+              <div className="max-w-3xl mx-auto space-y-14">
+                {DRINKS.map(group => (
+                  <div key={group.title}>
+                    <div className="flex items-center gap-4 mb-6">
+                      <span className="h-px flex-1 bg-[#e8b76a]/30" />
+                      <h3 className="font-playfair italic text-2xl md:text-3xl text-[#e8b76a] whitespace-nowrap">
+                        {lang === 'en' && group.titleEn ? group.titleEn : group.title}
+                      </h3>
+                      <span className="h-px flex-1 bg-[#e8b76a]/30" />
+                    </div>
+                    <ul className="divide-y divide-white/10">
+                      {group.items.map((d, i) => (
+                        <li key={`${d.name}-${i}`} className="flex items-baseline gap-3 py-3">
+                          <div className="flex-1 min-w-0">
+                            <div className="font-playfair text-white text-lg leading-tight">
+                              {lang === 'en' && d.nameEn ? d.nameEn : d.name}
+                            </div>
+                            {d.note && (
+                              <div className="text-white/50 text-xs mt-1 leading-snug">
+                                {lang === 'en' && d.noteEn ? d.noteEn : d.note}
+                              </div>
+                            )}
+                          </div>
+                          <div className="flex items-baseline gap-3 flex-shrink-0 text-right">
+                            {d.volume && (
+                              <span className="text-white/50 text-xs whitespace-nowrap tabular-nums">
+                                {d.volume}
+                              </span>
+                            )}
+                            <span className="text-[#e8b76a] font-bold text-base whitespace-nowrap tabular-nums min-w-[70px] text-right">
+                              {d.price}
+                            </span>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
               {MENU.map(item => (
                 <div key={item.slug} className="flex flex-col items-center text-center group">
@@ -386,46 +459,7 @@ const DaciaPage: NextPage<Props> = ({ heroImage }) => {
                 </div>
               ))}
             </div>
-
-            <div className="max-w-3xl mx-auto space-y-14 mt-20">
-              {DRINKS.map(group => (
-                <div key={group.title}>
-                  <div className="flex items-center gap-4 mb-6">
-                    <span className="h-px flex-1 bg-[#e8b76a]/30" />
-                    <h3 className="font-playfair italic text-2xl md:text-3xl text-[#e8b76a] whitespace-nowrap">
-                      {lang === 'en' && group.titleEn ? group.titleEn : group.title}
-                    </h3>
-                    <span className="h-px flex-1 bg-[#e8b76a]/30" />
-                  </div>
-                  <ul className="divide-y divide-white/10">
-                    {group.items.map((d, i) => (
-                      <li key={`${d.name}-${i}`} className="flex items-baseline gap-3 py-3">
-                        <div className="flex-1 min-w-0">
-                          <div className="font-playfair text-white text-lg leading-tight">
-                            {lang === 'en' && d.nameEn ? d.nameEn : d.name}
-                          </div>
-                          {d.note && (
-                            <div className="text-white/50 text-xs mt-1 leading-snug">
-                              {lang === 'en' && d.noteEn ? d.noteEn : d.note}
-                            </div>
-                          )}
-                        </div>
-                        <div className="flex items-baseline gap-3 flex-shrink-0 text-right">
-                          {d.volume && (
-                            <span className="text-white/50 text-xs whitespace-nowrap tabular-nums">
-                              {d.volume}
-                            </span>
-                          )}
-                          <span className="text-[#e8b76a] font-bold text-base whitespace-nowrap tabular-nums min-w-[70px] text-right">
-                            {d.price}
-                          </span>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
+            )}
           </div>
         </section>
 

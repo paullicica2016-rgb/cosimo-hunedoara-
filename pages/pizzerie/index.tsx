@@ -154,7 +154,7 @@ const SUPPLEMENTS: DrinkGroup[] = [
       { name: 'Ardei', price: '5 lei' },
       { name: 'Ciuperci', price: '5 lei' },
       { name: 'Bacon', price: '5 lei' },
-      { name: 'Pui', price: '5 lei' },
+      { name: 'Șuncă', price: '5 lei' },
     ],
   },
 ]
@@ -167,6 +167,16 @@ interface Props {
 const IMAGE_EXTS = ['.jpg', '.jpeg', '.png', '.webp', '.avif']
 
 const MENU: MenuItem[] = [
+  {
+    slug: 'felie-pizza-semplice',
+    name: 'Felie de Pizza Semplice',
+    nameEn: 'Simplice Pizza Slice',
+    category: 'pizza',
+    price: '8 lei',
+    ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte, șuncă, ciuperci.',
+    ingredientsEn: 'Dough, tomato sauce, Fior di latte mozzarella, ham, mushrooms.',
+    image: '/images/pizzerie/felie-pizza-semplice.png',
+  },
   {
     slug: 'pizza-huniad',
     name: 'Pizza Huniad',
