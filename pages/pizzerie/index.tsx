@@ -135,6 +135,30 @@ const DRINKS: DrinkGroup[] = [
   },
 ]
 
+const SUPPLEMENTS: DrinkGroup[] = [
+  {
+    title: 'Sosuri',
+    titleEn: 'Sauces',
+    items: [
+      { name: 'Sos de roșii', price: '3 lei' },
+      { name: 'Sos picant', price: '3 lei' },
+      { name: 'Sos grecesc', price: '3 lei' },
+    ],
+  },
+  {
+    title: 'Suplimente Pizza',
+    titleEn: 'Pizza Toppings',
+    items: [
+      { name: 'Porumb', price: '5 lei' },
+      { name: 'Ananas', price: '5 lei' },
+      { name: 'Ardei', price: '5 lei' },
+      { name: 'Ciuperci', price: '5 lei' },
+      { name: 'Bacon', price: '5 lei' },
+      { name: 'Pui', price: '5 lei' },
+    ],
+  },
+]
+
 interface Props {
   heroImage: string | null
   menu: MenuItem[]
@@ -617,6 +641,36 @@ const PizzeriePage: NextPage<Props> = ({ heroImage, menu }) => {
                 </div>
               ))}
             </div>
+            )}
+
+            {(activeTab === 'toate' || activeTab === 'pizza') && (
+              <div className="max-w-3xl mx-auto space-y-10 mt-20">
+                {SUPPLEMENTS.map(group => (
+                  <div key={group.title}>
+                    <div className="flex items-center gap-4 mb-6">
+                      <span className="h-px flex-1 bg-[#e8b76a]/30" />
+                      <h3 className="font-playfair italic text-2xl md:text-3xl text-[#e8b76a] whitespace-nowrap">
+                        {t(group.title, group.titleEn ?? group.title)}
+                      </h3>
+                      <span className="h-px flex-1 bg-[#e8b76a]/30" />
+                    </div>
+                    <ul className="divide-y divide-white/10">
+                      {group.items.map((d, i) => (
+                        <li key={`${d.name}-${i}`} className="flex items-baseline gap-3 py-3">
+                          <div className="flex-1 min-w-0">
+                            <div className="font-playfair text-white text-lg leading-tight">
+                              {d.name}
+                            </div>
+                          </div>
+                          <span className="text-[#e8b76a] font-bold text-base whitespace-nowrap tabular-nums min-w-[60px] text-right flex-shrink-0">
+                            {d.price}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             )}
           </div>
         </section>
