@@ -77,6 +77,18 @@ const DRINKS: DrinkGroup[] = [
   },
 ]
 
+const SAUCES: DrinkGroup[] = [
+  {
+    title: 'Sosuri',
+    titleEn: 'Sauces',
+    items: [
+      { name: 'Ketchup', price: '3 lei' },
+      { name: 'Maioneză', price: '3 lei' },
+      { name: 'Sos usturoi', price: '3 lei' },
+    ],
+  },
+]
+
 const MENU: MenuItem[] = [
   {
     slug: 'shaorma',
@@ -293,7 +305,7 @@ function useCounter(target: number, duration = 1400, active = false) {
   return val
 }
 
-type TabValue = 'toate' | Category | 'bauturi'
+type TabValue = 'toate' | Category | 'bauturi' | 'sosuri'
 
 const CorvinPage: NextPage<Props> = ({ images }) => {
   const { t, lang } = useLanguage()
@@ -317,6 +329,7 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
     { value: 'salate' as TabValue, label: CATEGORY_LABEL.salate[lang], count: countBy('salate') },
     { value: 'cartofi' as TabValue, label: CATEGORY_LABEL.cartofi[lang], count: countBy('cartofi') },
     { value: 'bauturi' as TabValue, label: t('🥤 Băuturi', '🥤 Drinks'), count: DRINKS.reduce((sum, g) => sum + g.items.length, 0) },
+    { value: 'sosuri' as TabValue, label: t('🥫 Sosuri', '🥫 Sauces'), count: SAUCES.reduce((sum, g) => sum + g.items.length, 0) },
   ]
 
   return (
@@ -493,9 +506,9 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
               })}
             </div>
 
-            {activeTab === 'bauturi' ? (
+            {(activeTab === 'bauturi' || activeTab === 'sosuri') ? (
               <div className="max-w-3xl mx-auto space-y-14">
-                {DRINKS.map(group => (
+                {(activeTab === 'bauturi' ? DRINKS : SAUCES).map(group => (
                   <div key={group.title}>
                     <div className="flex items-center gap-4 mb-6">
                       <span className="h-px flex-1 bg-[#e8b76a]/30" />

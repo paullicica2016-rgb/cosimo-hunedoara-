@@ -176,6 +176,7 @@ const MENU: MenuItem[] = [
     ingredients: 'Aluat, sos de roșii, mozzarella Fior di latte, șuncă, ciuperci.',
     ingredientsEn: 'Dough, tomato sauce, Fior di latte mozzarella, ham, mushrooms.',
     image: '/images/pizzerie/felie-pizza-semplice.png',
+    imageScale: 1.3,
   },
   {
     slug: 'pizza-huniad',
