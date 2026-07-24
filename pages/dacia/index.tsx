@@ -123,18 +123,6 @@ const MENU: MenuItem[] = [
     image: '/images/corvin/cartofi-cheddar.png',
     imageScale: 1.15,
   },
-  {
-    slug: 'cartofi',
-    name: 'Cartofi Prăjiți',
-    nameEn: 'French Fries',
-    priceMedium: '8 lei',
-    priceFamily: '11 lei',
-    sizeMediumLabel: '100g',
-    sizeFamilyLabel: '150g',
-    ingredients: 'Cartofi prăjiți crocanți — porție ca supliment sau garnitură.',
-    ingredientsEn: 'Crispy fries — as a side or extra.',
-    image: '/images/corvin/cartofi.jpeg',
-  },
 ]
 
 const DaciaPage: NextPage<Props> = ({ heroImage }) => {
