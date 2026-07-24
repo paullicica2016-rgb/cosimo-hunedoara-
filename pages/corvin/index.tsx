@@ -42,6 +42,41 @@ interface MenuItem {
   imageScale?: number
 }
 
+interface Drink {
+  name: string
+  nameEn?: string
+  note?: string
+  noteEn?: string
+  volume?: string
+  price: string
+}
+
+interface DrinkGroup {
+  title: string
+  titleEn?: string
+  items: Drink[]
+}
+
+const DRINKS: DrinkGroup[] = [
+  {
+    title: 'Băuturi Răcoritoare',
+    titleEn: 'Soft Drinks',
+    items: [
+      { name: 'Coca-Cola', note: 'Gust Original, Zero Zahăr, Lamaie Verde Zero, Cherry Zero', volume: '0.50 L', price: '10,50 lei' },
+      { name: 'Fanta', note: 'Orange, Madness, Zero Orange, Zero Mango, Zero WTF', volume: '0.50 L', price: '10,50 lei' },
+      { name: 'Sprite', volume: '0.50 L', price: '10,50 lei' },
+      { name: 'Schweppes', note: 'Tonic Water, Tonic Water Zero, Bitter Lemon, Mandarin, Pomegranate, Pink Style', volume: '0.50 L', price: '10,50 lei' },
+      { name: 'FuzeTea', note: 'Lemon Lemongrass, Peach Hibiscus, Forest Fruit, Mango Pineapple, Green Lime Mint, White Peach Zero, Cherry Elderflower', volume: '0.50 L', price: '10,50 lei' },
+      { name: 'Cappy Pulpy', note: 'Orange, Peach, Grapefruit', volume: '0.33 L', price: '10,50 lei' },
+      { name: 'Cappy Nectar', note: 'Orange, Peach', volume: '0.33 L', price: '10,50 lei' },
+      { name: 'Cappy Lemonades', note: 'Minty Lemon, Happy Lemon, Lemon Elderflower', volume: '0.40 L', price: '10,50 lei' },
+      { name: 'Dorna', note: 'apă minerală carbo/plată', volume: '0.50 L', price: '10,50 lei' },
+      { name: 'Burn', note: 'Energy Drink Original & Non Sugar', volume: '0.25 L', price: '10,50 lei' },
+      { name: 'Monster', note: 'Energy Drink Original & Non Sugar', volume: '0.50 L', price: '10,50 lei' },
+    ],
+  },
+]
+
 const MENU: MenuItem[] = [
   {
     slug: 'shaorma',
@@ -258,7 +293,7 @@ function useCounter(target: number, duration = 1400, active = false) {
   return val
 }
 
-type TabValue = 'toate' | Category
+type TabValue = 'toate' | Category | 'bauturi'
 
 const CorvinPage: NextPage<Props> = ({ images }) => {
   const { t, lang } = useLanguage()
@@ -281,6 +316,7 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
     { value: 'hotdog' as TabValue, label: CATEGORY_LABEL.hotdog[lang], count: countBy('hotdog') },
     { value: 'salate' as TabValue, label: CATEGORY_LABEL.salate[lang], count: countBy('salate') },
     { value: 'cartofi' as TabValue, label: CATEGORY_LABEL.cartofi[lang], count: countBy('cartofi') },
+    { value: 'bauturi' as TabValue, label: t('🥤 Băuturi', '🥤 Drinks'), count: DRINKS.reduce((sum, g) => sum + g.items.length, 0) },
   ]
 
   return (
@@ -457,6 +493,47 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
               })}
             </div>
 
+            {activeTab === 'bauturi' ? (
+              <div className="max-w-3xl mx-auto space-y-14">
+                {DRINKS.map(group => (
+                  <div key={group.title}>
+                    <div className="flex items-center gap-4 mb-6">
+                      <span className="h-px flex-1 bg-[#e8b76a]/30" />
+                      <h3 className="font-playfair italic text-2xl md:text-3xl text-[#e8b76a] whitespace-nowrap">
+                        {lang === 'en' && group.titleEn ? group.titleEn : group.title}
+                      </h3>
+                      <span className="h-px flex-1 bg-[#e8b76a]/30" />
+                    </div>
+                    <ul className="divide-y divide-white/10">
+                      {group.items.map((d, i) => (
+                        <li key={`${d.name}-${i}`} className="flex items-baseline gap-3 py-3">
+                          <div className="flex-1 min-w-0">
+                            <div className="font-playfair text-white text-lg leading-tight">
+                              {lang === 'en' && d.nameEn ? d.nameEn : d.name}
+                            </div>
+                            {d.note && (
+                              <div className="text-white/50 text-xs mt-1 leading-snug">
+                                {lang === 'en' && d.noteEn ? d.noteEn : d.note}
+                              </div>
+                            )}
+                          </div>
+                          <div className="flex items-baseline gap-3 flex-shrink-0 text-right">
+                            {d.volume && (
+                              <span className="text-white/50 text-xs whitespace-nowrap tabular-nums">
+                                {d.volume}
+                              </span>
+                            )}
+                            <span className="text-[#e8b76a] font-bold text-base whitespace-nowrap tabular-nums min-w-[70px] text-right">
+                              {d.price}
+                            </span>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
               {filtered.map(item => (
                 <div key={item.slug} className="flex flex-col items-center text-center group">
@@ -522,6 +599,7 @@ const CorvinPage: NextPage<Props> = ({ images }) => {
                 </div>
               ))}
             </div>
+            )}
           </div>
         </section>
 
