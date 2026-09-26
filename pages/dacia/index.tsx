@@ -94,7 +94,7 @@ const MENU: MenuItem[] = [
     comboPrice: '25 lei',
     ingredients: 'Chiflă, chiftea vită + porc, cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente. 260g',
     ingredientsEn: 'Bun, beef + pork patty, fries, mayo with cabbage, ketchup, pickles, spices. 260g',
-    image: '/images/corvin/pittburger-simplu.jpeg',
+    image: '/images/dacia/pittburger-cutout.png',
     imageScale: 0.8,
   },
   {
@@ -105,7 +105,7 @@ const MENU: MenuItem[] = [
     comboPrice: '23 lei',
     ingredients: 'Chiflă, cașcaval, șuncă, cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente. 250g',
     ingredientsEn: 'Bun, kaskaval cheese, ham, fries, mayo with cabbage, ketchup, pickles, spices. 250g',
-    image: '/images/corvin/sandwich-sunca-cascaval.jpeg',
+    image: '/images/dacia/sandwich-sunca-cascaval-cutout.png',
     imageScale: 0.8,
   },
   {
@@ -115,7 +115,7 @@ const MENU: MenuItem[] = [
     price: '15 lei',
     ingredients: 'Chiflă, șuncă, cartofi prăjiți, maioneză cu varză, ketchup, castraveți murați, condimente. 220g',
     ingredientsEn: 'Bun, ham, fries, mayo with cabbage, ketchup, pickles, spices. 220g',
-    image: '/images/corvin/sandwich-sunca.jpeg',
+    image: '/images/dacia/sandwich-sunca-cutout.png',
     imageScale: 0.8,
   },
   {
@@ -135,7 +135,7 @@ const MENU: MenuItem[] = [
     comboPrice: '22 lei',
     ingredients: 'Baton, crenvurști, cașcaval, castraveți murați, maioneză, ketchup, muștar, condimente. 220g',
     ingredientsEn: 'Baguette, frankfurters, kaskaval cheese, pickles, mayo, ketchup, mustard, spices. 220g',
-    image: '/images/corvin/hotdog-cascaval.jpeg',
+    image: '/images/dacia/hotdog-cascaval-cutout.png',
     imageScale: 0.8,
   },
   {
@@ -144,7 +144,7 @@ const MENU: MenuItem[] = [
     price: '14 lei',
     ingredients: 'Baton, crenvurști, maioneză, ketchup, muștar. 180g',
     ingredientsEn: 'Baguette, frankfurters, mayo, ketchup, mustard. 180g',
-    image: '/images/corvin/hotdog.jpeg',
+    image: '/images/dacia/hotdog-cutout.png',
     imageScale: 0.8,
   },
   {
@@ -205,11 +205,11 @@ const DaciaPage: NextPage<Props> = ({ heroImage }) => {
               <p className="mt-4 max-w-md text-sm leading-6 text-[#705344] sm:mt-6 sm:text-base sm:leading-7">
                 {t('Burgeri, sandwich-uri și gusturi care merită savurate. Pregătite pentru tine, la orice oră.', 'Burgers, sandwiches and flavours worth savouring. Made for you, any time of day.')}
               </p>
-              <div className="mt-6 flex flex-wrap gap-2 sm:mt-8 sm:gap-3">
-                <a href="#meniu" className="inline-flex min-h-11 items-center justify-center bg-[#722f24] px-5 text-[11px] font-bold uppercase tracking-[0.12em] text-[#fff5e8] transition-colors hover:bg-[#914331] sm:min-h-12 sm:px-7">
-                  {t('Descoperă meniul', 'Explore the menu')} <span className="ml-3" aria-hidden="true">↗</span>
+              <div className="mt-6 grid max-w-[440px] grid-cols-2 gap-2 sm:mt-8 sm:gap-3">
+                <a href="#meniu" className="inline-flex min-h-11 min-w-0 items-center justify-center whitespace-nowrap bg-[#722f24] px-2 text-[9px] font-bold uppercase tracking-[0.04em] text-[#fff5e8] transition-colors hover:bg-[#914331] sm:min-h-12 sm:px-4 sm:text-[11px] sm:tracking-[0.08em]">
+                  {t('Descoperă meniul', 'Explore the menu')} <span className="ml-1 sm:ml-2" aria-hidden="true">↗</span>
                 </a>
-                <a href="tel:0724004216" className="inline-flex min-h-11 items-center justify-center border border-[#9c6d50] px-5 text-[11px] font-semibold uppercase tracking-[0.1em] text-[#57291f] transition-colors hover:bg-[#e4c7a7] sm:min-h-12 sm:px-7">
+                <a href="tel:0724004216" className="inline-flex min-h-11 min-w-0 items-center justify-center whitespace-nowrap border border-[#9c6d50] px-2 text-[9px] font-semibold uppercase tracking-[0.04em] text-[#57291f] transition-colors hover:bg-[#e4c7a7] sm:min-h-12 sm:px-4 sm:text-[11px] sm:tracking-[0.08em]">
                   {t('Sună și comandă', 'Call to order')}
                 </a>
               </div>
@@ -306,43 +306,27 @@ const DaciaPage: NextPage<Props> = ({ heroImage }) => {
               </div>
             ) : (
               <div className="grid gap-3 sm:gap-5 lg:grid-cols-2">
-                {MENU.map(item => item.slug === 'burger-snitel-pui' ? (
+                {MENU.map(item => (
                   <article key={item.slug} className="group border border-[#e1d0bd] bg-[#fffaf3] p-4 transition-shadow hover:shadow-[0_12px_32px_rgba(67,38,24,0.1)] sm:p-5">
                     <div className="flex items-center gap-3 sm:gap-5">
-                      <div className="relative h-32 w-32 shrink-0 sm:h-40 sm:w-40">
-                        <Image src={item.image} alt={item.name} fill className="object-contain transition-transform duration-300 group-hover:scale-105" sizes="(max-width: 640px) 128px, 160px" />
+                      <div className="relative h-36 w-36 shrink-0 sm:h-44 sm:w-44">
+                        <Image src={item.image} alt={item.name} fill className={`object-contain transition-transform duration-300 ${item.slug === 'cartofi-cheddar' || item.slug === 'burger-vegetal' ? 'scale-[1.7] group-hover:scale-[1.8]' : 'group-hover:scale-105'}`} sizes="(max-width: 640px) 144px, 176px" />
                       </div>
                       <div className="min-w-0">
                         <h3 className="font-inter text-[18px] font-semibold leading-tight tracking-[-0.03em] text-[#4b2b20] sm:text-[22px]">{lang === 'en' && item.nameEn ? item.nameEn : item.name}</h3>
-                        <p className="mt-2 text-base font-bold text-[#8a4330]">{item.price}</p>
+                        {item.price && <p className="mt-2 text-base font-bold text-[#8a4330]">{item.price}</p>}
                       </div>
                     </div>
                     <p className="mt-3 border-t border-[#e8d9c9] pt-3 font-inter text-[13px] leading-[1.6] text-[#70584a] sm:text-sm">{lang === 'en' && item.ingredientsEn ? item.ingredientsEn : item.ingredients}</p>
+                    {(item.priceMedium || item.priceFamily) && (
+                      <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 border-t border-[#e8d9c9] pt-3 text-xs text-[#6b3d2b]">
+                        {item.priceMedium && <span>{lang === 'en' && item.sizeMediumLabelEn ? item.sizeMediumLabelEn : (item.sizeMediumLabel ?? 'Medie · 32 cm')}: <strong>{item.priceMedium}</strong></span>}
+                        {item.priceFamily && <span>{lang === 'en' && item.sizeFamilyLabelEn ? item.sizeFamilyLabelEn : (item.sizeFamilyLabel ?? 'Family · 50 cm')}: <strong>{item.priceFamily}</strong></span>}
+                      </div>
+                    )}
                     {item.comboPrice && <div className="mt-3 flex flex-wrap items-center justify-between gap-x-3 border-t border-[#e8d9c9] pt-3 font-inter text-[11px] font-semibold uppercase tracking-[0.04em] text-[#814c34] sm:text-xs">
                       <span>{t('Meniu + Coca-Cola 330 ml', 'Combo + Coca-Cola 330 ml')}</span><span className="font-bold text-[#4d271b]">{item.comboPrice}</span>
                     </div>}
-                  </article>
-                ) : (
-                  <article key={item.slug} className="group flex gap-3 border border-[#e1d0bd] bg-[#fffaf3] p-3 transition-shadow hover:shadow-[0_12px_32px_rgba(67,38,24,0.1)] sm:gap-5 sm:p-4">
-                    <div className="relative aspect-square h-24 shrink-0 overflow-hidden bg-[#100b08] sm:h-36">
-                      <Image src={item.image} alt={item.name} fill className="object-contain transition-transform duration-300 group-hover:scale-105" sizes="(max-width: 640px) 96px, 144px" />
-                    </div>
-                    <div className="min-w-0 flex-1 py-0.5">
-                      <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1">
-                        <h3 className="font-playfair text-lg font-semibold leading-tight text-[#321c16] sm:text-2xl">{lang === 'en' && item.nameEn ? item.nameEn : item.name}</h3>
-                        {item.price && <span className="whitespace-nowrap text-sm font-bold text-[#8a4330] sm:text-base">{item.price}</span>}
-                      </div>
-                      <p className="mt-2 text-xs leading-[1.5] text-[#826c5e] sm:text-sm sm:leading-5">{lang === 'en' && item.ingredientsEn ? item.ingredientsEn : item.ingredients}</p>
-                      {(item.priceMedium || item.priceFamily) && (
-                        <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-[#6b3d2b]">
-                          {item.priceMedium && <span>{lang === 'en' && item.sizeMediumLabelEn ? item.sizeMediumLabelEn : (item.sizeMediumLabel ?? 'Medie · 32 cm')}: <strong>{item.priceMedium}</strong></span>}
-                          {item.priceFamily && <span>{lang === 'en' && item.sizeFamilyLabelEn ? item.sizeFamilyLabelEn : (item.sizeFamilyLabel ?? 'Family · 50 cm')}: <strong>{item.priceFamily}</strong></span>}
-                        </div>
-                      )}
-                      {item.comboPrice && <div className="mt-3 inline-flex flex-wrap items-center gap-x-2 border-t border-[#e8d9c9] pt-2 text-[11px] font-semibold uppercase tracking-[0.04em] text-[#814c34] sm:text-xs">
-                        <span>{t('Meniu + Coca-Cola 330 ml', 'Combo + Coca-Cola 330 ml')}</span><span className="font-bold text-[#4d271b]">{item.comboPrice}</span>
-                      </div>}
-                    </div>
                   </article>
                 ))}
               </div>
