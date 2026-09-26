@@ -84,7 +84,7 @@ const MENU: MenuItem[] = [
     comboPrice: '26 lei',
     ingredients: 'Chiflă, șnițel din piept de pui, cartofi prăjiți, sos de usturoi, maioneză cu varză, ketchup, castraveți murați, condimente. 280g',
     ingredientsEn: 'Bun, chicken breast schnitzel, fries, garlic sauce, mayo with cabbage, ketchup, pickles, spices. 280g',
-    image: '/images/corvin/burger-snitel-pui.jpeg',
+    image: '/images/dacia/burger-snitel-pui-cutout.png',
     imageScale: 0.8,
   },
   {
@@ -176,8 +176,8 @@ const DaciaPage: NextPage<Props> = ({ heroImage }) => {
   const [activeTab, setActiveTab] = useState<TabValue>('toate')
   const drinksTotal = DRINKS.reduce((sum, g) => sum + g.items.length, 0)
   const tabs = [
-    { value: 'toate' as TabValue, label: t('Toate', 'All'), count: MENU.length },
-    { value: 'bauturi' as TabValue, label: t('🥤 Băuturi', '🥤 Drinks'), count: drinksTotal },
+    { value: 'toate' as TabValue, label: t('Preparate', 'Food'), count: MENU.length },
+    { value: 'bauturi' as TabValue, label: t('Băuturi', 'Drinks'), count: drinksTotal },
   ]
 
   return (
@@ -187,103 +187,49 @@ const DaciaPage: NextPage<Props> = ({ heroImage }) => {
         <meta name="description" content={t('Cosimo Non-Stop Fast Food, Bd. Dacia 23 bis — Restaurant nonstop 24/7 în Hunedoara. Burgeri, mâncare proaspătă, livrare Glovo.', 'Cosimo Non-Stop Fast Food, Bd. Dacia 23 bis — 24/7 restaurant in Hunedoara. Burgers, fresh food, Glovo delivery.')} />
       </Head>
 
-      <Navbar variant="location" />
+      <Navbar variant="location" theme="dacia" />
 
       <main>
         {/* ─── HERO ─── */}
-        <section className="relative bg-[#0d0806] overflow-hidden min-h-[92vh] flex items-center pt-16">
-          <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#D32F2F]/25 blur-[120px] pointer-events-none" />
-          <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-[#FFC107]/15 blur-[120px] pointer-events-none" />
-
-          <div
-            className="absolute inset-0 opacity-[0.04] pointer-events-none"
-            style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-opacity='1'%3E%3Ccircle cx='20' cy='20' r='1'/%3E%3C/g%3E%3C/svg%3E\")" }}
-          />
-
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
-
-              <div>
-                <div className="inline-flex items-center gap-2 bg-[#4caf50]/15 border border-[#4caf50]/40 text-[#7dcc7f] text-xs font-bold px-4 py-2 rounded-full mb-6 backdrop-blur">
-                  <span className="w-2 h-2 rounded-full bg-[#4caf50] animate-pulse" />
-                  {t('Nonstop 24/7', 'Open 24/7')}
-                </div>
-
-                <p className="font-inter text-[#FFC107] uppercase tracking-[0.35em] text-xs font-semibold mb-3">
-                  {t('// Bd. Dacia 23 bis', '// Bd. Dacia 23 bis')}
-                </p>
-
-                <h1 className="font-playfair font-bold text-white leading-[0.9] mb-4" style={{ fontSize: 'clamp(56px, 9vw, 108px)' }}>
-                  Cosimo<br />
-                  <span className="italic text-[#D32F2F]">Fast Food</span>
-                </h1>
-
-                <p className="text-white/70 text-base md:text-lg max-w-md mb-8 leading-relaxed">
-                  {t(
-                    'Burgeri, hot dog și sandwich-uri gata în mai puțin de 5 minute — cea mai rapidă servire, orice oră, orice zi.',
-                    'Burgers, hot dogs and sandwiches ready in under 5 minutes — the fastest service in town, any hour, any day.'
-                  )}
-                </p>
-
-                <div className="flex flex-col sm:flex-row flex-wrap gap-3 mb-8">
-                  <a
-                    href="tel:0724004216"
-                    className="inline-flex items-center justify-center gap-2 bg-[#D32F2F] hover:bg-[#b71c1c] text-white font-bold px-8 py-4 rounded-full transition-all shadow-xl shadow-red-900/40 text-sm uppercase tracking-wider"
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                    0724 004 216
-                  </a>
-                  <a
-                    href="https://glovoapp.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 backdrop-blur text-white font-bold px-8 py-4 rounded-full border border-white/25 hover:border-white/50 transition-all text-sm uppercase tracking-wider"
-                  >
-                    🛵 {t('Comandă pe Glovo', 'Order on Glovo')}
-                  </a>
-                  <a
-                    href="https://food.bolt.eu"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 bg-[#34D186] hover:bg-[#2ab973] text-white font-bold px-8 py-4 rounded-full transition-all shadow-xl text-sm uppercase tracking-wider"
-                  >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.4 15.5l-4.5-4.5 1.5-1.5 3 3 6-6 1.5 1.5-7.5 7.5z" />
-                    </svg>
-                    Bolt Food
-                  </a>
-                </div>
-
-                <div className="flex flex-wrap items-center gap-6 text-sm">
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-[#FFC107]">★★★★★</span>
-                    <span className="text-white font-semibold">4.4</span>
-                    <span className="text-white/40 text-xs">· 913 {t('recenzii', 'reviews')}</span>
-                  </div>
-                  <span className="text-white/20">|</span>
-                  <div className="flex items-center gap-1.5 text-white/60">
-                    <svg className="w-4 h-4 text-[#D32F2F]" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                    </svg>
-                    Bd. Dacia 23 bis, Hunedoara
-                  </div>
-                </div>
+        <section className="relative overflow-hidden bg-[#efe1cb] pt-20 text-[#351b15]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_38%,#f9f0df_0%,transparent_42%),linear-gradient(135deg,#f5ead9_0%,#ecd8bb_100%)]" />
+          <div className="absolute -left-24 bottom-0 h-64 w-64 rounded-full bg-[#dcb78b]/30 blur-3xl" />
+          <div className="relative mx-auto grid max-w-7xl items-center gap-1 px-4 pb-11 pt-5 sm:px-8 sm:pt-10 lg:min-h-[650px] lg:grid-cols-[0.9fr_1.1fr] lg:gap-6 lg:px-10 lg:py-12">
+            <div className="order-2 relative z-10 lg:order-1">
+              <p className="mb-4 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.22em] text-[#9b5a40] sm:text-xs">
+                <span className="h-px w-6 bg-[#a9684a]" /> Cosimo · Bd. Dacia 23 bis
+              </p>
+              <h1 className="max-w-[620px] font-playfair text-[clamp(2.8rem,8vw,6.2rem)] font-medium leading-[1.03] tracking-[-0.045em] text-[#3e2018]">
+                {t('Pofta n-are', 'Good taste')} <em className="font-normal text-[#a25436]">{t('oră.', 'never sleeps.')}</em>
+              </h1>
+              <p className="mt-4 max-w-md text-sm leading-6 text-[#705344] sm:mt-6 sm:text-base sm:leading-7">
+                {t('Burgeri, sandwich-uri și gusturi care merită savurate. Pregătite pentru tine, la orice oră.', 'Burgers, sandwiches and flavours worth savouring. Made for you, any time of day.')}
+              </p>
+              <div className="mt-6 flex flex-wrap gap-2 sm:mt-8 sm:gap-3">
+                <a href="#meniu" className="inline-flex min-h-11 items-center justify-center bg-[#722f24] px-5 text-[11px] font-bold uppercase tracking-[0.12em] text-[#fff5e8] transition-colors hover:bg-[#914331] sm:min-h-12 sm:px-7">
+                  {t('Descoperă meniul', 'Explore the menu')} <span className="ml-3" aria-hidden="true">↗</span>
+                </a>
+                <a href="tel:0724004216" className="inline-flex min-h-11 items-center justify-center border border-[#9c6d50] px-5 text-[11px] font-semibold uppercase tracking-[0.1em] text-[#57291f] transition-colors hover:bg-[#e4c7a7] sm:min-h-12 sm:px-7">
+                  {t('Sună și comandă', 'Call to order')}
+                </a>
               </div>
-
-              <div className="relative">
-                <div className="relative aspect-square max-w-md mx-auto">
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#D32F2F]/40 to-[#FFC107]/20 blur-3xl" />
-                  <Image
-                    src="/images/corvin/pittburger.jpeg"
-                    alt="Burger Cosimo"
-                    fill
-                    className="object-contain drop-shadow-[0_25px_45px_rgba(0,0,0,0.6)]"
-                    priority
-                  />
-                </div>
+              <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-[11px] text-[#735442] sm:mt-8">
+                <span className="font-bold uppercase tracking-[0.12em] text-[#763b2b]">{t('Deschis non-stop', 'Open 24/7')}</span>
+                <span className="text-[#a86c48]">✦</span>
+                <span><span className="text-[#b17635]">★★★★★</span> 4.4 · 913 {t('recenzii', 'reviews')}</span>
               </div>
+              <p className="mt-3 text-[11px] text-[#8d6b58]">
+                {t('Livrare prin', 'Delivery via')} <a href="https://glovoapp.com" target="_blank" rel="noopener noreferrer" className="underline decoration-[#a98976]/50 underline-offset-4 hover:text-[#722f24]">Glovo</a> {t('și', 'and')} <a href="https://food.bolt.eu" target="_blank" rel="noopener noreferrer" className="underline decoration-[#a98976]/50 underline-offset-4 hover:text-[#722f24]">Bolt Food</a>
+              </p>
+            </div>
+
+            <div className="order-1 relative lg:order-2">
+              <div className="absolute left-[12%] top-[10%] h-[75%] w-[76%] rounded-full border border-[#bd8b61]/40 bg-[#e6b988]/30" />
+              <div className="absolute left-[21%] top-[18%] h-[57%] w-[58%] rounded-full bg-[#f7e2bc]/80 blur-2xl" />
+              <div className="relative aspect-[1.2] lg:aspect-[1.05]">
+                <Image src="/images/dacia/dacia-hero-cutout.png" alt={t('Burger Cosimo pe platou de lemn', 'Cosimo burger on a wooden serving board')} fill className="object-contain" style={{ filter: 'drop-shadow(0 24px 24px rgba(91, 48, 24, 0.22))' }} priority sizes="(max-width: 1024px) 100vw, 55vw" />
+              </div>
+              <span className="absolute right-0 top-2 border border-[#a87354]/45 bg-[#f8eedc]/90 px-3 py-2 text-[9px] font-bold uppercase tracking-[0.13em] text-[#683727] shadow-sm sm:right-5 sm:top-8">{t('Deschis 24/7', 'Open 24/7')}</span>
             </div>
           </div>
         </section>
@@ -314,78 +260,43 @@ const DaciaPage: NextPage<Props> = ({ heroImage }) => {
           </div>
         </div>
 
-        {/* ─── MENU — pizzeria-style dark grid ─── */}
-        <section id="meniu" className="bg-[#0f0806] py-24 relative">
-          <div
-            className="absolute inset-0 opacity-[0.04] pointer-events-none"
-            style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23e8b76a' fill-opacity='1'%3E%3Ccircle cx='20' cy='20' r='1'/%3E%3C/g%3E%3C/svg%3E\")" }}
-          />
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <p className="font-inter text-[#e8b76a] uppercase tracking-[0.4em] text-xs font-semibold mb-4">
-                Il menù
-              </p>
-              <h2 className="font-playfair text-5xl md:text-6xl font-bold text-white italic">
-                {t('Meniul', 'Our')} <span className="text-[#e8b76a]">{t('nostru', 'Menu')}</span>
-              </h2>
+        {/* ─── MENU ─── */}
+        <section id="meniu" className="scroll-mt-20 bg-[#f6efe5] py-14 sm:py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-10">
+            <div className="max-w-2xl">
+              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.25em] text-[#a06845]">{t('Din bucătăria Cosimo', 'From the Cosimo kitchen')}</p>
+              <h2 className="font-playfair text-4xl font-medium tracking-[-0.04em] text-[#2c1711] sm:text-6xl">{t('Meniul nostru', 'Our menu')}</h2>
+              <p className="mt-3 max-w-xl text-sm leading-6 text-[#745d50] sm:text-base">{t('Alege ce îți face poftă. Gust proaspăt, pregătit la orice oră.', 'Choose what you crave. Fresh flavours, prepared around the clock.')}</p>
             </div>
 
-            {/* Category tabs */}
-            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-14">
+            <div className="mb-6 mt-7 flex gap-2 border-b border-[#dcc9b6] pb-4 sm:mb-9 sm:mt-10">
               {tabs.map(tab => {
                 const isActive = activeTab === tab.value
                 return (
-                  <button
-                    key={tab.value}
-                    onClick={() => setActiveTab(tab.value)}
-                    className={`px-5 sm:px-6 py-2.5 rounded-full text-sm font-semibold uppercase tracking-wider transition-all duration-200 ${
-                      isActive
-                        ? 'bg-[#e8b76a] text-[#0f0806] shadow-lg shadow-[#e8b76a]/20'
-                        : 'bg-transparent text-white/70 border border-white/20 hover:border-[#e8b76a]/60 hover:text-[#e8b76a]'
-                    }`}
-                  >
-                    {tab.label}
-                    <span className={`ml-2 text-xs ${isActive ? 'text-[#0f0806]/60' : 'text-white/40'}`}>
-                      {tab.count}
-                    </span>
+                  <button key={tab.value} onClick={() => setActiveTab(tab.value)} aria-pressed={isActive} className={`inline-flex items-center gap-2 px-4 py-2.5 text-xs font-semibold transition-colors sm:px-5 sm:text-sm ${isActive ? 'bg-[#361c16] text-[#fff6e9]' : 'text-[#735747] hover:bg-[#eadccc] hover:text-[#361c16]'}`}>
+                    {tab.label} <span className={`text-[10px] ${isActive ? 'text-[#d4ae85]' : 'text-[#a28b78]'}`}>{tab.count}</span>
                   </button>
                 )
               })}
             </div>
 
             {activeTab === 'bauturi' ? (
-              <div className="max-w-3xl mx-auto space-y-14">
+              <div className="grid gap-5 lg:grid-cols-2 lg:gap-8">
                 {DRINKS.map(group => (
-                  <div key={group.title}>
-                    <div className="flex items-center gap-4 mb-6">
-                      <span className="h-px flex-1 bg-[#e8b76a]/30" />
-                      <h3 className="font-playfair italic text-2xl md:text-3xl text-[#e8b76a] whitespace-nowrap">
-                        {lang === 'en' && group.titleEn ? group.titleEn : group.title}
-                      </h3>
-                      <span className="h-px flex-1 bg-[#e8b76a]/30" />
-                    </div>
-                    <ul className="divide-y divide-white/10">
+                  <div key={group.title} className="border border-[#e3d3c1] bg-[#fffaf3] p-5 sm:p-7">
+                    <h3 className="mb-5 border-b border-[#e7d9c9] pb-4 font-playfair text-2xl font-medium text-[#3a2119]">
+                      {lang === 'en' && group.titleEn ? group.titleEn : group.title}
+                    </h3>
+                    <ul className="divide-y divide-[#ecdfd1]">
                       {group.items.map((d, i) => (
-                        <li key={`${d.name}-${i}`} className="flex items-baseline gap-3 py-3">
-                          <div className="flex-1 min-w-0">
-                            <div className="font-playfair text-white text-lg leading-tight">
-                              {lang === 'en' && d.nameEn ? d.nameEn : d.name}
-                            </div>
-                            {d.note && (
-                              <div className="text-white/50 text-xs mt-1 leading-snug">
-                                {lang === 'en' && d.noteEn ? d.noteEn : d.note}
-                              </div>
-                            )}
+                        <li key={`${d.name}-${i}`} className="flex items-start justify-between gap-3 py-3">
+                          <div className="min-w-0">
+                            <p className="font-medium text-[#352018]">{lang === 'en' && d.nameEn ? d.nameEn : d.name}</p>
+                            {d.note && <p className="mt-1 text-xs leading-5 text-[#846f61]">{lang === 'en' && d.noteEn ? d.noteEn : d.note}</p>}
                           </div>
-                          <div className="flex items-baseline gap-3 flex-shrink-0 text-right">
-                            {d.volume && (
-                              <span className="text-white/50 text-xs whitespace-nowrap tabular-nums">
-                                {d.volume}
-                              </span>
-                            )}
-                            <span className="text-[#e8b76a] font-bold text-base whitespace-nowrap tabular-nums min-w-[70px] text-right">
-                              {d.price}
-                            </span>
+                          <div className="shrink-0 text-right">
+                            <p className="font-semibold text-[#6a3022]">{d.price}</p>
+                            {d.volume && <p className="mt-1 text-[11px] text-[#987f6c]">{d.volume}</p>}
                           </div>
                         </li>
                       ))}
@@ -394,71 +305,47 @@ const DaciaPage: NextPage<Props> = ({ heroImage }) => {
                 ))}
               </div>
             ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-              {MENU.map(item => (
-                <div key={item.slug} className="flex flex-col items-center text-center group">
-                  <div className="relative w-full aspect-square max-w-md overflow-hidden transition-transform duration-500 group-hover:scale-105">
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      fill
-                      className="object-contain drop-shadow-2xl"
-                      style={item.imageScale ? { transform: `scale(${item.imageScale})` } : undefined}
-                      sizes="(max-width: 768px) 100vw, 500px"
-                    />
-                  </div>
-                  <h3 className="font-playfair italic text-4xl font-bold text-[#e8b76a] mt-8">
-                    {lang === 'en' && item.nameEn ? item.nameEn : item.name}
-                  </h3>
-                  {item.price && (
-                    <div className="text-white font-bold text-2xl mt-3 tracking-wide">
-                      {item.price}
+              <div className="grid gap-3 sm:gap-5 lg:grid-cols-2">
+                {MENU.map(item => item.slug === 'burger-snitel-pui' ? (
+                  <article key={item.slug} className="group border border-[#e1d0bd] bg-[#fffaf3] p-4 transition-shadow hover:shadow-[0_12px_32px_rgba(67,38,24,0.1)] sm:p-5">
+                    <div className="flex items-center gap-3 sm:gap-5">
+                      <div className="relative h-32 w-32 shrink-0 sm:h-40 sm:w-40">
+                        <Image src={item.image} alt={item.name} fill className="object-contain transition-transform duration-300 group-hover:scale-105" sizes="(max-width: 640px) 128px, 160px" />
+                      </div>
+                      <div className="min-w-0">
+                        <h3 className="font-inter text-[18px] font-semibold leading-tight tracking-[-0.03em] text-[#4b2b20] sm:text-[22px]">{lang === 'en' && item.nameEn ? item.nameEn : item.name}</h3>
+                        <p className="mt-2 text-base font-bold text-[#8a4330]">{item.price}</p>
+                      </div>
                     </div>
-                  )}
-                  {(item.priceMedium || item.priceFamily) && (
-                    <div className="flex items-center gap-8 mt-4">
-                      {item.priceMedium && (
-                        <div className="flex flex-col items-center">
-                          <span className="text-[#e8b76a]/80 uppercase tracking-widest text-[10px] font-semibold">
-                            {lang === 'en' && item.sizeMediumLabelEn ? item.sizeMediumLabelEn : (item.sizeMediumLabel ?? 'Medie · 32 cm')}
-                          </span>
-                          <span className="text-white font-bold text-2xl mt-1 tracking-wide">
-                            {item.priceMedium}
-                          </span>
+                    <p className="mt-3 border-t border-[#e8d9c9] pt-3 font-inter text-[13px] leading-[1.6] text-[#70584a] sm:text-sm">{lang === 'en' && item.ingredientsEn ? item.ingredientsEn : item.ingredients}</p>
+                    {item.comboPrice && <div className="mt-3 flex flex-wrap items-center justify-between gap-x-3 border-t border-[#e8d9c9] pt-3 font-inter text-[11px] font-semibold uppercase tracking-[0.04em] text-[#814c34] sm:text-xs">
+                      <span>{t('Meniu + Coca-Cola 330 ml', 'Combo + Coca-Cola 330 ml')}</span><span className="font-bold text-[#4d271b]">{item.comboPrice}</span>
+                    </div>}
+                  </article>
+                ) : (
+                  <article key={item.slug} className="group flex gap-3 border border-[#e1d0bd] bg-[#fffaf3] p-3 transition-shadow hover:shadow-[0_12px_32px_rgba(67,38,24,0.1)] sm:gap-5 sm:p-4">
+                    <div className="relative aspect-square h-24 shrink-0 overflow-hidden bg-[#100b08] sm:h-36">
+                      <Image src={item.image} alt={item.name} fill className="object-contain transition-transform duration-300 group-hover:scale-105" sizes="(max-width: 640px) 96px, 144px" />
+                    </div>
+                    <div className="min-w-0 flex-1 py-0.5">
+                      <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1">
+                        <h3 className="font-playfair text-lg font-semibold leading-tight text-[#321c16] sm:text-2xl">{lang === 'en' && item.nameEn ? item.nameEn : item.name}</h3>
+                        {item.price && <span className="whitespace-nowrap text-sm font-bold text-[#8a4330] sm:text-base">{item.price}</span>}
+                      </div>
+                      <p className="mt-2 text-xs leading-[1.5] text-[#826c5e] sm:text-sm sm:leading-5">{lang === 'en' && item.ingredientsEn ? item.ingredientsEn : item.ingredients}</p>
+                      {(item.priceMedium || item.priceFamily) && (
+                        <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-[#6b3d2b]">
+                          {item.priceMedium && <span>{lang === 'en' && item.sizeMediumLabelEn ? item.sizeMediumLabelEn : (item.sizeMediumLabel ?? 'Medie · 32 cm')}: <strong>{item.priceMedium}</strong></span>}
+                          {item.priceFamily && <span>{lang === 'en' && item.sizeFamilyLabelEn ? item.sizeFamilyLabelEn : (item.sizeFamilyLabel ?? 'Family · 50 cm')}: <strong>{item.priceFamily}</strong></span>}
                         </div>
                       )}
-                      {item.priceMedium && item.priceFamily && (
-                        <div className="h-10 w-px bg-[#e8b76a]/30" />
-                      )}
-                      {item.priceFamily && (
-                        <div className="flex flex-col items-center">
-                          <span className="text-[#e8b76a]/80 uppercase tracking-widest text-[10px] font-semibold">
-                            {lang === 'en' && item.sizeFamilyLabelEn ? item.sizeFamilyLabelEn : (item.sizeFamilyLabel ?? 'Family · 50 cm')}
-                          </span>
-                          <span className="text-white font-bold text-2xl mt-1 tracking-wide">
-                            {item.priceFamily}
-                          </span>
-                        </div>
-                      )}
+                      {item.comboPrice && <div className="mt-3 inline-flex flex-wrap items-center gap-x-2 border-t border-[#e8d9c9] pt-2 text-[11px] font-semibold uppercase tracking-[0.04em] text-[#814c34] sm:text-xs">
+                        <span>{t('Meniu + Coca-Cola 330 ml', 'Combo + Coca-Cola 330 ml')}</span><span className="font-bold text-[#4d271b]">{item.comboPrice}</span>
+                      </div>}
                     </div>
-                  )}
-                  <p className="text-white/70 text-sm mt-4 max-w-md leading-relaxed">
-                    {lang === 'en' && item.ingredientsEn ? item.ingredientsEn : item.ingredients}
-                  </p>
-                  {item.comboPrice && (
-                    <div className="mt-4 inline-flex items-center gap-2 bg-[#e8b76a]/10 border border-[#e8b76a]/30 rounded-full px-4 py-2">
-                      <span className="text-[#e8b76a] text-sm">🥤</span>
-                      <span className="text-white/80 text-xs uppercase tracking-wider font-semibold">
-                        {t('Meniu + Coca-Cola 330 ml', 'Combo + Coca-Cola 330 ml')}
-                      </span>
-                      <span className="text-[#e8b76a] font-bold text-sm">
-                        {item.comboPrice}
-                      </span>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
+                  </article>
+                ))}
+              </div>
             )}
           </div>
         </section>

@@ -74,3 +74,44 @@ img {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
+
+/* Dacia's warm, restrained navigation matches its editorial hero. */
+.navbar-dacia {
+  background: #23120f !important;
+  border-bottom: 1px solid rgba(209, 163, 112, 0.25) !important;
+  box-shadow: 0 8px 28px rgba(17, 8, 5, 0.18) !important;
+}
+.navbar-dacia-brandmark {
+  --tw-ring-color: rgba(209, 163, 112, 0.7) !important;
+}
+.navbar-dacia-brand,
+.navbar-dacia-home-link,
+.navbar-dacia-menu-button {
+  color: #f4e6d3 !important;
+}
+.navbar-dacia-home-link:hover,
+.navbar-dacia-menu-button:hover {
+  color: #d1a370 !important;
+}
+.navbar-dacia-language {
+  background: #3b251e !important;
+  border-color: rgba(209, 163, 112, 0.35) !important;
+}
+.navbar-dacia-language button {
+  color: #e8d6c1 !important;
+}
+.navbar-dacia-language button[aria-pressed="true"],
+.navbar-dacia-order {
+  background: #d1a370 !important;
+  color: #261510 !important;
+}
+.navbar-dacia-order:hover {
+  background: #e8c194 !important;
+}
+.navbar-dacia-dropdown {
+  background: #2d1914 !important;
+  border-color: rgba(209, 163, 112, 0.35) !important;
+}
+.navbar-dacia-dropdown a:not(.navbar-dacia-order) {
+  color: #f4e6d3 !important;
+}

@@ -5,9 +5,10 @@ import { useLanguage } from '../lib/i18n'
 
 interface NavbarProps {
   variant?: 'home' | 'location'
+  theme?: 'default' | 'dacia'
 }
 
-export default function Navbar({ variant = 'home' }: NavbarProps) {
+export default function Navbar({ variant = 'home', theme = 'default' }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const { lang, setLang, t } = useLanguage()
@@ -23,7 +24,7 @@ export default function Navbar({ variant = 'home' }: NavbarProps) {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${theme === 'dacia' ? 'navbar-dacia' : ''}
         ${scrolled
           ? 'bg-white/90 backdrop-blur-md shadow-lg shadow-black/5 border-b border-white/20'
           : 'bg-white/60 backdrop-blur-sm'
@@ -33,10 +34,10 @@ export default function Navbar({ variant = 'home' }: NavbarProps) {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
-            <div className="relative w-14 h-14 rounded-full overflow-hidden ring-2 ring-[#D32F2F]/30 group-hover:ring-[#D32F2F] transition-all duration-200">
+            <div className="navbar-dacia-brandmark relative w-14 h-14 rounded-full overflow-hidden ring-2 ring-[#D32F2F]/30 group-hover:ring-[#D32F2F] transition-all duration-200">
               <Image src="/images/logo.png" alt="Cosimo Logo" fill className="object-cover" />
             </div>
-            <span className="font-playfair text-2xl font-bold text-[#D32F2F] tracking-wide">
+            <span className="navbar-dacia-brand font-playfair text-2xl font-bold text-[#D32F2F] tracking-wide">
               COSIMO
             </span>
           </Link>
@@ -46,7 +47,7 @@ export default function Navbar({ variant = 'home' }: NavbarProps) {
             {variant === 'location' ? (
               <Link
                 href="/"
-                className="flex items-center gap-1.5 text-[#6b5c4e] hover:text-[#D32F2F] font-medium transition-colors text-sm"
+                className="navbar-dacia-home-link flex items-center gap-1.5 text-[#6b5c4e] hover:text-[#D32F2F] font-medium transition-colors text-sm"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -70,11 +71,12 @@ export default function Navbar({ variant = 'home' }: NavbarProps) {
               </>
             )}
             {/* Desktop language toggle */}
-            <div className="flex items-center gap-0.5 bg-[#FFF3E0] rounded-full p-0.5 border border-[#e8d5b7]">
+            <div className="navbar-dacia-language flex items-center gap-0.5 bg-[#FFF3E0] rounded-full p-0.5 border border-[#e8d5b7]">
               <button
                 onClick={() => setLang('ro')}
                 className={`text-xs font-bold px-2.5 py-1 rounded-full transition-colors ${lang === 'ro' ? 'bg-[#D32F2F] text-white' : 'text-[#6b5c4e] hover:text-[#D32F2F]'}`}
                 aria-label="Română"
+                aria-pressed={lang === 'ro'}
               >
                 🇷🇴 RO
               </button>
@@ -82,6 +84,7 @@ export default function Navbar({ variant = 'home' }: NavbarProps) {
                 onClick={() => setLang('en')}
                 className={`text-xs font-bold px-2.5 py-1 rounded-full transition-colors ${lang === 'en' ? 'bg-[#D32F2F] text-white' : 'text-[#6b5c4e] hover:text-[#D32F2F]'}`}
                 aria-label="English"
+                aria-pressed={lang === 'en'}
               >
                 🇬🇧 EN
               </button>
@@ -90,7 +93,7 @@ export default function Navbar({ variant = 'home' }: NavbarProps) {
               href="https://glovoapp.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#D32F2F] hover:bg-[#b71c1c] text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-red-200 hover:-translate-y-px"
+              className="navbar-dacia-order bg-[#D32F2F] hover:bg-[#b71c1c] text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-red-200 hover:-translate-y-px"
             >
               {t('Comandă pe Glovo', 'Order on Glovo')}
             </a>
@@ -98,11 +101,12 @@ export default function Navbar({ variant = 'home' }: NavbarProps) {
 
           {/* Always-visible right cluster: language toggle (mobile) + hamburger */}
           <div className="flex items-center gap-2 md:hidden">
-            <div className="flex items-center gap-0.5 bg-[#FFF3E0] rounded-full p-0.5 border border-[#e8d5b7]">
+            <div className="navbar-dacia-language flex items-center gap-0.5 bg-[#FFF3E0] rounded-full p-0.5 border border-[#e8d5b7]">
               <button
                 onClick={() => setLang('ro')}
                 className={`text-[11px] font-bold px-2 py-1 rounded-full transition-colors ${lang === 'ro' ? 'bg-[#D32F2F] text-white' : 'text-[#6b5c4e]'}`}
                 aria-label="Română"
+                aria-pressed={lang === 'ro'}
               >
                 RO
               </button>
@@ -110,6 +114,7 @@ export default function Navbar({ variant = 'home' }: NavbarProps) {
                 onClick={() => setLang('en')}
                 className={`text-[11px] font-bold px-2 py-1 rounded-full transition-colors ${lang === 'en' ? 'bg-[#D32F2F] text-white' : 'text-[#6b5c4e]'}`}
                 aria-label="English"
+                aria-pressed={lang === 'en'}
               >
                 EN
               </button>
@@ -117,7 +122,7 @@ export default function Navbar({ variant = 'home' }: NavbarProps) {
           {/* Hamburger */}
           <button
             onClick={() => setMenuOpen(v => !v)}
-            className="p-2 rounded-xl text-[#6b5c4e] hover:text-[#D32F2F] hover:bg-[#D32F2F]/10 transition-colors"
+            className="navbar-dacia-menu-button p-2 rounded-xl text-[#6b5c4e] hover:text-[#D32F2F] hover:bg-[#D32F2F]/10 transition-colors"
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
           >
@@ -138,7 +143,7 @@ export default function Navbar({ variant = 'home' }: NavbarProps) {
           menuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="bg-white/95 backdrop-blur-md border-t border-[#e8d5b7]/50 px-4 py-4 space-y-1">
+        <div className="navbar-dacia-dropdown bg-white/95 backdrop-blur-md border-t border-[#e8d5b7]/50 px-4 py-4 space-y-1">
           {variant === 'location' ? (
             <Link href="/" className="flex items-center gap-2 text-[#6b5c4e] hover:text-[#D32F2F] font-medium py-3 px-3 rounded-xl hover:bg-[#D32F2F]/5 transition-colors" onClick={() => setMenuOpen(false)}>
               ← {t('Acasă', 'Home')}
@@ -153,15 +158,17 @@ export default function Navbar({ variant = 'home' }: NavbarProps) {
             </>
           )}
           {/* Language toggle */}
-          <div className="flex items-center justify-center gap-0.5 bg-[#FFF3E0] rounded-full p-0.5 border border-[#e8d5b7] mt-2 w-max mx-auto">
+          <div className="navbar-dacia-language flex items-center justify-center gap-0.5 bg-[#FFF3E0] rounded-full p-0.5 border border-[#e8d5b7] mt-2 w-max mx-auto">
             <button
               onClick={() => setLang('ro')}
+              aria-pressed={lang === 'ro'}
               className={`text-xs font-bold px-3 py-1.5 rounded-full transition-colors ${lang === 'ro' ? 'bg-[#D32F2F] text-white' : 'text-[#6b5c4e]'}`}
             >
               🇷🇴 RO
             </button>
             <button
               onClick={() => setLang('en')}
+              aria-pressed={lang === 'en'}
               className={`text-xs font-bold px-3 py-1.5 rounded-full transition-colors ${lang === 'en' ? 'bg-[#D32F2F] text-white' : 'text-[#6b5c4e]'}`}
             >
               🇬🇧 EN
@@ -172,7 +179,7 @@ export default function Navbar({ variant = 'home' }: NavbarProps) {
               href="https://glovoapp.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="block bg-[#D32F2F] text-white text-center font-semibold px-5 py-3 rounded-full transition-colors hover:bg-[#b71c1c]"
+              className="navbar-dacia-order block bg-[#D32F2F] text-white text-center font-semibold px-5 py-3 rounded-full transition-colors hover:bg-[#b71c1c]"
             >
               {t('Comandă pe Glovo', 'Order on Glovo')}
             </a>
